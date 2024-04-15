@@ -12,9 +12,7 @@ const Hero = () => {
         <p className="md:py-8 py-4 text-[16px] md:text-[24px] text-[#223134]">
           Create Your First Event. It is Simple and Free
         </p>
-        <button className="text-white rounded-[42px] bg-[#473BF0] text-bold text-[20px] w-[201px] h-[66px]">
-          Create Event
-        </button>
+        <Button text={"Create Event"} />
       </div>
       <div className="hero1 relative mt-24 px-4">
         <div className="rounded-[30px] mx-auto max-w-[1188px] h-[292px] md:h-[400px] bg-[#473BF0]"></div>
@@ -28,4 +26,10 @@ const Hero = () => {
   );
 };
 
+// eslint-disable-next-line react/prop-types
+export function Button({ text }) {
+  return <button className="text-white rounded-[42px] bg-[#473BF0] text-bold text-[20px] w-[201px] h-[66px]">
+    {text}
+  </button>;
+}
 export default Hero;

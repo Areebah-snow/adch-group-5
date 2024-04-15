@@ -1,3 +1,4 @@
+import CTA from "./CTA";
 import Features from "./Features";
 import Footer from "./Footer";
 import Hero from "./Hero";
@@ -12,7 +13,8 @@ const Home = () => {
       <Hero />
       <Features />
       <HowItWorks />
-      <Testimonials/>
+      <Testimonials />
+      <CTA />
       <Footer />
     </div>
   );
