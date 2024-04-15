@@ -7,6 +7,15 @@
   scrollbar-width: none;
 }
 body {
+
+    margin: 0;
+    padding: 0;
+  }
+  
+  .hero1 {
+    background-image: url(/src/assets/pngwing\ 1.png);
+  }
+
   margin: 0;
   padding: 0;
   font-family: "Open Sans", sans-serif;
@@ -25,3 +34,4 @@ body {
   top: 0;
   left: 44%;
 }
+
