@@ -12,7 +12,7 @@ const Navbar = () => {
   return (
     <div className="max-w-[1440px] mx-auto px-4 py-6">
       <div className="flex items-center justify-between">
-        <div>
+        <div className="md:w-[224px] h-[50px]">
           <img src={logo} alt="" />
         </div>
         <ul className="md:flex hidden gap-8">
