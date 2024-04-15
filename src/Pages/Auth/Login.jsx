@@ -20,7 +20,30 @@ const Login = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-
+  onAuthStateChanged(auth, (user) => {
+    console.log(user);
+  });
+  const handleLogin = () => {
+    const email = "a@b.com";
+    const password = "123456789";
+    const persistSession = 1;
+    setPersistence(
+      auth,
+      persistSession ? inMemoryPersistence : browserSessionPersistence
+    ).then(() => {
+      return signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          console.log(userCredential);
+          //TODO: Set loggedIn state and navigate
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorMessage);
+          //TODO: Handle error
+        });
+    });
+  };
   return (
     <div className="flex h-screen">
       <div className="hidden md:block md:w-1/2 overflow-hidden">
@@ -111,6 +134,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
+            onClick={handleLogin}
             className="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium mt-6 text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Log Into Account
