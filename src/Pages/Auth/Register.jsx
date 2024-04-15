@@ -13,6 +13,24 @@ const Register = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleSubmit = () => {
+    const name = "HRITIK";
+    const email = "a@b.com";
+    const password = "123456789";
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(async (userCredential) => {
+        sendEmailVerification(auth.currentUser);
+        updateProfile(user, { displayName: name });
+        // TODO: set loggedin state and navigate
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        // TODO : Handle error
+      });
+  };
+
   return (
     <div className="flex h-screen">
       <div className="hidden md:block md:w-1/2 overflow-hidden">
@@ -101,6 +119,7 @@ const Register = () => {
             </p>
             <button
               type="submit"
+              onClick={handleSubmit}
               className="w-full py-3 px-4 mt-8 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-indigo-700"
             >
               Create Account
