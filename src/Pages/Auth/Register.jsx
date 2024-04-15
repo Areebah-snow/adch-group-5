@@ -23,7 +23,7 @@ const Register = () => {
           <h2 className="text-3xl font-semibold pt-48 mb-2">Create Your Account</h2>
           <p>Sign Up to enjoy all of the features in the app</p>
           <form className='mt-5'>
-          <div className="mb-4">
+            <div className="mb-4">
               <label htmlFor="email" className="text-sm font-normal text-dark-100">
                 Name
               </label>
@@ -100,10 +100,10 @@ const Register = () => {
                 </div>
                <div className='space-y-4'>
                     <button className="w-full p-2.5 text-dark-200 font-semibold border border-gray outline-none rounded-md bg-brand-white text-base font-600 flex items-center justify-center cursor-pointer"> 
-                    <img src={ggle} alt="Google-icon"  className="mr-2 w-5"/>Continue with Google
+                    <img src={ggle} alt="Google-icon"  className="mr-2 w-5"/>Sign up with Google
                     </button>
                     <button className="w-full p-2.5 text-dark-200 font-semibold border border-gray outline-none rounded-md bg-brand-white text-base font-600 flex items-center justify-center cursor-pointer"> 
-                    <img src={Twitter} alt="Google-icon"  className="mr-2 w-5"/>Continue with Twitter
+                    <img src={Twitter} alt="Google-icon"  className="mr-2 w-5"/>Sign up with Twitter
                     </button>
                </div>
                <p className='text-grey text-sm mt-4 text-center'>Already have an account?

@@ -10,7 +10,7 @@ export default {
         'primary': '#473BF0',
         'gray': '#D0D5DD',
         'grey': '#667185'
-      }
+      },
 
       fontFamily: {
         'custom': ["Open Sans", "sans-serif"],
