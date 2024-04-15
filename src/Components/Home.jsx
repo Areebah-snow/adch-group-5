@@ -1,4 +1,5 @@
 import Features from "./Features";
+import Footer from "./Footer";
 import Hero from "./Hero";
 import HowItWorks from "./HowItWorks";
 import Navbar from "./Navbar";
@@ -10,6 +11,7 @@ const Home = () => {
       <Hero />
       <Features />
       <HowItWorks />
+      <Footer />
     </div>
   );
 };
