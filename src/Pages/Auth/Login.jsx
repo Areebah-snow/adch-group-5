@@ -22,7 +22,9 @@ const Login = () => {
             <div className="w-full md:w-1/2 flex items-center md:px-16 bg-white overflow-y-auto">
                 <div className="max-w-md p-6">
                     <h2 className="text-center text-dark font-bold pt-48 mb-1 text-2xl">Log In</h2>
-                <p className='text-dark font-normal text-base'>Enter your credentials to access your account</p>
+                <p className='text-dark font-normal text-base'>
+                    Enter your credentials to access your account
+                </p>
                 <div className="pt-6 space-y-6 ">
                     <div className="space-y-2 relative">
                         <label htmlFor="username" className="text-sm font-normal text-dark-100">
@@ -94,7 +96,7 @@ const Login = () => {
                     type="submit"
                     className="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium mt-6 text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                Log Into Account
+                    Log Into Account
                 </button>
                 <div className='flex items-center justify-center space-x-4 mt-4 mb-4'>
                     <div className='border-b border-[#F0F2F5] w-16 lg:w-36 h-2'></div>
