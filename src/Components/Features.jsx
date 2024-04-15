@@ -39,11 +39,11 @@ const featuresArr = [
 ];
 export default function Features() {
   return (
-    <section className="features container-xl px-36 my-20 flex justify-center items-center flex-col">
+    <section className="features container-xl max-w-[1440px] mx-auto my-20 flex justify-center items-center flex-col">
       <h2 className="feature-heading relative text-center p-10 w-1/2 text-4xl font-semibold mb-6">
         Our Powerful <br/>Features for Seamless Planning
       </h2>
-      <div className="flex justify-center items-center flex-wrap">
+      <div className="flex justify-center items-center flex-wrap ">
         {featuresArr.map((f, i) => (
           <Feature key={i} imgUrl={f.imgUrl} header={f.header} text={f.text} />
         ))}
@@ -54,7 +54,7 @@ export default function Features() {
 // eslint-disable-next-line react/prop-types
 function Feature({ imgUrl, header, text }) {
   return (
-    <div className="feature flex items-center justify-center px-24 py-6 flex-col w-1/3 text-center gap-2 mb-8">
+    <div className="feature flex items-center justify-center xl:px-24 py-6 flex-col lg:w-1/3 md:w-1/2 sm:w-full text-center gap-3 mb-8">
       <span className="rounded-full w-24 h-24 bg-[#473BF0] flex justify-center items-center">
         <img src={imgUrl} />
       </span>

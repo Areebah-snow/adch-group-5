@@ -1,25 +1,27 @@
-*,*::before,*::after{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-width: none;
 }
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   scrollbar-width: none;
 }
-
 
 .hero1 {
   background-image: url(/src/assets/pngwing\ 1.png);
 }
-.feature-heading::before{
-    width: 15%;
-    content: '';
-    background: #473BF0;
-    height: .25rem;
-    position: absolute;
-    top: 0;
-    left: 44%;
+*[class*="-heading"]::before {
+  width: 15%;
+  content: "";
+  background: #473bf0;
+  height: 0.25rem;
+  position: absolute;
+  top: 0;
+  left: 44%;
 }

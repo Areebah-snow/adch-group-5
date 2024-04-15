@@ -1,5 +1,6 @@
 import Features from "./Features";
 import Hero from "./Hero";
+import HowItWorks from "./HowItWorks";
 import Navbar from "./Navbar";
 
 const Home = () => {
@@ -7,7 +8,8 @@ const Home = () => {
     <div>
       <Navbar />
       <Hero />
-      <Features/>
+      <Features />
+      <HowItWorks />
     </div>
   );
 };
