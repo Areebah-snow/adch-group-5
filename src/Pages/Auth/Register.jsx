@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import AuthLogo from "../../assets/auth_logo.svg";
 import ggle from "../../assets/google.svg";
 import Twitter from "../../assets/twitter.svg";
