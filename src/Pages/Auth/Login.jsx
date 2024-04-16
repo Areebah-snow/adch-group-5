@@ -49,7 +49,7 @@ const Login = () => {
       <div className="hidden md:block md:w-1/2 overflow-hidden">
         <img className="object-cover h-full w-full" src={AuthLogo} alt="Logo" />
       </div>
-      <div className="w-full md:w-1/2 flex md:px-16 bg-white overflow-y-auto justify-center flex-col">
+      <div className="w-full md:w-1/2 flex md:px-16 bg-white overflow-y-auto justify-center max-md:items-center flex-col">
         <div className="max-w-md p-6">
           <h2 className="text-center text-dark font-bold mb-1 text-2xl">
             Log In
