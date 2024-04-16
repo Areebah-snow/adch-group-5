@@ -25,7 +25,7 @@ const Login = () => {
                 <p className='text-dark font-normal text-base'>
                     Enter your credentials to access your account
                 </p>
-                <div className="pt-6 space-y-6 ">
+                <form className="pt-6 space-y-6 ">
                     <div className="space-y-2 relative">
                         <label htmlFor="username" className="text-sm font-normal text-dark-100">
                             Email Address
@@ -35,10 +35,10 @@ const Login = () => {
                             <CiMail className="h-4 w-4 text-gray-400" aria-hidden="true" />
                         </div>
                         <input
-                        id="username"
+                        id="email"
                         type="text"
                         className="rounded-md px-4 py-3 w-full border border-gray outline-none"
-                        name="username"
+                        name="email"
                         autoComplete="off"
                         autoFocus
                         placeholder="Enter your email"
@@ -77,7 +77,7 @@ const Login = () => {
                             placeholder="Password"
                         />
                     </div>
-                </div>
+                
                 <div className="flex items-center justify-between mt-4">
                     <div className="flex items-center">
                         <input
@@ -94,10 +94,11 @@ const Login = () => {
                 </div>
                 <button
                     type="submit"
-                    className="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium mt-6 text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium mt-6 text-white bg-primary hover:bg-indigo-700"
                     >
                     Log Into Account
                 </button>
+            </form>
                 <div className='flex items-center justify-center space-x-4 mt-4 mb-4'>
                     <div className='border-b border-[#F0F2F5] w-16 lg:w-36 h-2'></div>
                         <p className='text-center text-sm mt-3 mb-3 cursor-pointer'>or</p>
