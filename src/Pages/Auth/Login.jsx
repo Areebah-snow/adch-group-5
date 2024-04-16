@@ -144,16 +144,7 @@ const Login = () => {
             <p className="text-center text-sm mt-3 mb-3 cursor-pointer">or</p>
             <div className="border-b border-[#F0F2F5] w-16 lg:w-36 h-2"></div>
           </div>
-          <div className="space-y-4">
-            <button className="w-full p-2.5 text-dark-200 font-semibold border border-gray outline-none rounded-md bg-brand-white text-base font-600 flex items-center justify-center cursor-pointer">
-              <img src={ggle} alt="Google-icon" className="mr-2 w-5" />
-              Continue with Google
-            </button>
-            <button className="w-full p-2.5 text-dark-200 font-semibold border border-gray outline-none rounded-md bg-brand-white text-base font-600 flex items-center justify-center cursor-pointer">
-              <img src={Twitter} alt="Google-icon" className="mr-2 w-5" />
-              Continue with Twitter
-            </button>
-          </div>
+          <GooggleAuth />
           <p className="text-grey text-sm mt-4 text-center">
             Are you new here?
             <Link to="/register" className="text-sm text-primary pl-2">
@@ -165,5 +156,20 @@ const Login = () => {
     </div>
   );
 };
+
+export function GooggleAuth() {
+  return (
+    <div className="space-y-4">
+      <button className="w-full p-2.5 text-dark-200 font-semibold border border-gray outline-none rounded-md bg-brand-white text-base font-600 flex items-center justify-center cursor-pointer">
+        <img src={ggle} alt="Google-icon" className="mr-2 w-5" />
+        Continue with Google
+      </button>
+      <button className="w-full p-2.5 text-dark-200 font-semibold border border-gray outline-none rounded-md bg-brand-white text-base font-600 flex items-center justify-center cursor-pointer">
+        <img src={Twitter} alt="Google-icon" className="mr-2 w-5" />
+        Continue with Twitter
+      </button>
+    </div>
+  );
+}
 
 export default Login;

@@ -20,10 +20,18 @@ const Footer = () => {
               Join us and discover the power of stress-free event .
             </p>
             <div className="flex gap-4 mt-4">
-              <FaTwitter size={20} color="white" />
-              <FaFacebook size={20} color="white" />
-              <FaInstagram size={20} color="white" />
-              <FaLinkedin size={20} color="white" />
+              <a href="">
+                <FaTwitter size={20} color="white" />
+              </a>
+              <a href="">
+                <FaFacebook size={20} color="white" />
+              </a>
+              <a href="">
+                <FaInstagram size={20} color="white" />
+              </a>
+              <a href="">
+                <FaLinkedin size={20} color="white" />
+              </a>
             </div>
           </div>
           <div className="md:mt-16">
