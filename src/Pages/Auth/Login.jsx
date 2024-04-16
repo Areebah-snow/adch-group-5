@@ -10,7 +10,8 @@ import {
   setPersistence,
   inMemoryPersistence,
   browserSessionPersistence,
-  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import auth from "../../../firebaseConfig";
 const Login = () => {
