@@ -1,7 +1,5 @@
 import { useState } from "react";
 import AuthLogo from "../../assets/auth_logo.svg";
-import ggle from "../../assets/google.svg";
-import Twitter from "../../assets/twitter.svg";
 import { CiMail } from "react-icons/ci";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
@@ -37,12 +35,14 @@ const Register = () => {
       <div className="hidden md:block md:w-1/2 overflow-hidden">
         <img className="object-cover h-full w-full" src={AuthLogo} alt="Logo" />
       </div>
-      <div className="w-full md:w-1/2 flex items-center md:px-16 bg-white overflow-y-auto">
+      <div className="w-full md:w-1/2 flex md:px-16 bg-white overflow-y-auto justify-center flex-col">
         <div className="max-w-md p-6">
-          <h2 className="text-3xl font-semibold pt-48 mb-2">
+          <h2 className="text-3xl text-center font-semibold mb-2">
             Create Your Account
           </h2>
-          <p>Sign Up to enjoy all of the features in the app</p>
+          <p className="text-center text-dark font-normal text-base">
+            Sign Up to enjoy all of the features in the app
+          </p>
           <form className="mt-5">
             <div className="mb-4">
               <label
@@ -78,7 +78,6 @@ const Register = () => {
                 className="rounded-md px-4 py-3 w-full border border-gray outline-none"
                 name="username"
                 autoComplete="off"
-                autoFocus
                 placeholder="Enter your email"
                 required
               />
