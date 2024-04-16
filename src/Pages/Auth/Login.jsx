@@ -156,6 +156,7 @@ const Login = () => {
 };
 
 export function GooggleAuth() {
+  const provider = new GoogleAuthProvider();
   const googleSignIn = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
