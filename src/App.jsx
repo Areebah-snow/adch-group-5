@@ -5,7 +5,7 @@ import Login from "./Pages/Auth/Login";
 import Register from "./Pages/Auth/Register";
 import { onAuthStateChanged } from "firebase/auth";
 import { useState } from "react";
-import auth from "../firebaseConfig";
+import { auth } from "../firebaseConfig"
 function App() {
   const [authLoaded, setAuthLoaded] = useState(false);
   onAuthStateChanged(auth, (user) => {
