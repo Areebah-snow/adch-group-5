@@ -1,8 +1,8 @@
 import express from "express";
 import connectDB from "./config/dbConfig.js";
 import dotenv from "dotenv";
-import userRoutes from "./routes/userRoutes.js";
-import eventRoutes from "./routes/eventRoutes.js";
+// import userRoutes from "./routes/userRoutes.js";
+// import eventRoutes from "./routes/eventRoutes.js";
 const app = express();
 dotenv.config();
 app.use(express.json());
