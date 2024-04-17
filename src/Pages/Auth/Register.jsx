@@ -2,32 +2,47 @@ import { useState } from "react";
 import AuthLogo from "../../assets/auth_logo.svg";
 import { CiMail } from "react-icons/ci";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GooggleAuth } from "./Login";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
+import { auth } from "../.././../firebaseConfig";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = () => {
-    const name = "HRITIK";
-    const email = "a@b.com";
-    const password = "123456789";
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(async (userCredential) => {
-        sendEmailVerification(auth.currentUser);
-        updateProfile(user, { displayName: name });
-        // TODO: set loggedin state and navigate
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage);
-        // TODO : Handle error
-      });
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      console.log(response);
+      setTimeout(() => {
+        navigate("/login");
+      }, 1500);
+      setLoading(false);
+      alert("Your account has been created");
+    } catch (error) {
+      setLoading(false);
+      console.error(error.message);
+    }
   };
 
   return (
@@ -36,7 +51,7 @@ const Register = () => {
         <img className="object-cover h-full w-full" src={AuthLogo} alt="Logo" />
       </div>
       <div className="w-full md:w-1/2 flex md:px-16 bg-white overflow-y-auto justify-center flex-col max-md:items-center">
-        <div className="max-w-md p-6">
+        <div className="max-w-md p-6 mt-44 md:mt-32">
           <h2 className="text-3xl text-center font-semibold mb-2">
             Create Your Account
           </h2>
@@ -73,12 +88,14 @@ const Register = () => {
                 <CiMail className="h-4 w-4 text-gray-400" aria-hidden="true" />
               </div>
               <input
-                id="username"
+                id="email"
                 type="text"
                 className="rounded-md px-4 py-3 w-full border border-gray outline-none"
-                name="username"
+                name="email"
                 autoComplete="off"
                 placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -112,6 +129,8 @@ const Register = () => {
                 required
                 autoComplete="off"
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <p className="text-dark-100 text-sm font-normal">
@@ -119,10 +138,10 @@ const Register = () => {
             </p>
             <button
               type="submit"
-              onClick={handleSubmit}
+              onClick={handleSignUp}
               className="w-full py-3 px-4 mt-8 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-indigo-700"
             >
-              Create Account
+               {loading ? "Loading" : "Create Account"}
             </button>
           </form>
           <div className="flex items-center justify-center space-x-4 mt-4 mb-4">
