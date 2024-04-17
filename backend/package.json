@@ -1,0 +1,18 @@
+{
+  "name": "adch-group-5-backend",
+  "version": "1.0.0",
+  "description": "backend for rsvp app adch-group-5",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "adch-group-5",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-async-handler": "^1.2.0",
+    "mongoose": "^8.3.2"
+  }
+}
