@@ -4,7 +4,7 @@ import ggle from "../../assets/google.svg";
 import Twitter from "../../assets/twitter.svg";
 import { CiMail } from "react-icons/ci";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   signInWithEmailAndPassword,
   setPersistence,
@@ -13,34 +13,39 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
-import auth from "../../../firebaseConfig";
+import { auth } from "../../../firebaseConfig";
 const Login = () => {
-  const [isLoading, setIsLoading] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate()
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  const handleLogin = () => {
-    const email = "a@b.com";
-    const password = "123456789";
-    const persistSession = 1;
-    setPersistence(
-      auth,
-      persistSession ? inMemoryPersistence : browserSessionPersistence
-    ).then(() => {
-      return signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          console.log(userCredential);
-          //TODO: Set loggedIn state and navigate
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorMessage);
-          //TODO: Handle error
-        });
-    });
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log(userCredential);
+        navigate("/");
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        if (error.code === "auth/wrong-password" || error.code === "auth/invalid-email") {
+          alert("Incorrect email or password. Please try again.");
+        } else if (error.code === "auth/invalid-credential") {
+          alert("User not found. Please sign up.");
+        } else {
+          alert("An error occurred. Please try again later.");
+          console.error(error);
+        }
+      });
   };
   return (
     <div className="flex h-screen">
@@ -48,7 +53,7 @@ const Login = () => {
         <img className="object-cover h-full w-full" src={AuthLogo} alt="Logo" />
       </div>
       <div className="w-full md:w-1/2 flex md:px-16 bg-white overflow-y-auto justify-center max-md:items-center flex-col">
-        <div className="max-w-md p-6">
+        <div className="max-w-md p-6 mt-32 md:mt-12">
           <h2 className="text-center text-dark font-bold mb-1 text-2xl">
             Log In
           </h2>
@@ -75,6 +80,8 @@ const Login = () => {
                 autoComplete="off"
                 autoFocus
                 placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -108,6 +115,8 @@ const Login = () => {
                 required
                 autoComplete="off"
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </div>
@@ -133,9 +142,9 @@ const Login = () => {
           <button
             type="submit"
             onClick={handleLogin}
-            className="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium mt-6 text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium mt-6 text-white bg-primary"
           >
-            Log Into Account
+            {loading ? "Loading" : "Log Into Account"}
           </button>
           <div className="flex items-center justify-center space-x-4 mt-4 mb-4">
             <div className="border-b border-[#F0F2F5] w-16 lg:w-36 h-2"></div>
