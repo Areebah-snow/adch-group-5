@@ -1,6 +1,8 @@
 import { useState } from "react";
 import AuthLogo from "../../assets/auth_logo.svg";
 import ggle from "../../assets/google.svg";
+import { ToastContainer, Zoom, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Twitter from "../../assets/twitter.svg";
 import { CiMail } from "react-icons/ci";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
@@ -19,7 +21,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -27,26 +29,56 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    setLoading(true);
+    if (validate()) {
+      setLoading(true);
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log(userCredential);
-        navigate("/");
-        setLoading(false);
-      })
-      .catch((error) => {
-        setLoading(false);
-        if (error.code === "auth/wrong-password" || error.code === "auth/invalid-email") {
-          alert("Incorrect email or password. Please try again.");
-        } else if (error.code === "auth/invalid-credential") {
-          alert("User not found. Please sign up.");
-        } else {
-          alert("An error occurred. Please try again later.");
-          console.error(error);
-        }
-      });
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          console.log(userCredential);
+          navigate("/");
+          setLoading(false);
+        })
+        .catch((error) => {
+          setLoading(false);
+          if (
+            error.code === "auth/wrong-password" ||
+            error.code === "auth/invalid-email"
+          ) {
+            toast.error("Incorrect email or password. Please try again.", {
+              theme: "colored",
+            });
+          } else if (error.code === "auth/invalid-credential") {
+            toast.error("User not found. Please sign up.", {
+              theme: "colored",
+            });
+          } else {
+            toast.error("An error occurred. Please try again later.", {
+              theme: "colored",
+            });
+            console.error(error);
+          }
+        });
+    }
   };
+  const validate = () => {
+    let result = true;
+    if (email === "" || email === null) {
+      result = false;
+      toast.warning("Please Enter Email Address", {
+        theme: "colored",
+        autoClose: 3000,
+      });
+    }
+    if (password === "" || password === null) {
+      result = false;
+      toast.warning("Please Enter Password", {
+        theme: "colored",
+        autoClose: 3000,
+      });
+    }
+    return result;
+  };
+
   return (
     <div className="flex h-screen">
       <div className="hidden md:block md:w-1/2 overflow-hidden">
@@ -159,6 +191,7 @@ const Login = () => {
             </Link>
           </p>
         </div>
+        <ToastContainer transition={Zoom} />
       </div>
     </div>
   );
