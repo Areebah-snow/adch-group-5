@@ -6,6 +6,11 @@ const eventSchema = mongoose.Schema(
     description: { type: "String", trim: true },
     location: { type: "String", required: true, trim: true },
     additionalInfo: { type: "String", trim: true },
+    creator: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     photoURL: {
       type: "String",
       required: true,
