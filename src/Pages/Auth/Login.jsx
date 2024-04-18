@@ -32,7 +32,7 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential);
-        navigate("/");
+        navigate("/dashboard");
         setLoading(false);
       })
       .catch((error) => {
@@ -63,7 +63,7 @@ const Login = () => {
           <div className="pt-6 space-y-6 ">
             <div className="space-y-2 relative">
               <label
-                htmlFor="username"
+                htmlFor="email"
                 className="text-sm font-normal text-dark-100"
               >
                 Email Address
@@ -73,10 +73,10 @@ const Login = () => {
                 <CiMail className="h-4 w-4 text-gray-400" aria-hidden="true" />
               </div>
               <input
-                id="username"
+                id="email"
                 type="text"
                 className="rounded-md px-4 py-3 w-full border border-gray outline-none"
-                name="username"
+                name="email"
                 autoComplete="off"
                 autoFocus
                 placeholder="Enter your email"

@@ -42,6 +42,9 @@ const Register = () => {
     } catch (error) {
       setLoading(false);
       console.error(error.message);
+      if (error.code === "auth/email-already-in-use") {
+        alert("User with this email already exists. Please log in.");
+      }
     }
   };
 
