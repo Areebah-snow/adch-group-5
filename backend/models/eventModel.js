@@ -14,6 +14,8 @@ const eventSchema = mongoose.Schema(
     photoURL: {
       type: "String",
       required: true,
+      default:
+        "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
     },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
