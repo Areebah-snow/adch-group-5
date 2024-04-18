@@ -5,18 +5,18 @@ const userExps = [
     img: userPic1,
     header: "“Exceeded my expectations.”",
     text: "Easy to create invitations, manage registrations, and communicate.\nHighly recommend!",
-    userName:'James Rodriguez'
+    userName: "James Rodriguez",
   },
   {
     img: userPic2,
     header: "“Presentation Made Easy”",
     text: "Personalized invitations, smooth registration, and great communication tools.",
-    userName:'Sarah Thompson'
+    userName: "Sarah Thompson",
   },
 ];
 export default function Testimonials() {
   return (
-    <section className="testimonials bg-[#473BF01C] my-4 flex justify-evenly items-center p-24">
+    <section className="testimonials bg-[#473BF01C] my-4 flex flex-wrap justify-evenly items-center md:p-24">
       {userExps.map((exp, i) => (
         <UserExp
           key={i}
@@ -32,10 +32,10 @@ export default function Testimonials() {
 // eslint-disable-next-line react/prop-types
 function UserExp({ header, text, img, userName }) {
   return (
-    <div className="userExp text-center flex flex-col justify-center items-center gap-8 p-6">
+    <div className="userExp text-center flex flex-col justify-center items-center gap-4 p-6">
       <img src={img} alt="user-pic" />
-      <h2 className="text-2xl font-semibold">{header}</h2>
-      <p className="text-xl w-[30ch]">{text}</p>
+      <h2 className="md:text-2xl text-xl font-semibold">{header}</h2>
+      <p className="md:text-xl text-l w-[30ch]">{text}</p>
       <span className="text-[#473BF0]">{userName}</span>
     </div>
   );
