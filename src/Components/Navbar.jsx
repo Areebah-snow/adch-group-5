@@ -45,7 +45,7 @@ const Navbar = () => {
         </div>
       </div>
       <div
-        className={`md:hidden fixed flex items-end flex-col px-4 gap-6 top-0 pt-[30px] right-0 w-1/2 bottom-0 bg-white z-[100] translate-x-[100%] ${
+        className={`md:hidden fixed flex items-end flex-col px-4 gap-6 top-0 pt-[30px] right-0 w-1/2 bottom-0 bg-white z-[100] ${
           showmenu ? "translate-x-[0%]" : "translate-x-[100%]"
         } transition-transform ease-in`}
       >
