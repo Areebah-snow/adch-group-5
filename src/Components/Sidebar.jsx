@@ -10,13 +10,14 @@ import Logout from "../assets/logout.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
+
 const Sidebar = () => {
   const navigate = useNavigate();
-  const [collapsed, setCollapsed] = useState(false);
   const handleSignout = () => {
     signOut(auth)
       .then(() => {
         console.log("Signed out successfully");
+        navigate("/login");
         // TODO: handle flow after signout
       })
       .catch((error) => {
