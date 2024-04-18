@@ -3,6 +3,8 @@ import AuthLogo from "../../assets/auth_logo.svg";
 import { CiMail } from "react-icons/ci";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, Zoom, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { GooggleAuth } from "./Login";
 import {
   getAuth,
@@ -38,10 +40,15 @@ const Register = () => {
         navigate("/login");
       }, 1500);
       setLoading(false);
-      alert("Your account has been created");
+      toast.success("Your account has been created");
     } catch (error) {
       setLoading(false);
       console.error(error.message);
+      if (error.code === "auth/email-already-in-use") {
+        toast.error("User with this email already exists. Please log in.", {
+          theme: "colored",
+        });
+      }
     }
   };
 
@@ -157,6 +164,7 @@ const Register = () => {
             </Link>
           </p>
         </div>
+        <ToastContainer transition={Zoom} />
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import Register from "./Pages/Auth/Register";
 import { onAuthStateChanged } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../firebaseConfig"
+import Dashboard from "./Pages/Dashboard/Dashboard";
 function App() {
   const [authLoaded, setAuthLoaded] = useState(false);
   onAuthStateChanged(auth, (user) => {
@@ -18,7 +19,8 @@ function App() {
     { path: "/", element: <Home /> },
     { path: "/login", element: <Login /> },
     { path: "/register", element: <Register /> },
-    // { path: "/", element: <Home /> },
+    { path: "/dashboard", element: <Dashboard />}
+
   ]);
   return (
     <>
