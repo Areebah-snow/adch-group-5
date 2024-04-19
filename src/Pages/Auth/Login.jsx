@@ -1,66 +1,101 @@
 import { useState } from "react";
 import AuthLogo from "../../assets/auth_logo.svg";
 import ggle from "../../assets/google.svg";
+import { ToastContainer, Zoom, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Twitter from "../../assets/twitter.svg";
 import { CiMail } from "react-icons/ci";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   signInWithEmailAndPassword,
   setPersistence,
   inMemoryPersistence,
   browserSessionPersistence,
-  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
-import auth from "../../../firebaseConfig";
+import { auth } from "../../../firebaseConfig";
 const Login = () => {
-  const [isLoading, setIsLoading] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  onAuthStateChanged(auth, (user) => {
-    console.log(user);
-  });
-  const handleLogin = () => {
-    const email = "a@b.com";
-    const password = "123456789";
-    const persistSession = 1;
-    setPersistence(
-      auth,
-      persistSession ? inMemoryPersistence : browserSessionPersistence
-    ).then(() => {
-      return signInWithEmailAndPassword(auth, email, password)
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (validate()) {
+      setLoading(true);
+
+      signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           console.log(userCredential);
-          //TODO: Set loggedIn state and navigate
+          navigate("/dashboard");
+          setLoading(false);
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorMessage);
-          //TODO: Handle error
+          setLoading(false);
+          if (
+            error.code === "auth/wrong-password" ||
+            error.code === "auth/invalid-email"
+          ) {
+            toast.error("Incorrect email or password. Please try again.", {
+              theme: "colored",
+            });
+          } else if (error.code === "auth/invalid-credential") {
+            toast.error("User not found. Please sign up.", {
+              theme: "colored",
+            });
+          } else {
+            toast.error("An error occurred. Please try again later.", {
+              theme: "colored",
+            });
+            console.error(error);
+          }
         });
-    });
+    }
   };
+  const validate = () => {
+    let result = true;
+    if (email === "" || email === null) {
+      result = false;
+      toast.warning("Please Enter Email Address", {
+        theme: "colored",
+        autoClose: 3000,
+      });
+    }
+    if (password === "" || password === null) {
+      result = false;
+      toast.warning("Please Enter Password", {
+        theme: "colored",
+        autoClose: 3000,
+      });
+    }
+    return result;
+  };
+
   return (
     <div className="flex h-screen">
       <div className="hidden md:block md:w-1/2 overflow-hidden">
         <img className="object-cover h-full w-full" src={AuthLogo} alt="Logo" />
       </div>
-      <div className="w-full md:w-1/2 flex items-center md:px-16 bg-white overflow-y-auto">
-        <div className="max-w-md p-6">
-          <h2 className="text-center text-dark font-bold pt-48 mb-1 text-2xl">
+      <div className="w-full md:w-1/2 flex md:px-16 bg-white overflow-y-auto justify-center max-md:items-center flex-col">
+        <div className="max-w-md p-6 mt-32 md:mt-12">
+          <h2 className="text-center text-dark font-bold mb-1 text-2xl">
             Log In
           </h2>
-          <p className="text-dark font-normal text-base">
+          <p className="text-dark font-normal text-base text-center">
             Enter your credentials to access your account
           </p>
           <div className="pt-6 space-y-6 ">
             <div className="space-y-2 relative">
               <label
-                htmlFor="username"
+                htmlFor="email"
                 className="text-sm font-normal text-dark-100"
               >
                 Email Address
@@ -70,13 +105,15 @@ const Login = () => {
                 <CiMail className="h-4 w-4 text-gray-400" aria-hidden="true" />
               </div>
               <input
-                id="username"
+                id="email"
                 type="text"
                 className="rounded-md px-4 py-3 w-full border border-gray outline-none"
-                name="username"
+                name="email"
                 autoComplete="off"
                 autoFocus
                 placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -110,6 +147,8 @@ const Login = () => {
                 required
                 autoComplete="off"
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </div>
@@ -135,25 +174,16 @@ const Login = () => {
           <button
             type="submit"
             onClick={handleLogin}
-            className="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium mt-6 text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium mt-6 text-white bg-primary"
           >
-            Log Into Account
+            {loading ? "Loading" : "Log Into Account"}
           </button>
           <div className="flex items-center justify-center space-x-4 mt-4 mb-4">
             <div className="border-b border-[#F0F2F5] w-16 lg:w-36 h-2"></div>
             <p className="text-center text-sm mt-3 mb-3 cursor-pointer">or</p>
             <div className="border-b border-[#F0F2F5] w-16 lg:w-36 h-2"></div>
           </div>
-          <div className="space-y-4">
-            <button className="w-full p-2.5 text-dark-200 font-semibold border border-gray outline-none rounded-md bg-brand-white text-base font-600 flex items-center justify-center cursor-pointer">
-              <img src={ggle} alt="Google-icon" className="mr-2 w-5" />
-              Continue with Google
-            </button>
-            <button className="w-full p-2.5 text-dark-200 font-semibold border border-gray outline-none rounded-md bg-brand-white text-base font-600 flex items-center justify-center cursor-pointer">
-              <img src={Twitter} alt="Google-icon" className="mr-2 w-5" />
-              Continue with Twitter
-            </button>
-          </div>
+          <GooggleAuth />
           <p className="text-grey text-sm mt-4 text-center">
             Are you new here?
             <Link to="/register" className="text-sm text-primary pl-2">
@@ -161,9 +191,43 @@ const Login = () => {
             </Link>
           </p>
         </div>
+        <ToastContainer transition={Zoom} />
       </div>
     </div>
   );
 };
+
+export function GooggleAuth() {
+  const provider = new GoogleAuthProvider();
+  const googleSignIn = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        //TODO : Store user detail in the db
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // TODO: Handle errors
+      });
+  };
+  return (
+    <div className="space-y-4">
+      <button
+        onClick={googleSignIn}
+        className="w-full p-2.5 text-dark-200 font-semibold border border-gray outline-none rounded-md bg-brand-white text-base font-600 flex items-center justify-center cursor-pointer"
+      >
+        <img src={ggle} alt="Google-icon" className="mr-2 w-5" />
+        Continue with Google
+      </button>
+      <button className="w-full p-2.5 text-dark-200 font-semibold border border-gray outline-none rounded-md bg-brand-white text-base font-600 flex items-center justify-center cursor-pointer">
+        <img src={Twitter} alt="Google-icon" className="mr-2 w-5" />
+        Continue with Twitter
+      </button>
+    </div>
+  );
+}
 
 export default Login;
