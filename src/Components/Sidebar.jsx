@@ -12,6 +12,7 @@ import { MdOutlineHeadsetMic } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 
 const Sidebar = () => {
+  const [eventlist, seteventlist] = useState(false);
   const navigate = useNavigate();
   const handleSignout = () => {
     signOut(auth)
@@ -27,7 +28,7 @@ const Sidebar = () => {
   return (
     <div className="w-[262px] lg:h-screen text-white bg-primary hidden lg:flex flex-col lg:px-7 gap-8 py-[2.375rem] px-0">
       <aside>
-        <img src={DbLogo} alt="" className="w-full my-4" />
+        <img src={DbLogo} alt="" className="w-full my-2" />
         <div className="flex flex-col justify-between h-[70vh]">
           <div>
             <NavLink to="/dashboard">
@@ -35,31 +36,98 @@ const Sidebar = () => {
                 <div
                   className={`${
                     isActive && "bg-white text-primary"
-                  } flex items-center rounded-lg p-2 gap-4`}
+                  } flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary my-2`}
                 >
                   <GoHome size={30} />
                   <span className="text-base leading-[120%]">Dashboard</span>
                 </div>
               )}
             </NavLink>
-            <NavLink to="/events">
-              {({ isActive }) => (
+            <NavLink onClick={() => seteventlist(!eventlist)}>
+              <div>
                 <div
-                  className={`${
-                    isActive && "bg-white text-primary"
-                  } flex items-center rounded-lg p-2 gap-4`}
+                  className={` flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary`}
                 >
                   <CiCalendar size={30} />
                   <span className="text-base leading-[120%]">Events</span>
                 </div>
-              )}
+                {eventlist && (
+                  <div className="ml-10">
+                    <NavLink to="/createevent">
+                      {({ isActive }) => (
+                        <div
+                          className={`${
+                            isActive && "bg-white text-primary"
+                          } flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary my-1`}
+                        >
+                          <span className="text-base leading-[120%]">
+                            Create Event
+                          </span>
+                        </div>
+                      )}
+                    </NavLink>
+                    <NavLink to="/allevents">
+                      {({ isActive }) => (
+                        <div
+                          className={`${
+                            isActive && "bg-white text-primary"
+                          } flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary my-1`}
+                        >
+                          <span className="text-base leading-[120%]">
+                            All Events
+                          </span>
+                        </div>
+                      )}
+                    </NavLink>
+                    <NavLink to="/upcommingevents">
+                      {({ isActive }) => (
+                        <div
+                          className={`${
+                            isActive && "bg-white text-primary"
+                          } flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary my-1`}
+                        >
+                          <span className="text-base leading-[120%]">
+                            Upcoming Events
+                          </span>
+                        </div>
+                      )}
+                    </NavLink>
+                    <NavLink to="/pastevents">
+                      {({ isActive }) => (
+                        <div
+                          className={`${
+                            isActive && "bg-white text-primary"
+                          } flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary my-1`}
+                        >
+                          <span className="text-base leading-[120%]">
+                            Past Events
+                          </span>
+                        </div>
+                      )}
+                    </NavLink>
+                    <NavLink to="/calendar">
+                      {({ isActive }) => (
+                        <div
+                          className={`${
+                            isActive && "bg-white text-primary"
+                          } flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary my-1`}
+                        >
+                          <span className="text-base leading-[120%]">
+                            Calendar
+                          </span>
+                        </div>
+                      )}
+                    </NavLink>
+                  </div>
+                )}
+              </div>
             </NavLink>
             <NavLink to="/profile">
               {({ isActive }) => (
                 <div
                   className={`${
                     isActive && "bg-white text-primary"
-                  } flex items-center rounded-lg p-2 gap-4`}
+                  } flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary my-2`}
                 >
                   <IoPersonOutline size={30} />
                   <span className="text-base leading-[120%]">Profile</span>
@@ -71,7 +139,7 @@ const Sidebar = () => {
                 <div
                   className={`${
                     isActive && "bg-white text-primary"
-                  } flex items-center rounded-lg p-2 gap-4`}
+                  } flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary my-2`}
                 >
                   <GrNotes size={30} />
                   <span className="text-base leading-[120%]">RSVP</span>
@@ -85,7 +153,7 @@ const Sidebar = () => {
                 <div
                   className={`${
                     isActive && "bg-white text-primary"
-                  } flex items-center rounded-lg p-2 gap-4`}
+                  } flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary my-2`}
                 >
                   <IoSettingsOutline size={30} />
                   <span className="text-base leading-[120%] whitespace-pre">
@@ -99,7 +167,7 @@ const Sidebar = () => {
                 <div
                   className={`${
                     isActive && "bg-white text-primary"
-                  } flex items-center rounded-lg p-2 gap-4`}
+                  } flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary my-2`}
                 >
                   <MdOutlineHeadsetMic size={30} />
                   <span className="text-base leading-[120%] whitespace-pre">
@@ -108,7 +176,7 @@ const Sidebar = () => {
                 </div>
               )}
             </NavLink>
-            <NavLink className="flex items-center p-2 gap-4">
+            <NavLink className="flex items-center p-2 gap-4 hover:bg-white hover:text-primary my-2">
               <FiLogOut size={30} />
               <span
                 className="text-base leading-[120%] text-error"
