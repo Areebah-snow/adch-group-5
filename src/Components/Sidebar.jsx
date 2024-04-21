@@ -26,7 +26,7 @@ const Sidebar = () => {
       });
   };
   return (
-    <div className="w-[262px] lg:h-screen text-white bg-primary hidden lg:flex flex-col lg:px-7 gap-8 py-[2.375rem] px-0">
+    <div className="w-[262px] lg:h-screen text-[#FFECE5] bg-primary hidden lg:flex flex-col lg:px-7 gap-8 py-[2.375rem] px-0">
       <aside>
         <img src={DbLogo} alt="" className="w-full my-2" />
         <div className="flex flex-col justify-between h-[70vh]">
@@ -35,8 +35,8 @@ const Sidebar = () => {
               {({ isActive }) => (
                 <div
                   className={`${
-                    isActive && "bg-white text-primary"
-                  } flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary my-2`}
+                    isActive && "bg-[#FFECE5] text-primary"
+                  } flex items-center rounded-lg p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary my-2`}
                 >
                   <GoHome size={30} />
                   <span className="text-base leading-[120%]">Dashboard</span>
@@ -46,7 +46,7 @@ const Sidebar = () => {
             <NavLink onClick={() => seteventlist(!eventlist)}>
               <div>
                 <div
-                  className={` flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary`}
+                  className={` flex items-center rounded-lg p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary`}
                 >
                   <CiCalendar size={30} />
                   <span className="text-base leading-[120%]">Events</span>
@@ -57,8 +57,8 @@ const Sidebar = () => {
                       {({ isActive }) => (
                         <div
                           className={`${
-                            isActive && "bg-white text-primary"
-                          } flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary my-1`}
+                            isActive && "bg-[#FFECE5] text-primary"
+                          } flex items-center rounded-lg p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary my-1`}
                         >
                           <span className="text-base leading-[120%]">
                             Create Event
@@ -70,8 +70,8 @@ const Sidebar = () => {
                       {({ isActive }) => (
                         <div
                           className={`${
-                            isActive && "bg-white text-primary"
-                          } flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary my-1`}
+                            isActive && "bg-[#FFECE5] text-primary"
+                          } flex items-center rounded-lg p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary my-1`}
                         >
                           <span className="text-base leading-[120%]">
                             All Events
@@ -83,8 +83,8 @@ const Sidebar = () => {
                       {({ isActive }) => (
                         <div
                           className={`${
-                            isActive && "bg-white text-primary"
-                          } flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary my-1`}
+                            isActive && "bg-[#FFECE5] text-primary"
+                          } flex items-center rounded-lg p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary my-1`}
                         >
                           <span className="text-base leading-[120%]">
                             Upcoming Events
@@ -96,8 +96,8 @@ const Sidebar = () => {
                       {({ isActive }) => (
                         <div
                           className={`${
-                            isActive && "bg-white text-primary"
-                          } flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary my-1`}
+                            isActive && "bg-[#FFECE5] text-primary"
+                          } flex items-center rounded-lg p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary my-1`}
                         >
                           <span className="text-base leading-[120%]">
                             Past Events
@@ -109,8 +109,8 @@ const Sidebar = () => {
                       {({ isActive }) => (
                         <div
                           className={`${
-                            isActive && "bg-white text-primary"
-                          } flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary my-1`}
+                            isActive && "bg-[#FFECE5] text-primary"
+                          } flex items-center rounded-lg p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary my-1`}
                         >
                           <span className="text-base leading-[120%]">
                             Calendar
@@ -126,8 +126,8 @@ const Sidebar = () => {
               {({ isActive }) => (
                 <div
                   className={`${
-                    isActive && "bg-white text-primary"
-                  } flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary my-2`}
+                    isActive && "bg-[#FFECE5] text-primary"
+                  } flex items-center rounded-lg p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary my-2`}
                 >
                   <IoPersonOutline size={30} />
                   <span className="text-base leading-[120%]">Profile</span>
@@ -138,8 +138,8 @@ const Sidebar = () => {
               {({ isActive }) => (
                 <div
                   className={`${
-                    isActive && "bg-white text-primary"
-                  } flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary my-2`}
+                    isActive && "bg-[#FFECE5] text-primary"
+                  } flex items-center rounded-lg p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary my-2`}
                 >
                   <GrNotes size={30} />
                   <span className="text-base leading-[120%]">RSVP</span>
@@ -152,11 +152,11 @@ const Sidebar = () => {
               {({ isActive }) => (
                 <div
                   className={`${
-                    isActive && "bg-white text-primary"
-                  } flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary my-2`}
+                    isActive && "bg-[#FFECE5] text-primary"
+                  } flex items-center rounded-lg p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary my-2`}
                 >
                   <IoSettingsOutline size={30} />
-                  <span className="text-base leading-[120%] whitespace-pre">
+                  <span className="text-base leading-[120%] [#FFECE5]space-pre">
                     Settings
                   </span>
                 </div>
@@ -166,17 +166,17 @@ const Sidebar = () => {
               {({ isActive }) => (
                 <div
                   className={`${
-                    isActive && "bg-white text-primary"
-                  } flex items-center rounded-lg p-2 gap-4 hover:bg-white hover:text-primary my-2`}
+                    isActive && "bg-[#FFECE5] text-primary"
+                  } flex items-center rounded-lg p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary my-2`}
                 >
                   <MdOutlineHeadsetMic size={30} />
-                  <span className="text-base leading-[120%] whitespace-pre">
+                  <span className="text-base leading-[120%] [#FFECE5]space-pre">
                     Help Center
                   </span>
                 </div>
               )}
             </NavLink>
-            <NavLink className="flex items-center p-2 gap-4 hover:bg-white hover:text-primary my-2">
+            <NavLink className="flex items-center p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary my-2">
               <FiLogOut size={30} />
               <span
                 className="text-base leading-[120%] text-error"
