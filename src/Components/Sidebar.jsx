@@ -28,7 +28,7 @@ const Sidebar = () => {
       });
   };
   return (
-    <div className="w-[262px] lg:h-screen text-[#FFECE5] bg-primary hidden lg:flex flex-col lg:px-7 gap-8 py-[2.375rem] px-0">
+    <div className="w-[15%] fixed left-0 top-0 bottom-0 lg:h-screen text-[#FFECE5] bg-primary hidden lg:flex flex-col lg:px-7 gap-8 py-[2.375rem] px-0">
       <aside>
         <img src={DbLogo} alt="" className="w-full my-2" />
         <div className="flex flex-col justify-between h-[70vh]">
@@ -50,7 +50,7 @@ const Sidebar = () => {
                 <div
                   className={`flex items-center rounded-lg p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary`}
                 >
-                  <CiCalendar size={30} />
+                  <CiCalendar size={40} />
                   <div className="flex justify-between ite w-full">
                     <span className="text-base leading-[120%]">Events</span>
                     {eventlist ? <FaAngleUp /> : <FaAngleDown />}
