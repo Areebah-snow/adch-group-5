@@ -10,6 +10,8 @@ import { GrNotes } from "react-icons/gr";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineHeadsetMic } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
+import { FaAngleDown } from "react-icons/fa";
+import { FaAngleUp } from "react-icons/fa";
 
 const Sidebar = () => {
   const [eventlist, seteventlist] = useState(false);
@@ -46,10 +48,13 @@ const Sidebar = () => {
             <NavLink onClick={() => seteventlist(!eventlist)}>
               <div>
                 <div
-                  className={` flex items-center rounded-lg p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary`}
+                  className={`flex items-center rounded-lg p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary`}
                 >
                   <CiCalendar size={30} />
-                  <span className="text-base leading-[120%]">Events</span>
+                  <div className="flex justify-between ite w-full">
+                    <span className="text-base leading-[120%]">Events</span>
+                    {eventlist ? <FaAngleUp /> : <FaAngleDown />}
+                  </div>
                 </div>
                 {eventlist && (
                   <div className="ml-10">
