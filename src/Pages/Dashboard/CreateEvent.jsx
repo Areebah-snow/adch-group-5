@@ -5,7 +5,7 @@ const CreateEvent = () => {
     <div>
       <div>
         {/* <Sidebar /> */}
-        <div className="">
+        <div className="px-10">
           <div className="text-center max-w-[600px] mx-auto">
             <h2 className="font-bold text-[24px]">Build your event page</h2>
             <h3 className="font-[500] ">
@@ -15,43 +15,74 @@ const CreateEvent = () => {
             </h3>
           </div>
           <form action="">
-            <div>
+            <div className="my-6">
               <label className="font-semibold">Event Name</label>
-              <input type="text" className="w-[100%]" />
+              <input
+                type="text"
+                placeholder="Name of the event"
+                className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
+              />
             </div>
-            <div>
-              <label>Event Description</label>
-              <input type="text" className="w-[100%]" />
+            <div className="my-6">
+              <label className="font-semibold">Event Description</label>
+              <input
+                type="text"
+                placeholder="Give a brief description of the event..."
+                className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
+              />
             </div>
-            <div>
-              <label>Start Time</label>
-              <input type="time" className="w-[100%]" />
+            <div className="my-6">
+              <label className="font-semibold">Start Time</label>
+              <input
+                type="time"
+                className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
+              />
             </div>
-            <div>
-              <label>Event Start Date</label>
-              <input type="date" className="w-[100%]" />
+            <div className="my-6">
+              <label className="font-semibold">Event Start Date</label>
+              <input
+                type="date"
+                className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
+              />
             </div>
-            <div>
-              <label>End Time</label>
-              <input type="time" className="w-[100%]" />
+            <div className="my-6">
+              <label className="font-semibold">End Time</label>
+              <input
+                type="time"
+                className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
+              />
             </div>
-            <div>
-              <label>Event End Date</label>
-              <input type="date" className="w-[100%]" />
+            <div className="my-6">
+              <label className="font-semibold">Event End Date</label>
+              <input
+                type="date"
+                className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
+              />
             </div>
-            <div>
-              <label>Event Location</label>
-              <input type="text" className="w-[100%]" />
+            <div className="my-6">
+              <label className="font-semibold">Event Location</label>
+              <input
+                type="text"
+                placeholder="Enter event location..."
+                className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
+              />
             </div>
-            <input type="text" className="w-[100%]" />
-            <div>
-              <label>Upload Event Image</label>
-              <input type="file" className="w-[100%]" />
+            <input
+              type="text"
+              placeholder="Other additional information"
+              className="my-4 rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
+            />
+            <div className="my-6">
+              <label className="font-semibold">Upload Event Image</label>
+              <input
+                type="file"
+                className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
+              />
             </div>
-            <button className="w-[100%] text-[#473BF0] border-[#473BF0] font-semibold border-2 rounded-xl py-2">
+            <button className="w-full text-[#473BF0] border-[#473BF0] font-semibold border-2 rounded-xl py-2">
               Save for Later
             </button>
-            <button className="w-[100%] border-2 border-[#473BF0] bg-[#473BF0] text-white py-2 rounded-xl mt-6">
+            <button className="w-full border-2 border-[#473BF0] bg-[#473BF0] text-white py-2 rounded-xl mt-6">
               Create Event
             </button>
           </form>
