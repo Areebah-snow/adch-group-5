@@ -18,6 +18,7 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -27,6 +28,7 @@ const Register = () => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+    if (validate()) {
     setLoading(true);
     try {
       const response = await createUserWithEmailAndPassword(
@@ -50,6 +52,33 @@ const Register = () => {
         });
       }
     }
+  }
+  };
+
+  const validate = () => {
+    let result = true;
+    if (email === "" || email === null) {
+      result = false;
+      toast.warning("Please Enter Email Address", {
+        theme: "colored",
+        autoClose: 3000,
+      });
+    }
+    if (password === "" || password === null) {
+      result = false;
+      toast.warning("Please Enter Password", {
+        theme: "colored",
+        autoClose: 3000,
+      });
+    }
+    if (username === "" || username === null) {
+      result = false;
+      toast.warning("Please Enter a Username", {
+        theme: "colored",
+        autoClose: 3000,
+      });
+    }
+    return result;
   };
 
   return (
@@ -81,6 +110,8 @@ const Register = () => {
                 autoComplete="off"
                 autoFocus
                 placeholder="Enter your name"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 required
               />
             </div>
