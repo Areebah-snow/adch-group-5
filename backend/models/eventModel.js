@@ -19,8 +19,8 @@ const eventSchema = mongoose.Schema(
     },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
-    acceptedCount: { type: Int32Array },
-    declinedCount: { type: Int32Array },
+    acceptedCount: { type: Number },
+    declinedCount: { type: Number },
     stats: { type: String, required: true, default: "Open", trim: true },
   },
   { timestamps: true }

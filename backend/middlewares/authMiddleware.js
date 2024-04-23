@@ -21,8 +21,19 @@ const protect = expressAsyncHandler(async (req, res, next) => {
           res.status(400);
           throw new Error("User Unauthorised");
         }
-        req.user = decodedToken;
-        next();
+        admin
+          .auth()
+          .getUser(decodedToken.uid)
+          .then((userRecord) => {
+            req.user = {
+              name: userRecord.name,
+              uid: userRecord.uid,
+              photoURL: userRecord.photoURL,
+              email: userRecord.email,
+            };
+            console.log(userRecord);
+            next();
+          });
       })
       .catch((error) => {
         res.status(401);
