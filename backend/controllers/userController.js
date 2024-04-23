@@ -5,9 +5,13 @@ const registerUser = expressAsyncHandler(async (req, res) => {
   const { name, uid, photoURL, email } = req.user;
   console.log(req.user);
   try {
-    User.create({ uid, photoURL, name, email }).then((user) => {
-      res.status(200).json(user);
-    });
+    User.create({ uid, photoURL, name, email })
+      .then((user) => {
+        res.status(200).json(user);
+      })
+      .catch((error) => {
+        return res.status(400).send(error.message);
+      });
   } catch (error) {
     res.status(400).send(error.message);
   }
