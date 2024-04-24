@@ -2,22 +2,20 @@ import mongoose from "mongoose";
 
 const rsvpSchema = mongoose.Schema(
   {
-    userRef: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    eventRef: {
+    name: { type: String, required: true, trim: true },
+    email: { type: String, required: true, trim: true },
+    plusOnes: [{ type: String, trim: true }],
+    event: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Event",
       required: true,
     },
     isAttending: { type: Boolean, required: true },
-    plusOne: [{ type: "String", trim: true }],
+    urlId: { type: String, required: true, unique: true },
   },
   { timestamps: true }
 );
 
 const RSVP = mongoose.model("RSVP", rsvpSchema);
 
-export default Event;
+export default RSVP;

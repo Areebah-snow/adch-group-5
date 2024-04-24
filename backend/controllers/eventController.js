@@ -31,7 +31,7 @@ const createEvent = expressAsyncHandler(async (req, res) => {
       res.status(200).json(result);
     });
   } catch (error) {
-    res.status(403).send(error.message);
+    res.status(403).send(error);
   }
 });
 
@@ -46,19 +46,22 @@ const getEventByID = expressAsyncHandler(async (req, res) => {
     const populatedEvent = await event.populate("creator");
     res.status(200).json(populatedEvent);
   } catch (error) {
-    res.status(402).send(error.message);
+    res.status(402).send(error);
   }
 });
 
 const getAllEvents = expressAsyncHandler(async (req, res) => {
   try {
     Event.find({})
-      //   .populate("creator")
+      .populate("creator")
       .then((events) => {
         res.status(200).json(events);
+      })
+      .catch((error) => {
+        res.status(400).send(error);
       });
   } catch (error) {
-    res.status(404).send(error.message + "hello");
+    res.status(404).send(error);
   }
 });
 export { createEvent, getEventByID, getAllEvents };
