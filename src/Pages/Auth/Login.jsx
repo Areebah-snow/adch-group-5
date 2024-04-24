@@ -222,10 +222,10 @@ export function GooggleAuth() {
         <img src={ggle} alt="Google-icon" className="mr-2 w-5" />
         Continue with Google
       </button>
-      <button className="w-full p-2.5 text-dark-200 font-semibold border border-gray outline-none rounded-md bg-brand-white text-base font-600 flex items-center justify-center cursor-pointer">
+      {/* <button className="w-full p-2.5 text-dark-200 font-semibold border border-gray outline-none rounded-md bg-brand-white text-base font-600 flex items-center justify-center cursor-pointer">
         <img src={Twitter} alt="Google-icon" className="mr-2 w-5" />
         Continue with Twitter
-      </button>
+      </button> */}
     </div>
   );
 }
