@@ -16,7 +16,6 @@ const protect = expressAsyncHandler(async (req, res, next) => {
       .auth()
       .verifyIdToken(token)
       .then((decodedToken) => {
-        console.log(decodedToken);
         if (!decodedToken) {
           res.status(400);
           throw new Error("User Unauthorised");
@@ -31,12 +30,11 @@ const protect = expressAsyncHandler(async (req, res, next) => {
               photoURL: userRecord.photoURL,
               email: userRecord.email,
             };
-            console.log(userRecord);
             next();
           });
       })
       .catch((error) => {
-        res.status(401).send(error);
+        res.status(401).send(error.message);
       });
   } else {
     res.status(400).send("Unauthorised user");
