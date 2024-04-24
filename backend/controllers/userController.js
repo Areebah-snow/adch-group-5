@@ -10,10 +10,10 @@ const registerUser = expressAsyncHandler(async (req, res) => {
         res.status(200).json(user);
       })
       .catch((error) => {
-        return res.status(400).send(error);
+        return res.status(400).send(error.message);
       });
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send(error.message);
   }
 });
 
@@ -25,10 +25,10 @@ const updateUser = expressAsyncHandler(async (req, res) => {
         res.status(200).json(user);
       })
       .catch((error) => {
-        res.status(400).send(error);
+        res.status(400).send(error.message);
       });
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send(error.message);
   }
 });
 
@@ -40,10 +40,10 @@ const deleteUser = expressAsyncHandler(async (req, res) => {
         res.status(200).send("User deleted successfully");
       })
       .catch((error) => {
-        res.status(400).send(error);
+        res.status(400).send(error.message);
       });
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send(error.message);
   }
 });
 
@@ -55,10 +55,10 @@ const getUser = expressAsyncHandler(async (req, res) => {
         res.status(200).json(user);
       })
       .catch((error) => {
-        res.status(400).send(error);
+        res.status(400).send(error.message);
       });
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send(error.message);
   }
 });
 

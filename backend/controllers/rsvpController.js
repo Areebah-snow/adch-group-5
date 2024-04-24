@@ -22,7 +22,7 @@ const createRSVP = expressAsyncHandler(async (req, res) => {
     }
     res.status(400).json(newRSVP);
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send(error.message);
   }
 });
 
@@ -35,10 +35,10 @@ const getRSVPByURL = expressAsyncHandler(async (req, res) => {
         res.status(200).json(result);
       })
       .catch((error) => {
-        res.status(400).send(error);
+        res.status(400).send(error.message);
       });
   } catch (error) {
-    res.status(404).send(error);
+    res.status(404).send(error.message);
   }
 });
 
@@ -51,10 +51,10 @@ const getRSVPs = expressAsyncHandler(async (req, res) => {
         res.status(200).json(result);
       })
       .catch((error) => {
-        res.status(404).send(error);
+        res.status(404).send(error.message);
       });
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send(error.message);
   }
 });
 
