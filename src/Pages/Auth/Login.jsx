@@ -203,6 +203,7 @@ export function GooggleAuth() {
     signInWithPopup(auth, provider)
       .then((result) => {
         //TODO : Store user detail in the db
+        navigate("/dashboard");
       })
       .catch((error) => {
         const errorCode = error.code;

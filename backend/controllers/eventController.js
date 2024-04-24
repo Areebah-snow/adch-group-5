@@ -108,4 +108,21 @@ const updateEvent = expressAsyncHandler(async (req, res) => {
     res.status(401).send(error.message);
   }
 });
-export { createEvent, getEventByID, getAllEvents, updateEvent };
+const getAllEventsByUser = expressAsyncHandler(async (req, res) => {
+  try {
+    const uid = req.user.uid;
+    const user = await User.findOne({ uid });
+    var events = await Event.find({ creator: user._id });
+    events = await events.populate("creator");
+    res.status(200).json(events);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+export {
+  createEvent,
+  getEventByID,
+  getAllEvents,
+  updateEvent,
+  getAllEventsByUser,
+};
