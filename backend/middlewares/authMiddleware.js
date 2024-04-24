@@ -36,8 +36,7 @@ const protect = expressAsyncHandler(async (req, res, next) => {
           });
       })
       .catch((error) => {
-        res.status(401);
-        throw new Error(error.message);
+        res.status(401).send(error);
       });
   } else {
     res.status(400).send("Unauthorised user");
