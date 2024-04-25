@@ -4,11 +4,13 @@ import Nav from "../../Components/Nav";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { FaPen } from "react-icons/fa";
 import { LuEye } from "react-icons/lu";
+import Mobilesidebar from "../../Components/Mobilesidebar";
 
 const AllEvents = () => {
   return (
     <div>
       <Sidebar />
+      <Mobilesidebar />
       <div>
         <div className="lg:ml-[17%]">
           <Nav />

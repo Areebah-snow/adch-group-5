@@ -7,7 +7,7 @@ import { IoIosSearch } from "react-icons/io";
 const Nav = () => {
   return (
     <div className="w-full my-3 flex items-center justify-between px-2 py-2 md:px-10 md:py-1 bg-white mx-auto">
-      <div className="w-96">
+      <div className="w-full hidden lg:block">
         <form className="flex items-center">
           <label className="sr-only">Search</label>
           <div className="relative w-full">
@@ -26,9 +26,6 @@ const Nav = () => {
       <div className="flex flex-row items-center justify-center">
         <span className="mr-5 cursor-pointer">
           <img src={Noti} alt="Notification" />
-        </span>
-        <span className="mr-5 cursor-pointer">
-          <img src={Prof} alt="profile" />
         </span>
         <span className=" cursor-pointer flex items-center gap-2 text-dark text-sm">
           <img src={Woman} alt="profile-pic" />

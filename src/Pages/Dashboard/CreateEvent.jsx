@@ -1,11 +1,13 @@
 import Nav from "../../Components/Nav";
 import Sidebar from "../../Components/Sidebar";
+import Mobilesidebar from "../../Components/Mobilesidebar";
 
 const CreateEvent = () => {
   return (
     <div>
       <div>
         <Sidebar />
+        <Mobilesidebar />
         <div className="lg:ml-[17%]">
           <Nav />
           <div className="bg-[#F9FAFB] md:p-10 p-4">

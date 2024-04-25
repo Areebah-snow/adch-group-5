@@ -9,8 +9,6 @@ import { auth } from "../firebaseConfig";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import CreateEvent from "./Pages/Dashboard/CreateEvent";
 import AllEvents from "./Pages/Dashboard/AllEvents";
-import Upcomming from "./Pages/Dashboard/Upcomming";
-import PastEvents from "./Pages/Dashboard/PastEvents";
 import Calendar from "./Pages/Dashboard/Calendar";
 import Profile from "./Pages/Dashboard/Profile";
 import Rsvp from "./Pages/Dashboard/Rsvp";
@@ -33,8 +31,6 @@ function App() {
     { path: "/createevent", element: <CreateEvent /> },
     { path: "/createevent/eventsuccess", element: <Eventsucess /> },
     { path: "/allevents", element: <AllEvents /> },
-    { path: "/upcommingevents", element: <Upcomming /> },
-    { path: "/pastevents", element: <PastEvents /> },
     { path: "/calendar", element: <Calendar /> },
     { path: "/profile", element: <Profile /> },
     { path: "/rsvp", element: <Rsvp /> },

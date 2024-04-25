@@ -3,6 +3,7 @@ import Nav from "../../Components/Nav";
 import Sidebar from "../../Components/Sidebar";
 import { Link } from "react-router-dom";
 import { AiOutlinePlusCircle } from "react-icons/ai";
+import Mobilesidebar from "../../Components/Mobilesidebar";
 
 const Rsvp = () => {
   const events = [
@@ -34,6 +35,7 @@ const Rsvp = () => {
   return (
     <div>
       <Sidebar />
+      <Mobilesidebar />
       <div className="lg:ml-[17%]">
         <>
           <Nav />

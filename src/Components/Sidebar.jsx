@@ -83,32 +83,6 @@ const Sidebar = () => {
                         </div>
                       )}
                     </NavLink>
-                    <NavLink to="/upcommingevents">
-                      {({ isActive }) => (
-                        <div
-                          className={`${
-                            isActive && "bg-[#FFECE5] text-primary"
-                          } flex items-center rounded-lg p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary my-1`}
-                        >
-                          <span className="text-base leading-[120%]">
-                            Upcoming Events
-                          </span>
-                        </div>
-                      )}
-                    </NavLink>
-                    <NavLink to="/pastevents">
-                      {({ isActive }) => (
-                        <div
-                          className={`${
-                            isActive && "bg-[#FFECE5] text-primary"
-                          } flex items-center rounded-lg p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary my-1`}
-                        >
-                          <span className="text-base leading-[120%]">
-                            Past Events
-                          </span>
-                        </div>
-                      )}
-                    </NavLink>
                     <NavLink to="/calendar">
                       {({ isActive }) => (
                         <div
