@@ -17,18 +17,17 @@ const Sidebar = () => {
   const [eventlist, seteventlist] = useState(false);
   const navigate = useNavigate();
   const handleSignout = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("Signed out successfully");
-        navigate("/login");
-        // TODO: handle flow after signout
-      })
-      .catch((error) => {
-        // TODO handle error
-      });
+    signOut(auth).then(() => {
+      console.log("Signed out successfully");
+      navigate("/login");
+      // TODO: handle flow after signout
+    });
+    // .catch((error) => {
+    // TODO handle error
+    // });
   };
   return (
-    <div className="w-[15%] fixed left-0 top-0 bottom-0 lg:h-screen text-[#FFECE5] bg-primary hidden lg:flex flex-col lg:px-7 gap-8 py-[2.375rem] px-0">
+    <div className="w-[17%] fixed left-0 top-0 bottom-0 lg:h-screen text-[#FFECE5] bg-primary hidden lg:flex flex-col lg:px-7 gap-8 py-[2.375rem] px-0">
       <aside>
         <img src={DbLogo} alt="" className="w-full my-2" />
         <div className="flex flex-col justify-between h-[70vh]">
