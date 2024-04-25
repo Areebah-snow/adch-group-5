@@ -39,7 +39,7 @@ const Dashboard = () => {
   return (
     <div className="">
       <Sidebar />
-      <div className="lg:ml-[17%]">
+      <div className="lg:ml-[15%]">
         <div className="bg-[#F9FAFB]">
           <Nav />
           <div className="px-6 lg:px-14 py-6 mt-3">

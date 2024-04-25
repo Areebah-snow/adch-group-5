@@ -9,16 +9,14 @@ const Nav = () => {
     <div className="w-full my-3 flex items-center justify-between px-2 py-2 md:px-10 md:py-1 bg-white mx-auto">
       <div className="w-96">
         <form className="flex items-center">
-          <label for="simple-search" class="sr-only">
-            Search
-          </label>
+          <label className="sr-only">Search</label>
           <div className="relative w-full">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <IoIosSearch size={20} color="gray" />
             </div>
             <input
               type="text"
-              className="bg-[#F9FAFB] border-2 border-[#F9FAFB] text-dark-100 text-sm rounded-md block w-[629px] pl-10 p-2.5 outline-none"
+              className="bg-[#F9FAFB] border-2 border-[#F9FAFB] text-dark-100 text-sm rounded-md block w-full pl-10 p-2.5 outline-none"
               placeholder="Search reference"
               required
             />
@@ -33,7 +31,7 @@ const Nav = () => {
           <img src={Prof} alt="profile" />
         </span>
         <span className=" cursor-pointer flex items-center gap-2 text-dark text-sm">
-          <img src={Woman} alt="Woman-face" />
+          <img src={Woman} alt="profile-pic" />
           Anita Monalisa
         </span>
       </div>

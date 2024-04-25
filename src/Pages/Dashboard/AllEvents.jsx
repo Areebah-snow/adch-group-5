@@ -12,7 +12,7 @@ const AllEvents = () => {
       <div>
         <div className="lg:ml-[17%]">
           <Nav />
-          <div className="bg-[#F9FAFB] min-h-[90vh] border-[#E4E7EC] border-2 mx-10 p-4">
+          <div className="bg-[#F9FAFB] min-h-[90vh] cmx-10 p-4">
             <table className="text-left" width="100%">
               <thead>
                 <tr>
