@@ -6,7 +6,7 @@ const CreateEvent = () => {
     <div>
       <div>
         <Sidebar />
-        <div className="lg:ml-[15%]">
+        <div className="lg:ml-[17%]">
           <Nav />
           <div className="bg-[#F9FAFB] md:p-10 p-4">
             <div className="text-center max-w-[600px] mx-auto my-4">
