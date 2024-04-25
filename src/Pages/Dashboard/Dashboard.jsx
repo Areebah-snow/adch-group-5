@@ -51,7 +51,7 @@ const Dashboard = () => {
               </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-64 mt-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-64 mt-12">
               <div className="w-full max-w-[602px]">
                 <div className="bg-[#EDEBFE] shadow-md rounded-lg w-[675px] lg:p-5 flex items-center gap-5">
                   <img src={Mona} alt="woman-face" />
