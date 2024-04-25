@@ -117,7 +117,7 @@ const EventTable = () => {
   );
 
   return (
-    <div className="container mx-auto my-8 min-h-screen">
+    <div className="container mx-auto my-8">
       <table
         {...getTableProps()}
         className="min-w-full divide-y divide-gray-200 border border-[#E4E7EC] rounded-full"

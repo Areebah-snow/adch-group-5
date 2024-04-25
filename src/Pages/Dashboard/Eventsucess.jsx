@@ -1,4 +1,3 @@
-import React from "react";
 import Sidebar from "../../Components/Sidebar";
 import Nav from "../../Components/Nav";
 import successicon from "../../assets/Rectangle 5083.png";
@@ -8,7 +7,7 @@ const Eventsucess = () => {
   return (
     <div>
       <Sidebar />
-      <div className="lg:ml-[15%]">
+      <div className="lg:ml-[17%]">
         <Nav />
         <div className="bg-[#F9FAFB]">
           <div className="md:p-10 p-4 min-h-[90vh] max-w-[664px] flex-col flex items-center mx-auto px-6 text-center">
