@@ -49,7 +49,7 @@ const Rsvp = () => {
                 </button>
               </Link>
             </div>
-            <div className="flex gap-6 justify-between mt-12">
+            <div className="flex gap-6 justify-between mt-12 lg:flex-nowrap flex-wrap">
               {events.map((rsvp) => {
                 return (
                   <div
