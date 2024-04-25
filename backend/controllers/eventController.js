@@ -31,7 +31,7 @@ const createEvent = expressAsyncHandler(async (req, res) => {
       res.status(200).json(result);
     });
   } catch (error) {
-    res.status(403).send(error);
+    res.status(403).send(error.message);
   }
 });
 
@@ -46,7 +46,8 @@ const getEventByID = expressAsyncHandler(async (req, res) => {
     const populatedEvent = await event.populate("creator");
     res.status(200).json(populatedEvent);
   } catch (error) {
-    res.status(402).send(error);
+    console.log(error);
+    res.status(400).send({ message: error.message });
   }
 });
 
@@ -58,10 +59,70 @@ const getAllEvents = expressAsyncHandler(async (req, res) => {
         res.status(200).json(events);
       })
       .catch((error) => {
-        res.status(400).send(error);
+        res.status(400).send(error.message);
       });
   } catch (error) {
-    res.status(404).send(error);
+    res.status(404).send(error.message);
   }
 });
-export { createEvent, getEventByID, getAllEvents };
+
+const updateEvent = expressAsyncHandler(async (req, res) => {
+  try {
+    const user = req.user;
+
+    const {
+      name,
+      description,
+      location,
+      additionalInfo,
+      photoURL,
+      startDate,
+      endDate,
+      stats,
+      _id,
+    } = req.body;
+    const event = await Event.findById(_id);
+    const creator = await User.findById(event.creator);
+    if (creator.uid != user.uid) {
+      res.status(401);
+      throw new Error("User dont have required permission");
+    }
+    var updatedEvent = await Event.findByIdAndUpdate(
+      _id,
+      {
+        name,
+        description,
+        location,
+        additionalInfo,
+        photoURL,
+        startDate,
+        endDate,
+        stats,
+      },
+      { new: true }
+    );
+    updatedEvent = await updatedEvent.populate("creator");
+    res.status(200).json(updatedEvent);
+  } catch (error) {
+    console.log(error);
+    res.status(401).send(error.message);
+  }
+});
+const getAllEventsByUser = expressAsyncHandler(async (req, res) => {
+  try {
+    const uid = req.user.uid;
+    const user = await User.findOne({ uid });
+    var events = await Event.find({ creator: user._id });
+    events = await events.populate("creator");
+    res.status(200).json(events);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+export {
+  createEvent,
+  getEventByID,
+  getAllEvents,
+  updateEvent,
+  getAllEventsByUser,
+};
