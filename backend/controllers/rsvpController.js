@@ -20,6 +20,13 @@ const createRSVP = expressAsyncHandler(async (req, res) => {
       res.status(400);
       throw new Error("Unable to send rsvp");
     }
+    var val;
+    if (isAttending == true) {
+      val = 1;
+    } else {
+      val = -1;
+    }
+    await Event.findByIdAndUpdate(event, { $inc: { acceptedCount: val } });
     res.status(400).json(newRSVP);
   } catch (error) {
     res.status(400).send(error.message);
