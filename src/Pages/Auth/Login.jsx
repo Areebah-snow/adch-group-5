@@ -167,9 +167,12 @@ const Login = () => {
                 Remember for 30 days
               </label>
             </div>
-            <a href="#" className="text-sm text-primary font-normal">
+            <Link
+              to="/resetpassword"
+              className="text-sm text-primary font-normal"
+            >
               Forgot password?
-            </a>
+            </Link>
           </div>
           <button
             type="submit"

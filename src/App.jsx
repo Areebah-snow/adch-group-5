@@ -15,6 +15,7 @@ import Rsvp from "./Pages/Dashboard/Rsvp";
 import Settings from "./Pages/Dashboard/Settings";
 import Helpcenter from "./Pages/Dashboard/Helpcenter";
 import Eventsucess from "./Pages/Dashboard/Eventsucess";
+import Forgotpassword from "./Pages/Auth/Forgotpassword";
 function App() {
   const [authLoaded, setAuthLoaded] = useState(false);
   onAuthStateChanged(auth, (user) => {
@@ -36,6 +37,7 @@ function App() {
     { path: "/rsvp", element: <Rsvp /> },
     { path: "/settings", element: <Settings /> },
     { path: "/helpcenter", element: <Helpcenter /> },
+    { path: "/resetpassword", element: <Forgotpassword /> },
   ]);
   return (
     <>
