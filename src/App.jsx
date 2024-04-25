@@ -16,6 +16,7 @@ import Profile from "./Pages/Dashboard/Profile";
 import Rsvp from "./Pages/Dashboard/Rsvp";
 import Settings from "./Pages/Dashboard/Settings";
 import Helpcenter from "./Pages/Dashboard/Helpcenter";
+import Eventsucess from "./Pages/Dashboard/Eventsucess";
 function App() {
   const [authLoaded, setAuthLoaded] = useState(false);
   onAuthStateChanged(auth, (user) => {
@@ -30,6 +31,7 @@ function App() {
     { path: "/register", element: <Register /> },
     { path: "/dashboard", element: <Dashboard /> },
     { path: "/createevent", element: <CreateEvent /> },
+    { path: "/createevent/eventsuccess", element: <Eventsucess /> },
     { path: "/allevents", element: <AllEvents /> },
     { path: "/upcommingevents", element: <Upcomming /> },
     { path: "/pastevents", element: <PastEvents /> },
