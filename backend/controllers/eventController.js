@@ -127,10 +127,29 @@ const getAllEventsByUser = expressAsyncHandler(async (req, res) => {
     res.status(400).send(error.message);
   }
 });
+const deleteEvent = expressAsyncHandler(async (req, res) => {
+  try {
+    const uid = req.user.uid;
+    const { _id } = req.body;
+    const creator = await User.findOne({ uid });
+    const event = await Event.findById(_id);
+    if (event == undefined) {
+      throw new Error("No event found");
+    }
+    if (event.creator != creator._id) {
+      throw new Error("User don't have reqd permissions");
+    }
+    await Event.findOneAndDelete({ _id, creator: creator._id });
+    res.status(200).send("Event Deleted");
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
 export {
   createEvent,
   getEventByID,
   getAllEvents,
   updateEvent,
   getAllEventsByUser,
+  deleteEvent,
 };
