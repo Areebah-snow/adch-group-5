@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import Noti from "../assets/noti.svg";
 import Prof from "../assets/prof.svg";
-import Woman from "../assets/face.svg";
+import Woman from "../assets/default.png";
 import { IoIosSearch } from "react-icons/io";
 import { auth } from "../../firebaseConfig.js";
+import { useNavigate } from "react-router-dom";
 const Nav = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!auth.currentUser) {
+      navigate("/login");
+    }
+  }, []);
   return (
     <div className="w-full my-3 flex items-center justify-between px-2 py-2 md:px-10 md:py-1 bg-white mx-auto">
       <div className="w-full hidden lg:block">
@@ -28,8 +35,12 @@ const Nav = () => {
           <img src={Noti} alt="Notification" />
         </span>
         <span className=" cursor-pointer flex items-center gap-2 text-dark text-sm">
-          <img src={auth.currentUser.photoURL || Woman} alt="profile-pic" />
-          {auth.currentUser.displayName}
+          <img
+            className="w-12 rounded-full"
+            src={auth.currentUser?.photoURL || Woman}
+            alt="profile-pic"
+          />
+          {auth.currentUser?.displayName}
         </span>
       </div>
     </div>

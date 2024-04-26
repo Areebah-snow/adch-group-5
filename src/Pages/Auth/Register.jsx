@@ -7,18 +7,15 @@ import { ToastContainer, Zoom, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GooggleAuth } from "./Login";
 import {
-  getAuth,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
 } from "firebase/auth";
 import { auth } from "../.././../firebaseConfig";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -29,30 +26,30 @@ const Register = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     if (validate()) {
-    setLoading(true);
-    try {
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      setLoading(true);
+      try {
+        const response = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
 
-      console.log(response);
-      setTimeout(() => {
-        navigate("/login");
-      }, 1500);
-      setLoading(false);
-      toast.success("Your account has been created");
-    } catch (error) {
-      setLoading(false);
-      console.error(error.message);
-      if (error.code === "auth/email-already-in-use") {
-        toast.error("User with this email already exists. Please log in.", {
-          theme: "colored",
-        });
+        console.log(response);
+        setTimeout(() => {
+          navigate("/login");
+        }, 1500);
+        setLoading(false);
+        toast.success("Your account has been created");
+      } catch (error) {
+        setLoading(false);
+        console.error(error.message);
+        if (error.code === "auth/email-already-in-use") {
+          toast.error("User with this email already exists. Please log in.", {
+            theme: "colored",
+          });
+        }
       }
     }
-  }
   };
 
   const validate = () => {
@@ -179,7 +176,7 @@ const Register = () => {
               onClick={handleSignUp}
               className="w-full py-3 px-4 mt-8 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-indigo-700"
             >
-               {loading ? "Loading" : "Create Account"}
+              {loading ? "Loading" : "Create Account"}
             </button>
           </form>
           <div className="flex items-center justify-center space-x-4 mt-4 mb-4">
@@ -187,7 +184,7 @@ const Register = () => {
             <p className="text-center text-sm mt-3 mb-3 cursor-pointer">or</p>
             <div className="border-b border-[#F0F2F5] w-16 lg:w-36 h-2"></div>
           </div>
-          <GooggleAuth />
+          <GooggleAuth navigate={navigate} />
           <p className="text-grey text-sm mt-4 text-center">
             Already have an account?
             <Link to="/login" className="text-sm text-primary pl-2">
