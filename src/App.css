@@ -27,7 +27,38 @@ body {
 }
 
 .react-calendar .highlight {
-  background-color: #AAA5F8; 
+  background-color: #aaa5f8;
   border-radius: 80%;
-  color: #473BF0;
+  color: #473bf0;
+}
+.testimonial-container::before,
+.testimonial-container::after {
+  content: "";
+  width: 15em;
+  height: 100%;
+  z-index: 100;
+  position: absolute;
+}
+.testimonial-container::before {
+  left: 0;
+  background: linear-gradient(to left, transparent, #ebe9fd);
+}
+.testimonial-container::after {
+  right: 0;
+  background: linear-gradient(to right, transparent, #ebe9fd);
+}
+.testimonial-container:hover > .test-con {
+  animation-play-state: paused;
+}
+.test-con {
+  animation: slide 35s infinite linear;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - 144px));
+  }
 }
