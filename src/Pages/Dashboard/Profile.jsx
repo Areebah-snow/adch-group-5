@@ -4,7 +4,7 @@ const Profile = () => {
   return (
     <div>
       <Sidebar />
-      <div className="ml-[17%]">
+      <div className="lg:ml-[17%]">
         <div>Profile</div>
       </div>
     </div>
