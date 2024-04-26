@@ -4,7 +4,7 @@ import Prof from "../assets/prof.svg";
 import Woman from "../assets/default.png";
 import { IoIosSearch } from "react-icons/io";
 import { auth } from "../../firebaseConfig.js";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Nav = () => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -35,11 +35,13 @@ const Nav = () => {
           <img src={Noti} alt="Notification" />
         </span>
         <span className=" cursor-pointer flex items-center gap-2 text-dark text-sm">
-          <img
-            className="w-12 rounded-full"
-            src={auth.currentUser?.photoURL || Woman}
-            alt="profile-pic"
-          />
+          <Link to="/profile">
+            <img
+              className="w-12 rounded-full"
+              src={auth.currentUser?.photoURL || Woman}
+              alt="profile-pic"
+            />
+          </Link>
           {auth.currentUser?.displayName}
         </span>
       </div>

@@ -59,13 +59,14 @@ const Dashboard = () => {
             <div className="lg:flex-row flex flex-col gap-6 mt-12">
               <div className="lg:w-[70%]">
                 <div className="bg-[#EDEBFE] shadow-md rounded-lg w-[full] lg:p-5 flex items-center gap-5">
-                  <img width={70}
+                  <img
+                    width={70}
                     src={auth.currentUser?.photoURL || Mona}
                     alt="profilepic"
                   />
                   <div className="flex flex-col">
                     <h1 className="text-black text-base md:text-[2rem] font-semibold">
-                      Hello, {auth.currentUser.displayName?.split(" ")[0]}
+                      Hello, {auth.currentUser?.displayName?.split(" ")[0]}
                     </h1>
                     <p className="text-sm md:text-base text-black font-normal">
                       Hava a great day

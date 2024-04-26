@@ -6,9 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GooggleAuth } from "./Login";
-import {
-  createUserWithEmailAndPassword,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../.././../firebaseConfig";
 
 const Register = () => {
@@ -54,6 +52,13 @@ const Register = () => {
 
   const validate = () => {
     let result = true;
+    if (username === "" || username === null) {
+      result = false;
+      toast.warning("Please Enter a Username", {
+        theme: "colored",
+        autoClose: 3000,
+      });
+    }
     if (email === "" || email === null) {
       result = false;
       toast.warning("Please Enter Email Address", {
@@ -68,16 +73,19 @@ const Register = () => {
         autoClose: 3000,
       });
     }
-    if (username === "" || username === null) {
-      result = false;
-      toast.warning("Please Enter a Username", {
-        theme: "colored",
-        autoClose: 3000,
-      });
+    if (!password.match(/^(?=.*\d)(?=.*[@$!%-*?&_#~><])/)) {
+      toast.warning(
+        "Password should contain at least one letter, one number, and one special character",
+        {
+          theme: "colored",
+          autoClose: 3000,
+        }
+      );
+      return false;
     }
+
     return result;
   };
-
   return (
     <div className="flex h-screen">
       <div className="hidden md:block md:w-1/2 overflow-hidden">
