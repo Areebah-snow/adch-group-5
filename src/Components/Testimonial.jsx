@@ -65,7 +65,7 @@ function UserExp({ header, text, img, userName }) {
 }
 function TestCon({ children }) {
   return (
-    <div className="test-con flex gap-20 mr-20 lg:gap-36 lg:mr-36">
+    <div className="test-con flex gap-20 mr-20 lg:gap-40 lg:mr-40">
       {children}
     </div>
   );
