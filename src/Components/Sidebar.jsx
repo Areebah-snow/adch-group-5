@@ -27,7 +27,7 @@ const Sidebar = () => {
     // });
   };
   return (
-    <div className="w-[17%] fixed left-0 top-0 bottom-0 lg:h-screen text-[#FFECE5] bg-primary hidden lg:flex flex-col lg:px-7 gap-8 py-[2.375rem] px-0">
+    <div className="w-[17%] fixed left-0 top-0 bottom-0 lg:h-screen text-[#FFECE5] bg-primary hidden lg:flex flex-col lg:px-7 gap-8 py-[2.375rem] px-0 z-10">
       <aside>
         <img src={DbLogo} alt="" className="w-full my-2" />
         <div className="flex flex-col justify-between h-[70vh]">
@@ -79,32 +79,6 @@ const Sidebar = () => {
                         >
                           <span className="text-base leading-[120%]">
                             All Events
-                          </span>
-                        </div>
-                      )}
-                    </NavLink>
-                    <NavLink to="/upcommingevents">
-                      {({ isActive }) => (
-                        <div
-                          className={`${
-                            isActive && "bg-[#FFECE5] text-primary"
-                          } flex items-center rounded-lg p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary my-1`}
-                        >
-                          <span className="text-base leading-[120%]">
-                            Upcoming Events
-                          </span>
-                        </div>
-                      )}
-                    </NavLink>
-                    <NavLink to="/pastevents">
-                      {({ isActive }) => (
-                        <div
-                          className={`${
-                            isActive && "bg-[#FFECE5] text-primary"
-                          } flex items-center rounded-lg p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary my-1`}
-                        >
-                          <span className="text-base leading-[120%]">
-                            Past Events
                           </span>
                         </div>
                       )}

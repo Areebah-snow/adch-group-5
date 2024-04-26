@@ -4,15 +4,17 @@ import Nav from "../../Components/Nav";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { FaPen } from "react-icons/fa";
 import { LuEye } from "react-icons/lu";
+import Mobilesidebar from "../../Components/Mobilesidebar";
 
 const AllEvents = () => {
   return (
     <div>
       <Sidebar />
+      <Mobilesidebar />
       <div>
         <div className="lg:ml-[17%]">
           <Nav />
-          <div className="bg-[#F9FAFB] min-h-[90vh] border-[#E4E7EC] border-2 mx-10 p-4">
+          <div className="bg-[#F9FAFB] min-h-[90vh] cmx-10 p-4">
             <table className="text-left" width="100%">
               <thead>
                 <tr>
