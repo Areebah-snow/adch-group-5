@@ -118,7 +118,9 @@ const updateEvent = expressAsyncHandler(async (req, res) => {
 });
 const getAllEventsByUser = expressAsyncHandler(async (req, res) => {
   try {
+    console.log(req.user);
     const uid = req.user.uid;
+    
     const user = await User.findOne({ uid });
     var events = await Event.find({ creator: user._id });
     events = await events.populate("creator");
