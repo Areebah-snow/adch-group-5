@@ -97,4 +97,13 @@ const updateRSVP = expressAsyncHandler(async (req, res) => {
     res.status(400).send(error.message);
   }
 });
-export { createRSVP, getRSVPByURL, getRSVPs, updateRSVP };
+const getRsvpByEvent = expressAsyncHandler(async (req, res) => {
+  try {
+    const { event } = req.body;
+    var rsvps = await RSVP.find({ event });
+    res.status(200).json(rsvps);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+export { createRSVP, getRSVPByURL, getRSVPs, updateRSVP, getRsvpByEvent };
