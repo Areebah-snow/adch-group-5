@@ -20,7 +20,7 @@ const CreateEvent = () => {
               </h3>
             </div>
             <form action="">
-              <div className="my-4">
+              <div className="my-4 flex flex-col">
                 <label className="font-semibold">Event Name</label>
                 <input
                   type="text"
@@ -28,7 +28,7 @@ const CreateEvent = () => {
                   className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
                 />
               </div>
-              <div className="my-4">
+              <div className="my-4 flex flex-col">
                 <label className="font-semibold">Event Description</label>
                 <input
                   type="text"
@@ -37,14 +37,14 @@ const CreateEvent = () => {
                 />
               </div>
               <div className="flex flex-row-reverse md:flex-col gap-6 md:gap-0">
-                <div className="my-4 w-full">
+                <div className="my-4 w-full flex flex-col">
                   <label className="font-semibold">Start Time</label>
                   <input
                     type="time"
                     className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
                   />
                 </div>
-                <div className="my-4 w-full">
+                <div className="my-4 w-full flex flex-col">
                   <label className="font-semibold">Event Start Date</label>
                   <input
                     type="date"
@@ -53,14 +53,14 @@ const CreateEvent = () => {
                 </div>
               </div>
               <div className="flex flex-row-reverse md:flex-col gap-6 md:gap-[0px]">
-                <div className="my-4 w-full">
+                <div className="my-4 w-full  flex flex-col">
                   <label className="font-semibold">End Time</label>
                   <input
                     type="time"
                     className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
                   />
                 </div>
-                <div className="my-4 w-full">
+                <div className="my-4 w-full flex flex-col">
                   <label className="font-semibold">Event End Date</label>
                   <input
                     type="date"
@@ -68,7 +68,7 @@ const CreateEvent = () => {
                   />
                 </div>
               </div>
-              <div className="my-4">
+              <div className="my-4 flex flex-col">
                 <label className="font-semibold">Event Location</label>
                 <input
                   type="text"
@@ -81,7 +81,7 @@ const CreateEvent = () => {
                 placeholder="Other additional information"
                 className="my-4 rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
               />
-              <div className="my-4">
+              <div className="my-4 flex flex-col">
                 <label className="font-semibold">Upload Event Image</label>
                 <input
                   type="file"
