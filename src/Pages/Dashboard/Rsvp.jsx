@@ -39,7 +39,7 @@ const Rsvp = () => {
       <div className="lg:ml-[17%]">
         <>
           <Nav />
-          <div className="bg-[#F9FAFB] p-10 min-h-[90vh]">
+          <div className="bg-[#F9FAFB] p-5 lg:p-10 min-h-[90vh]">
             <div className="flex justify-between items-center">
               <h1 className="text-[28px] font-[600]">RSVP's</h1>
               <Link to="/createevent">
@@ -53,11 +53,11 @@ const Rsvp = () => {
               {events.map((rsvp) => {
                 return (
                   <div
-                    className="rounded-xl w-[236px]"
+                    className="rounded-xl w-full lg:w-[236px]"
                     style={{ backgroundColor: rsvp.BackgroundColor }}
                     key={rsvp.id}
                   >
-                    <h3 className="font-bold p-5 text-[2rem]">{rsvp.title}</h3>
+                    <h3 className="font-bold p-5 text-base lg:text-[2rem]">{rsvp.title}</h3>
                     <p className="px-5 pb-12 text-[#1D2739] font-semibold">
                       {rsvp.details}
                     </p>
@@ -65,11 +65,11 @@ const Rsvp = () => {
                 );
               })}
             </div>
-            <div>
-              <h1 className="py-10 font-[600] text-[18px]">
+            <div className="mt-8 overflow-x-auto">
+              <h1 className=" font-[600] text-[18px]">
                 Queen Arit's Birthday RSVP list
               </h1>
-              <table className="text-left" width="100%">
+              <table className="text-center lg:text-left w-full whitespace-nowrap">
                 <thead>
                   <tr>
                     <th className="py-2">Name</th>
@@ -78,7 +78,7 @@ const Rsvp = () => {
                   </tr>
                 </thead>
                 <tbody className="">
-                  <tr className="border-t-[1px] border-[#E4E7EC] font-semibold">
+                  <tr className="border-t-[1px] border-[#E4E7EC] font-semibold text-sm lg:text-base">
                     <td className="py-4">Muhammed M.</td>
                     <td>muhammed@yahoo.com</td>
                     <td>Yes</td>

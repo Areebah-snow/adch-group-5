@@ -3,7 +3,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 const events = [
-  { date: '2024-04-25', time: '12:00pm - 3:00pm', name:'Dr. Ernest McKelvin (Intro Party)', description: 'University of Ibadan, International Conference Center, Ibadan, Nigeria' },
+  { date: '2024-04-26', time: '12:00pm - 3:00pm', name:'Dr. Ernest McKelvin (Intro Party)', description: 'University of Ibadan, International Conference Center, Ibadan, Nigeria' },
   { date: '2024-04-30', time: '11:55pm', name:'Hackthon', description: 'Project deadline' },
 ];
 
