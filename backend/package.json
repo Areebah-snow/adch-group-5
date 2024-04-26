@@ -15,6 +15,8 @@
     "express": "^4.19.2",
     "express-async-handler": "^1.2.0",
     "firebase-admin": "^12.1.0",
-    "mongoose": "^8.3.2"
+    "googleapis": "^135.0.0",
+    "mongoose": "^8.3.2",
+    "nodemailer": "^6.9.13"
   }
 }
