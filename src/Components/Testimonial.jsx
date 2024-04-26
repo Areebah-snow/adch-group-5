@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import userPic1 from "../assets/Oval.png";
 import userPic2 from "../assets/Oval2.png";
 import userPic3 from "../assets/Oval3.png";
@@ -23,9 +24,9 @@ const userExps = [
 ];
 export default function Testimonials() {
   return (
-    <section className="testimonials bg-[#473BF01C]">
+    <section className="testimonials bg-[#473BF01C] overflow-hidden">
       <div className="testimonial-container my-4 md:p-24 flex items-center justify-evenly relative">
-        <div className="test-con flex gap-36 mr-36">
+        <TestCon>
           {userExps.map((exp, i) => (
             <UserExp
               key={i}
@@ -35,8 +36,8 @@ export default function Testimonials() {
               userName={exp.userName}
             />
           ))}
-        </div>
-        <div className="test-con flex gap-36 aria-hidden:">
+        </TestCon>
+        <TestCon>
           {userExps.map((exp, i) => (
             <UserExp
               key={i}
@@ -46,7 +47,7 @@ export default function Testimonials() {
               userName={exp.userName}
             />
           ))}
-        </div>
+        </TestCon>
       </div>
     </section>
   );
@@ -59,6 +60,13 @@ function UserExp({ header, text, img, userName }) {
       <h2 className="md:text-2xl text-xl font-semibold">{header}</h2>
       <p className="md:text-xl text-l w-[30ch]">{text}</p>
       <span className="text-[#473BF0]">{userName}</span>
+    </div>
+  );
+}
+function TestCon({ children }) {
+  return (
+    <div className="test-con flex gap-20 mr-20 lg:gap-36 lg:mr-36">
+      {children}
     </div>
   );
 }
