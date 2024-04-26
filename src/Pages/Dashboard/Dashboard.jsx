@@ -94,7 +94,7 @@ const Dashboard = () => {
                   <h1 className="text-dark font-semibold text-lg mt-5 over">
                     Created Events
                   </h1>
-                  <EventTable size={20} />
+                  <EventTable />
                 </div>
               </div>
 
