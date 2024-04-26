@@ -222,13 +222,13 @@ export function GooggleAuth({ navigate }) {
   };
   return (
     <div className="space-y-4">
-      <button
+      <div
         onClick={googleSignIn}
         className="w-full p-2.5 text-dark-200 font-semibold border border-gray outline-none rounded-md bg-brand-white text-base font-600 flex items-center justify-center cursor-pointer"
       >
         <img src={ggle} alt="Google-icon" className="mr-2 w-5" />
         Continue with Google
-      </button>
+      </div>
     </div>
   );
 }
