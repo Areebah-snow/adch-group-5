@@ -136,7 +136,8 @@ const deleteEvent = expressAsyncHandler(async (req, res) => {
     if (event == undefined) {
       throw new Error("No event found");
     }
-    if (event.creator != creator._id) {
+    if (!event.creator.equals(creator._id)) {
+      console.log(event.creator, creator._id);
       throw new Error("User don't have reqd permissions");
     }
     await Event.findOneAndDelete({ _id, creator: creator._id });

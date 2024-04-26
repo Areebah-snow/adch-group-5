@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import RSVP from "./rsvpModel.js";
 const eventSchema = mongoose.Schema(
   {
     name: { type: "String", required: true, trim: true },
@@ -41,6 +41,14 @@ eventSchema
   .path("endDate")
   .required(conditionalValidation, "End Date is required");
 
+eventSchema.pre("findOneAndDelete", async function (next) {
+  try {
+    await RSVP.deleteMany({ event: this.getQuery()._id });
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 const Event = mongoose.model("Event", eventSchema);
 
 export default Event;

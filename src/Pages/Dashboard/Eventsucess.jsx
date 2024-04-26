@@ -1,4 +1,5 @@
 import Sidebar from "../../Components/Sidebar";
+import Mobilesidebar from "../../Components/Mobilesidebar";
 import Nav from "../../Components/Nav";
 import successicon from "../../assets/Rectangle 5083.png";
 import { FaLink } from "react-icons/fa6";
@@ -7,6 +8,7 @@ const Eventsucess = () => {
   return (
     <div>
       <Sidebar />
+      <Mobilesidebar />
       <div className="lg:ml-[17%]">
         <Nav />
         <div className="bg-[#F9FAFB]">

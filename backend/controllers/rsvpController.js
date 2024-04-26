@@ -7,6 +7,12 @@ const createRSVP = expressAsyncHandler(async (req, res) => {
     const plusOnes = req.body.plusOnes
       ? JSON.parse(req.body.plusOnes)
       : undefined;
+    const rsvp = await RSVP.findOne({ email });
+    if (rsvp != undefined) {
+      throw new Error(
+        "You have already rsvp'ed using this email , please use another email address"
+      );
+    }
     var newRSVP = await RSVP.create({
       name,
       email,
@@ -35,10 +41,10 @@ const createRSVP = expressAsyncHandler(async (req, res) => {
   }
 });
 
-const getRSVPByURL = expressAsyncHandler(async (req, res) => {
-  const urlId = req.params.id;
+const getRSVPById = expressAsyncHandler(async (req, res) => {
+  const _id = req.params.id;
   try {
-    RSVP.find({ urlId })
+    RSVP.findById(_id)
       .populate("event")
       .then((result) => {
         res.status(200).json(result);
@@ -73,7 +79,10 @@ const updateRSVP = expressAsyncHandler(async (req, res) => {
     const plusOnes = req.body.plusOnes
       ? JSON.parse(req.body.plusOnes)
       : undefined;
-    const oldRSVP = await RSVP.findById(_id);
+    var oldRSVP = await RSVP.findById(_id);
+    if (oldRSVP.email != user.email) {
+      throw new Error("User don't have required permission");
+    }
     var updatedRSVP = await RSVP.findOneAndUpdate(
       { _id, email: user.email },
       { name, plusOnes, isAttending },
@@ -97,4 +106,13 @@ const updateRSVP = expressAsyncHandler(async (req, res) => {
     res.status(400).send(error.message);
   }
 });
-export { createRSVP, getRSVPByURL, getRSVPs, updateRSVP };
+const getRsvpByEvent = expressAsyncHandler(async (req, res) => {
+  try {
+    const { event } = req.body;
+    var rsvps = await RSVP.find({ event });
+    res.status(200).json(rsvps);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+export { createRSVP, getRSVPById, getRSVPs, updateRSVP, getRsvpByEvent };

@@ -1,12 +1,25 @@
+import { useState } from "react";
 import AuthLogo from "../../assets/auth_logo.svg";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CiMail } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
-
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../../../firebaseConfig";
 const Resetpassword = () => {
   const navigate = useNavigate();
-
+  const [email, setEmail] = useState("");
+  const handleSubmit = async () => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        console.log("Password reset link sent");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        //Handle error
+      });
+  };
   return (
     <div className="flex h-screen">
       <div className="hidden md:block md:w-1/2 overflow-hidden">
@@ -38,6 +51,8 @@ const Resetpassword = () => {
                 autoComplete="off"
                 autoFocus
                 placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -45,6 +60,7 @@ const Resetpassword = () => {
 
           <button
             type="submit"
+            onClick={handleSubmit}
             className="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium mt-6 text-white bg-primary"
           >
             Send password reset link
