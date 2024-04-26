@@ -41,7 +41,7 @@ const Sidebar = () => {
         />
       </div>
       <div
-        className={`w-[60%] absolute lg:hidden right-0 top-0 bottom-0 h-screen text-[#FFECE5] bg-primary flex flex-col gap-8 py-6 px-0 z-10 ${
+        className={`w-[60%] fixed lg:hidden right-0 top-0 bottom-0 h-screen text-[#FFECE5] bg-primary flex flex-col gap-8 py-6 px-0 z-10 ${
           menubar ? "translate-x-[0%]" : "translate-x-[100%] hidden"
         }`}
       >
