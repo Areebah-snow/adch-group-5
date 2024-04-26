@@ -3,21 +3,32 @@ import AuthLogo from "../../assets/auth_logo.svg";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CiMail } from "react-icons/ci";
-import { useNavigate } from "react-router-dom";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
 const Resetpassword = () => {
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const handleSubmit = async () => {
+    setLoading(true);
     sendPasswordResetEmail(auth, email)
       .then(() => {
         console.log("Password reset link sent");
+        toast.success("Password reset link sent", {
+          theme: "colored",
+          autoClose: 3000,
+        });
+        setLoading(false);
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        //Handle error
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        console.log(error.message);
+        toast.error("An eeror occured:" + error.message, {
+          theme: "colored",
+          autoClose: 3000,
+        });
+        setLoading(false);
+        // Handle error
       });
   };
   return (
@@ -63,7 +74,7 @@ const Resetpassword = () => {
             onClick={handleSubmit}
             className="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium mt-6 text-white bg-primary"
           >
-            Send password reset link
+            {loading ? "Loading..." : " Send password reset link"}
           </button>
         </div>
         <ToastContainer transition={Zoom} />
