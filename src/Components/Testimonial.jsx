@@ -1,5 +1,6 @@
 import userPic1 from "../assets/Oval.png";
 import userPic2 from "../assets/Oval2.png";
+import userPic3 from "../assets/Oval3.png";
 const userExps = [
   {
     img: userPic1,
@@ -13,19 +14,40 @@ const userExps = [
     text: "Personalized invitations, smooth registration, and great communication tools.",
     userName: "Sarah Thompson",
   },
+  {
+    img: userPic3,
+    header: "“Amazing User Experience”",
+    text: "Event creation and management made easy, with a smooth and highly accessible user interface.",
+    userName: "Daniella Ferguson",
+  },
 ];
 export default function Testimonials() {
   return (
-    <section className="testimonials bg-[#473BF01C] my-4 flex flex-wrap justify-evenly items-center md:p-24">
-      {userExps.map((exp, i) => (
-        <UserExp
-          key={i}
-          header={exp.header}
-          text={exp.text}
-          img={exp.img}
-          userName={exp.userName}
-        />
-      ))}
+    <section className="testimonials bg-[#473BF01C]">
+      <div className="testimonial-container my-4 md:p-24 flex items-center justify-evenly relative">
+        <div className="test-con flex gap-36 mr-36">
+          {userExps.map((exp, i) => (
+            <UserExp
+              key={i}
+              header={exp.header}
+              text={exp.text}
+              img={exp.img}
+              userName={exp.userName}
+            />
+          ))}
+        </div>
+        <div className="test-con flex gap-36 aria-hidden:">
+          {userExps.map((exp, i) => (
+            <UserExp
+              key={i}
+              header={exp.header}
+              text={exp.text}
+              img={exp.img}
+              userName={exp.userName}
+            />
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
