@@ -45,9 +45,9 @@ const Dashboard = () => {
           <Nav />
           <div className="px-6 lg:px-14 py-6 mt-3">
             <div className="flex items-center justify-between">
-              <h2 className="text-dark text-3xl font-semibold">Dashboard</h2>
+              <h2 className="text-dark text-xl md:text-3xl font-semibold">Dashboard</h2>
               <Link to="/createevent">
-                <button className="flex items-center gap-2 bg-primary text-base font-normal text-white py-4 px-3 rounded-lg">
+                <button className="flex items-center gap-2 bg-primary text-sm md:text-base font-normal text-white py-2 px-2 md:py-4 md:px-3 rounded-lg">
                   Create Event
                   <AiOutlinePlusCircle size={25} />
                 </button>
@@ -59,10 +59,10 @@ const Dashboard = () => {
                 <div className="bg-[#EDEBFE] shadow-md rounded-lg w-[full] lg:p-5 flex items-center gap-5">
                   <img src={Mona} alt="profilepic" />
                   <div className="flex flex-col">
-                    <h1 className="text-black text-[2rem] font-semibold">
+                    <h1 className="text-black text-base md:text-[2rem] font-semibold">
                       Hello, Monalisa
                     </h1>
-                    <p className="text-base text-black font-normal">
+                    <p className="text-sm md:text-base text-black font-normal">
                       Hava a great day
                     </p>
                   </div>
@@ -94,7 +94,7 @@ const Dashboard = () => {
                   <h1 className="text-dark font-semibold text-lg mt-5 over">
                     Created Events
                   </h1>
-                  <EventTable />
+                  <EventTable size={20} />
                 </div>
               </div>
 
