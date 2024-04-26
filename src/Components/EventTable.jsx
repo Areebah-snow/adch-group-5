@@ -117,7 +117,7 @@ const EventTable = () => {
   );
 
   return (
-    <div className="container mx-auto my-8 min-h-screen">
+    <div className="container mx-auto my-8 overflow-x-auto">
       <table
         {...getTableProps()}
         className="min-w-full divide-y divide-gray-200 border border-[#E4E7EC] rounded-full"
@@ -128,7 +128,7 @@ const EventTable = () => {
               {headerGroup.headers.map((column) => (
                 <th
                   {...column.getHeaderProps()}
-                  className="px-6 py-3 text-left text-base font-bold text-[#344054] tracking-wider"
+                  className="px-6 py-3 text-left text-sm md:text-base font-bold text-[#344054] tracking-wider"
                 >
                   {column.render("Header")}
                 </th>
@@ -143,7 +143,7 @@ const EventTable = () => {
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => {
                   const cellProps = cell.getCellProps();
-                  let cellClassName = "px-6 py-4 whitespace-nowrap text-[#757575] font-semibold";
+                  let cellClassName = "px-6 py-4 whitespace-nowrap text-sm md:text-base text-[#757575] font-semibold";
                   return (
                     <td 
                       {...cellProps} className={cellClassName}>
@@ -156,7 +156,7 @@ const EventTable = () => {
           })}
         </tbody>
       </table>
-      <div className="flex items-center justify-between mt-2">
+      <div className="flex flex-col sm:flex-row items-center justify-between mt-2">
         <button
           className="px-4 py-2 bg-blue-500 text-[#BDBDBD] text-sm rounded focus:outline-none"
           onClick={() => previousPage()}
