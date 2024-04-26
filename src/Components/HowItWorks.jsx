@@ -36,7 +36,7 @@ export default function HowItWorks() {
           width={"579.55px"}
           height={"388.07px"}
         />
-        <div className="steps flex flex-col gap-10 ">
+        <div className="steps flex flex-col justify-center items-center gap-10 md:w-min">
           {steps.map((step, i) => (
             <Step key={i} num={i + 1} header={step.header} text={step.text} />
           ))}
