@@ -16,6 +16,9 @@ app.use("/api/email", emailRoutes);
 
 const port = 3000;
 connectDB();
+app.get("/", (req, res) => {
+  res.status(200).send("server running");
+});
 app.listen(port, () => {
   console.log(`Listening on http://localhost:${port}`);
 });
