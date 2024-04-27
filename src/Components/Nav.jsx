@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import Noti from "../assets/noti.svg";
-import Prof from "../assets/prof.svg";
 import Woman from "../assets/default.png";
 import { IoIosSearch } from "react-icons/io";
 import { auth } from "../../firebaseConfig.js";
@@ -11,7 +10,7 @@ const Nav = () => {
     if (!auth.currentUser) {
       navigate("/login");
     }
-  }, []);
+  }, [navigate]);
   return (
     <div className="w-full my-3 flex items-center justify-between px-2 py-2 md:px-10 md:py-1 bg-white mx-auto">
       <div className="w-full hidden lg:block">
