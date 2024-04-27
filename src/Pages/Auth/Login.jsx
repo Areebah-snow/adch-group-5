@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { CiMail } from "react-icons/ci";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import {
   signInWithEmailAndPassword,
   // setPersistence,
@@ -204,6 +205,7 @@ export function GooggleAuth({ navigate }) {
   const googleSignIn = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
+        console.log(result);
         //TODO : Store user detail in the db
         navigate("/dashboard");
       })
@@ -232,5 +234,8 @@ export function GooggleAuth({ navigate }) {
     </div>
   );
 }
+GooggleAuth.propTypes = {
+  navigate: PropTypes.func.isRequired,
+};
 
 export default Login;
