@@ -5,8 +5,24 @@ import { RiDeleteBin6Fill } from "react-icons/ri";
 import { FaPen } from "react-icons/fa";
 import { LuEye } from "react-icons/lu";
 import Mobilesidebar from "../../Components/Mobilesidebar";
-
+import axios from "axios";
+import { auth } from "../../../firebaseConfig";
 const AllEvents = () => {
+  const instance = axios.create({
+    baseURL:
+      "https://adch-group-5-okwvc2dby-hritiks-projects-5fee05b3.vercel.app/",
+    headers: {
+      Authorization: `Bearer ${auth.currentUser.accessToken}`,
+    },
+  });
+  axios
+    .get("api/event/getAllEvents")
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   return (
     <div>
       <Sidebar />
