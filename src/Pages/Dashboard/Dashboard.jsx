@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+// import { useState } from "react";
 import Nav from "../../Components/Nav";
-import Mona from "../../assets/mona.svg";
+import Mona from "../../assets/default.png";
 import Sidebar from "../../Components/Sidebar";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import CalendarComponent from "../../Components/CalendarComponent";
 import EventTable from "../../Components/EventTable";
 import Mobilesidebar from "../../Components/Mobilesidebar";
 import { Link } from "react-router-dom";
-
+import { auth } from "../../../firebaseConfig";
 const Dashboard = () => {
   const mores = [
     {
@@ -40,12 +40,14 @@ const Dashboard = () => {
     <div className="">
       <Sidebar />
       <Mobilesidebar />
-      <div className="lg:ml-[15%]">
+      <div className="lg:ml-[17%]">
         <div className="bg-[#F9FAFB]">
           <Nav />
           <div className="px-6 lg:px-14 py-6 mt-3">
             <div className="flex items-center justify-between">
-              <h2 className="text-dark text-xl md:text-3xl font-semibold">Dashboard</h2>
+              <h2 className="text-dark text-xl md:text-3xl font-semibold">
+                Dashboard
+              </h2>
               <Link to="/createevent">
                 <button className="flex items-center gap-2 bg-primary text-sm md:text-base font-normal text-white py-2 px-2 md:py-4 md:px-3 rounded-lg">
                   Create Event
@@ -57,10 +59,14 @@ const Dashboard = () => {
             <div className="lg:flex-row flex flex-col gap-6 mt-12">
               <div className="lg:w-[70%]">
                 <div className="bg-[#EDEBFE] shadow-md rounded-lg w-[full] lg:p-5 flex items-center gap-5">
-                  <img src={Mona} alt="profilepic" />
+                  <img
+                    width={70}
+                    src={auth.currentUser?.photoURL || Mona}
+                    alt="profilepic"
+                  />
                   <div className="flex flex-col">
                     <h1 className="text-black text-base md:text-[2rem] font-semibold">
-                      Hello, Monalisa
+                      Hello, {auth.currentUser?.displayName?.split(" ")[0]}
                     </h1>
                     <p className="text-sm md:text-base text-black font-normal">
                       Hava a great day

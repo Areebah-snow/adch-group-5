@@ -1,5 +1,7 @@
+/* eslint-disable react/prop-types */
 import userPic1 from "../assets/Oval.png";
 import userPic2 from "../assets/Oval2.png";
+import userPic3 from "../assets/Oval3.png";
 const userExps = [
   {
     img: userPic1,
@@ -13,19 +15,40 @@ const userExps = [
     text: "Personalized invitations, smooth registration, and great communication tools.",
     userName: "Sarah Thompson",
   },
+  {
+    img: userPic3,
+    header: "“Amazing User Experience”",
+    text: "Event creation and management made easy, with a smooth and highly accessible user interface.",
+    userName: "Daniella Ferguson",
+  },
 ];
 export default function Testimonials() {
   return (
-    <section className="testimonials bg-[#473BF01C] my-4 flex flex-wrap justify-evenly items-center md:p-24">
-      {userExps.map((exp, i) => (
-        <UserExp
-          key={i}
-          header={exp.header}
-          text={exp.text}
-          img={exp.img}
-          userName={exp.userName}
-        />
-      ))}
+    <section className="testimonials bg-[#473BF01C] overflow-hidden">
+      <div className="testimonial-container my-4 md:p-24 flex items-center justify-evenly relative">
+        <TestCon>
+          {userExps.map((exp, i) => (
+            <UserExp
+              key={i}
+              header={exp.header}
+              text={exp.text}
+              img={exp.img}
+              userName={exp.userName}
+            />
+          ))}
+        </TestCon>
+        <TestCon>
+          {userExps.map((exp, i) => (
+            <UserExp
+              key={i}
+              header={exp.header}
+              text={exp.text}
+              img={exp.img}
+              userName={exp.userName}
+            />
+          ))}
+        </TestCon>
+      </div>
     </section>
   );
 }
@@ -37,6 +60,13 @@ function UserExp({ header, text, img, userName }) {
       <h2 className="md:text-2xl text-xl font-semibold">{header}</h2>
       <p className="md:text-xl text-l w-[30ch]">{text}</p>
       <span className="text-[#473BF0]">{userName}</span>
+    </div>
+  );
+}
+function TestCon({ children }) {
+  return (
+    <div className="test-con flex gap-20 mr-20 lg:gap-36 lg:mr-36">
+      {children}
     </div>
   );
 }
