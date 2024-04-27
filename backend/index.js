@@ -5,10 +5,12 @@ import userRoutes from "./routes/userRoutes.js";
 import eventRoutes from "./routes/eventRoutes.js";
 import rsvpRoutes from "./routes/rsvpRoutes.js";
 import emailRoutes from "./routes/emailRoutes.js";
+import cors from "cors";
 const app = express();
 dotenv.config();
 
 app.use(express.json());
+app.use(cors());
 app.use("/api/user", userRoutes);
 app.use("/api/event", eventRoutes);
 app.use("/api/rsvp", rsvpRoutes);
