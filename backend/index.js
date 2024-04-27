@@ -14,11 +14,12 @@ app.use("/api/event", eventRoutes);
 app.use("/api/rsvp", rsvpRoutes);
 app.use("/api/email", emailRoutes);
 
-const port = 3000;
+// const port = 3000;
 connectDB();
 app.get("/", (req, res) => {
   res.status(200).send("server running");
 });
-app.listen(port, () => {
-  console.log(`Listening on http://localhost:${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Listening on http://localhost:${port}`);
+// });
+export default app;
