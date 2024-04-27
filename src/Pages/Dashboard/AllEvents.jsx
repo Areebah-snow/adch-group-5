@@ -9,13 +9,13 @@ import axios from "axios";
 import { auth } from "../../../firebaseConfig";
 const AllEvents = () => {
   const instance = axios.create({
-    baseURL: "http://localhost:3000/",
+    baseURL: "https://db-lhsk5bihpq-uc.a.run.app/",
     headers: {
       Authorization: `Bearer ${auth.currentUser.accessToken}`,
     },
   });
   instance
-    .get("api/event/getAllEvents")
+    .get("/")
     .then((res) => {
       console.log(res.data);
     })
