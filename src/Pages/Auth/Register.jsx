@@ -50,6 +50,9 @@ const Register = () => {
         toast.error("User with this email already exists. Please log in.", {
           theme: "colored",
         });
+        setTimeout(() => {
+          navigate('/');
+        }, 2000);
       }
     }
   }
@@ -87,7 +90,7 @@ const Register = () => {
         <img className="object-cover h-full w-full" src={AuthLogo} alt="Logo" />
       </div>
       <div className="w-full md:w-1/2 flex md:px-16 bg-white overflow-y-auto justify-center flex-col max-md:items-center">
-        <div className="max-w-md p-6 mt-2 md:mt-32">
+        <div className="max-w-md p-6 mt-2 md:mt-20">
           <h2 className="text-3xl text-center font-semibold mb-2">
             Create Your Account
           </h2>
