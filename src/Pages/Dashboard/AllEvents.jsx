@@ -15,7 +15,7 @@ const AllEvents = () => {
     },
   });
   instance
-    .get("/")
+    .get("/api/event/getAllEvents")
     .then((res) => {
       console.log(res.data);
     })
