@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import png1 from "../assets/pngwing 2.png";
 const Hero = () => {
   return (
@@ -29,9 +30,11 @@ const Hero = () => {
 // eslint-disable-next-line react/prop-types
 export function Button({ text }) {
   return (
-    <button className="text-white rounded-[42px] bg-[#473BF0] text-bold text-[20px] w-[201px] h-[66px] cursor-pointer">
-      {text}
-    </button>
+    <Link to="/createevent">
+      <button className="text-white rounded-[42px] bg-[#473BF0] text-bold text-[20px] w-[201px] h-[66px]">
+        {text}
+      </button>
+    </Link>
   );
 }
 export default Hero;

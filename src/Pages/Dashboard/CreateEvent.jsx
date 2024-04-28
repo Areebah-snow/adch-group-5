@@ -1,8 +1,145 @@
+import { useState } from "react";
 import Nav from "../../Components/Nav";
 import Sidebar from "../../Components/Sidebar";
 import Mobilesidebar from "../../Components/Mobilesidebar";
+import { ToastContainer, Zoom, toast } from "react-toastify";
+import { auth } from "../../../firebaseConfig";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CreateEvent = () => {
+  const [eventName, seteventName] = useState("");
+  const [eventDescription, seteventDescription] = useState("");
+  const [eventStartTime, seteventStartTime] = useState("");
+  const [eventStartDate, seteventStartDate] = useState("");
+  const [eventEndTime, seteventEndTime] = useState("");
+  const [eventEndDate, seteventEndDate] = useState([]);
+  const [eventLocation, seteventLocation] = useState("");
+  const [eventotherInfo, seteventotherInfo] = useState("");
+  const [photourl, setphotourl] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const validateForm = () => {
+    let result = true;
+    if (eventName === "" || eventName === null) {
+      result = false;
+      toast.warning("Input the event name", {
+        theme: "colored",
+        autoClose: 3000,
+      });
+    }
+
+    if (eventDescription === "" || eventDescription === null) {
+      result = false;
+      toast.warning("Input the event description", {
+        theme: "colored",
+        autoClose: 3000,
+      });
+    }
+    if (eventStartTime === "" || eventStartTime === null) {
+      result = false;
+      toast.warning("Pick a time", {
+        theme: "colored",
+        autoClose: 3000,
+      });
+    }
+    if (eventStartDate === "" || eventStartDate === null) {
+      result = false;
+      toast.warning("Pick a date", {
+        theme: "colored",
+        autoClose: 3000,
+      });
+    }
+    if (eventEndTime === "" || eventEndTime === null) {
+      result = false;
+      toast.warning("Pick the time ending", {
+        theme: "colored",
+        autoClose: 3000,
+      });
+    }
+    if (eventEndDate === "" || eventEndDate === null) {
+      result = false;
+      toast.warning("Pick the date ending", {
+        theme: "colored",
+        autoClose: 3000,
+      });
+    }
+    if (eventLocation === "" || eventLocation === null) {
+      result = false;
+      toast.warning("Input the event location", {
+        theme: "colored",
+        autoClose: 3000,
+      });
+    }
+    if (photourl === "" || photourl === null) {
+      result = false;
+      toast.warning("Upload the event picture", {
+        theme: "colored",
+        autoClose: 3000,
+      });
+    } else {
+      const currentDate = new Date();
+      const selectedDateTime = new Date(`${eventStartDate}T${eventStartTime}`);
+
+      if (selectedDateTime < currentDate) {
+        result = false;
+        toast.warning("Selected date and time must be in the future", {
+          theme: "colored",
+          autoClose: 3000,
+        });
+      }
+    }
+    return result;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      setIsLoading(true);
+
+      const requestData = {
+        name: eventName,
+        description: eventDescription,
+        additionalInfo: eventotherInfo,
+        startDate: eventStartDate,
+        endDate: eventEndDate,
+        stats: "Event canceled",
+        photoURL: photourl,
+      };
+      console.log(requestData);
+
+      const instance = axios.create({
+        baseURL: "https://db-lhsk5bihpq-uc.a.run.app/",
+        headers: {
+          Authorization: `Bearer ${auth.currentUser.accessToken}`,
+        },
+      });
+
+      instance
+        .get("api/event/createEvent", requestData)
+        .then((res) => {
+          setIsLoading(false);
+          e.target.reset();
+          const resp = res.data.data;
+          console.log(resp.data);
+          toast.success("Event created successfully", {
+            theme: "colored",
+            autoClose: 3000,
+          });
+          setTimeout(() => {
+            navigate("/createevent/eventsuccess");
+          }, 1500);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          toast.error("An error occoured: " + error.message, {
+            theme: "colored",
+            autoClose: 3000,
+          });
+        });
+    }
+  };
   return (
     <div>
       <div>
@@ -19,10 +156,12 @@ const CreateEvent = () => {
                 clear understanding of what to anticipate.
               </h3>
             </div>
-            <form action="">
+            <form onSubmit={handleSubmit}>
               <div className="my-4 flex flex-col">
                 <label className="font-semibold">Event Name</label>
                 <input
+                  value={eventName}
+                  onChange={(e) => seteventName(e.target.value)}
                   type="text"
                   placeholder="Name of the event"
                   className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
@@ -31,6 +170,8 @@ const CreateEvent = () => {
               <div className="my-4 flex flex-col">
                 <label className="font-semibold">Event Description</label>
                 <input
+                  value={eventDescription}
+                  onChange={(e) => seteventDescription(e.target.value)}
                   type="text"
                   placeholder="Give a brief description of the event..."
                   className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
@@ -40,6 +181,8 @@ const CreateEvent = () => {
                 <div className="my-4 w-full flex flex-col">
                   <label className="font-semibold">Start Time</label>
                   <input
+                    value={eventStartTime}
+                    onChange={(e) => seteventStartTime(e.target.value)}
                     type="time"
                     className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
                   />
@@ -47,6 +190,8 @@ const CreateEvent = () => {
                 <div className="my-4 w-full flex flex-col">
                   <label className="font-semibold">Event Start Date</label>
                   <input
+                    value={eventStartDate}
+                    onChange={(e) => seteventStartDate(e.target.value)}
                     type="date"
                     className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
                   />
@@ -56,6 +201,8 @@ const CreateEvent = () => {
                 <div className="my-4 w-full  flex flex-col">
                   <label className="font-semibold">End Time</label>
                   <input
+                    value={eventEndTime}
+                    onChange={(e) => seteventEndTime(e.target.value)}
                     type="time"
                     className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
                   />
@@ -63,6 +210,8 @@ const CreateEvent = () => {
                 <div className="my-4 w-full flex flex-col">
                   <label className="font-semibold">Event End Date</label>
                   <input
+                    value={eventEndDate}
+                    onChange={(e) => seteventEndDate(e.target.value)}
                     type="date"
                     className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
                   />
@@ -71,6 +220,8 @@ const CreateEvent = () => {
               <div className="my-4 flex flex-col">
                 <label className="font-semibold">Event Location</label>
                 <input
+                  value={eventLocation}
+                  onChange={(e) => seteventLocation(e.target.value)}
                   type="text"
                   placeholder="Enter event location..."
                   className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
@@ -78,23 +229,28 @@ const CreateEvent = () => {
               </div>
               <input
                 type="text"
+                value={eventotherInfo}
+                onChange={(e) => seteventotherInfo(e.target.value)}
                 placeholder="Other additional information"
                 className="my-4 rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
               />
               <div className="my-4 flex flex-col">
                 <label className="font-semibold">Upload Event Image</label>
                 <input
+                  value={photourl}
+                  onChange={(e) => setphotourl(e.target.value)}
                   type="file"
                   className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
                 />
               </div>
-              <button className="w-full text-[#473BF0] border-[#473BF0] font-semibold border-2 rounded-xl py-2">
+              <div className="w-full text-center text-[#473BF0] border-[#473BF0] font-semibold border-2 rounded-xl py-2">
                 Save for Later
-              </button>
-              <button className="w-full border-2 border-[#473BF0] bg-[#473BF0] text-white py-2 rounded-xl mt-6">
-                Create Event
+              </div>
+              <button className="w-full text-center border-2 border-[#473BF0] bg-[#473BF0] text-white py-2 rounded-xl mt-6">
+                {isLoading ? "Loading..." : "Create Event"}
               </button>
             </form>
+            <ToastContainer transition={Zoom} />
           </div>
         </div>
       </div>

@@ -3,15 +3,15 @@ import AuthLogo from "../../assets/auth_logo.svg";
 import ggle from "../../assets/google.svg";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Twitter from "../../assets/twitter.svg";
 import { CiMail } from "react-icons/ci";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import {
   signInWithEmailAndPassword,
-  setPersistence,
-  inMemoryPersistence,
-  browserSessionPersistence,
+  // setPersistence,
+  // inMemoryPersistence,
+  // browserSessionPersistence,
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
@@ -85,7 +85,7 @@ const Login = () => {
         <img className="object-cover h-full w-full" src={AuthLogo} alt="Logo" />
       </div>
       <div className="w-full md:w-1/2 flex md:px-16 bg-white overflow-y-auto justify-center max-md:items-center flex-col">
-        <div className="max-w-md p-6  md:mt-12">
+        <form className="max-w-md p-6  md:mt-12">
           <h2 className="text-center text-dark font-bold mb-1 text-2xl">
             Log In
           </h2>
@@ -186,52 +186,56 @@ const Login = () => {
             <p className="text-center text-sm mt-3 mb-3 cursor-pointer">or</p>
             <div className="border-b border-[#F0F2F5] w-16 lg:w-36 h-2"></div>
           </div>
-          <GooggleAuth />
+          <GooggleAuth navigate={navigate} />
           <p className="text-grey text-sm mt-4 text-center">
             Are you new here?
             <Link to="/register" className="text-sm text-primary pl-2">
               Create Account
             </Link>
           </p>
-        </div>
+        </form>
         <ToastContainer transition={Zoom} />
       </div>
     </div>
   );
 };
 
-export function GooggleAuth() {
+export function GooggleAuth({ navigate }) {
   const provider = new GoogleAuthProvider();
   const googleSignIn = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
+        console.log(result);
         //TODO : Store user detail in the db
         navigate("/dashboard");
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        const credential = GoogleAuthProvider.credentialFromError(error);
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        // // The email of the user's account used.
+        // const email = error.customData.email;
+        // const credential = GoogleAuthProvider.credentialFromError(error);
         // TODO: Handle errors
+        toast.error("An eeror occured:" + error.message, {
+          theme: "colored",
+          autoClose: 3000,
+        });
       });
   };
   return (
     <div className="space-y-4">
-      <button
+      <div
         onClick={googleSignIn}
         className="w-full p-2.5 text-dark-200 font-semibold border border-gray outline-none rounded-md bg-brand-white text-base font-600 flex items-center justify-center cursor-pointer"
       >
         <img src={ggle} alt="Google-icon" className="mr-2 w-5" />
         Continue with Google
-      </button>
-      {/* <button className="w-full p-2.5 text-dark-200 font-semibold border border-gray outline-none rounded-md bg-brand-white text-base font-600 flex items-center justify-center cursor-pointer">
-        <img src={Twitter} alt="Google-icon" className="mr-2 w-5" />
-        Continue with Twitter
-      </button> */}
+      </div>
     </div>
   );
 }
+GooggleAuth.propTypes = {
+  navigate: PropTypes.func.isRequired,
+};
 
 export default Login;

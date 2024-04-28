@@ -20,11 +20,7 @@ const Sidebar = () => {
     signOut(auth).then(() => {
       console.log("Signed out successfully");
       navigate("/login");
-      // TODO: handle flow after signout
     });
-    // .catch((error) => {
-    // TODO handle error
-    // });
   };
   return (
     <div className="w-[17%] fixed left-0 top-0 bottom-0 lg:h-screen text-[#FFECE5] bg-primary hidden lg:flex flex-col lg:px-7 gap-8 py-[2.375rem] px-0 z-10">

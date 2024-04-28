@@ -1,22 +1,31 @@
 {
-  "name": "adch-group-5-backend",
-  "version": "1.0.0",
-  "description": "backend for rsvp app adch-group-5",
-  "main": "index.js",
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
   "type": "module",
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "deploy": "firebase deploy --only functions"
   },
-  "author": "adch-group-5",
-  "license": "ISC",
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
   "dependencies": {
+    "axios": "^1.6.8",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-async-handler": "^1.2.0",
-    "firebase-admin": "^12.1.0",
+    "firebase-admin": "^11.8.0",
+    "firebase-functions": "^4.3.1",
     "googleapis": "^135.0.0",
     "mongoose": "^8.3.2",
     "nodemailer": "^6.9.13"
-  }
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
 }

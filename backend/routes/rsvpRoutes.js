@@ -11,9 +11,9 @@ import {
 const router = express.Router();
 
 router.post("/", createRSVP);
-// router.route("/getRSVP/:id").get(getRSVPById);
+router.route("/getRSVP/:id").get(protect, getRSVPById);
 router.route("/").get(protect, getRSVPs);
-router.route("/getRsvpByEvent").get(getRsvpByEvent);
+router.route("/getRsvpByEvent/:event").get(protect, getRsvpByEvent);
 router.route("/").put(protect, updateRSVP);
 
 export default router;

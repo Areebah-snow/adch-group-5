@@ -5,8 +5,23 @@ import { RiDeleteBin6Fill } from "react-icons/ri";
 import { FaPen } from "react-icons/fa";
 import { LuEye } from "react-icons/lu";
 import Mobilesidebar from "../../Components/Mobilesidebar";
-
+import axios from "axios";
+import { auth } from "../../../firebaseConfig";
 const AllEvents = () => {
+  const instance = axios.create({
+    baseURL: "https://db-lhsk5bihpq-uc.a.run.app/",
+    headers: {
+      Authorization: `Bearer ${auth.currentUser.accessToken}`,
+    },
+  });
+  instance
+    .get("/api/event/getAllEvents")
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   return (
     <div>
       <Sidebar />

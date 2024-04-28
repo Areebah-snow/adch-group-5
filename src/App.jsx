@@ -16,6 +16,7 @@ import Settings from "./Pages/Dashboard/Settings";
 import Helpcenter from "./Pages/Dashboard/Helpcenter";
 import Eventsucess from "./Pages/Dashboard/Eventsucess";
 import Forgotpassword from "./Pages/Auth/Forgotpassword";
+import Invitation from "./Pages/Dashboard/Invitation";
 function App() {
   const [authLoaded, setAuthLoaded] = useState(false);
   onAuthStateChanged(auth, (user) => {
@@ -26,6 +27,7 @@ function App() {
   });
   const router = createBrowserRouter([
     { path: "/", element: <Home /> },
+    { path: "*", element: <Home /> },
     { path: "/login", element: <Login /> },
     { path: "/register", element: <Register /> },
     { path: "/dashboard", element: <Dashboard /> },
@@ -37,6 +39,7 @@ function App() {
     { path: "/rsvp", element: <Rsvp /> },
     { path: "/settings", element: <Settings /> },
     { path: "/helpcenter", element: <Helpcenter /> },
+    { path: "/invitation", element: <Invitation /> },
     { path: "/resetpassword", element: <Forgotpassword /> },
   ]);
   return (

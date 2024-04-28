@@ -4,9 +4,7 @@ import Event from "../models/eventModel.js";
 const createRSVP = expressAsyncHandler(async (req, res) => {
   try {
     const { name, email, isAttending, urlId, event } = req.body;
-    const plusOnes = req.body.plusOnes
-      ? JSON.parse(req.body.plusOnes)
-      : undefined;
+    const plusOnes = req.body.plusOnes || undefined;
     const rsvp = await RSVP.findOne({ email });
     if (rsvp != undefined) {
       throw new Error(
@@ -17,7 +15,6 @@ const createRSVP = expressAsyncHandler(async (req, res) => {
       name,
       email,
       isAttending,
-      urlId,
       plusOnes,
       event,
     });
@@ -76,9 +73,7 @@ const updateRSVP = expressAsyncHandler(async (req, res) => {
   try {
     const user = req.user;
     const { name, isAttending, _id } = req.body;
-    const plusOnes = req.body.plusOnes
-      ? JSON.parse(req.body.plusOnes)
-      : undefined;
+    const plusOnes = req.body.plusOnes || undefined;
     var oldRSVP = await RSVP.findById(_id);
     if (oldRSVP.email != user.email) {
       throw new Error("User don't have required permission");
@@ -108,7 +103,7 @@ const updateRSVP = expressAsyncHandler(async (req, res) => {
 });
 const getRsvpByEvent = expressAsyncHandler(async (req, res) => {
   try {
-    const { event } = req.body;
+    const { event } = req.params.event;
     var rsvps = await RSVP.find({ event });
     res.status(200).json(rsvps);
   } catch (error) {

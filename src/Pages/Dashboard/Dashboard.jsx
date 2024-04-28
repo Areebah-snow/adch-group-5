@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+// import { useState } from "react";
 import Nav from "../../Components/Nav";
-import Mona from "../../assets/mona.svg";
+import Mona from "../../assets/default.png";
 import Sidebar from "../../Components/Sidebar";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import CalendarComponent from "../../Components/CalendarComponent";
@@ -40,7 +40,7 @@ const Dashboard = () => {
     <div className="">
       <Sidebar />
       <Mobilesidebar />
-      <div className="lg:ml-[15%]">
+      <div className="lg:ml-[17%]">
         <div className="bg-[#F9FAFB]">
           <Nav />
           <div className="px-6 lg:px-14 py-6 mt-3">
@@ -60,12 +60,13 @@ const Dashboard = () => {
               <div className="lg:w-[70%]">
                 <div className="bg-[#EDEBFE] shadow-md rounded-lg w-[full] lg:p-5 flex items-center gap-5">
                   <img
-                    src={auth.currentUser.photoURL || Mona}
+                    width={70}
+                    src={auth.currentUser?.photoURL || Mona}
                     alt="profilepic"
                   />
                   <div className="flex flex-col">
                     <h1 className="text-black text-base md:text-[2rem] font-semibold">
-                      Hello, {auth.currentUser.displayName.split(" ")[0]}
+                      Hello, {auth.currentUser?.displayName?.split(" ")[0]}
                     </h1>
                     <p className="text-sm md:text-base text-black font-normal">
                       Hava a great day
