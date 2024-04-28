@@ -10,6 +10,7 @@ import { auth } from "../../../firebaseConfig";
 import { useState, useEffect } from "react";
 const AllEvents = () => {
   const [showEvents, setShowEvents] = useState([]);
+  const [loading, isLoading] = useState(false);
   const instance = axios.create({
     baseURL: "https://db-lhsk5bihpq-uc.a.run.app/",
     headers: {
@@ -22,13 +23,16 @@ const AllEvents = () => {
   };
 
   useEffect(() => {
+    isLoading(true);
     instance
       .get("/api/event/getAllEvents")
       .then((res) => {
+        isLoading(false);
         console.log(res.data);
         setShowEvents(res.data);
       })
       .catch((error) => {
+        isLoading(false);
         console.log(error);
       });
   }, []);
@@ -51,6 +55,7 @@ const AllEvents = () => {
                   <th className="p-4">Actions</th>
                 </tr>
               </thead>
+              {loading && "Loading..."}
               <tbody>
                 {showEvents.map((item, index) => (
                   <tr
