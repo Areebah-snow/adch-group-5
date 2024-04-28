@@ -25,7 +25,7 @@ const protect = expressAsyncHandler(async (req, res, next) => {
           .getUser(decodedToken.uid)
           .then((userRecord) => {
             req.user = {
-              name: userRecord.name,
+              name: userRecord.name ? userRecord.name : userRecord.displayName,
               uid: userRecord.uid,
               photoURL: userRecord.photoURL,
               email: userRecord.email,

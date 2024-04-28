@@ -6,9 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GooggleAuth } from "./Login";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../.././../firebaseConfig";
-
+import axios from "./axios";
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -31,6 +31,25 @@ const Register = () => {
           email,
           password
         );
+        var user = response.user;
+        updateProfile(user, { displayName: username }).then((res) => {
+          axios.post(
+            "/user/",
+            {
+              name: username,
+              email: email,
+              uid: response.user.uid,
+              photoUrl:
+                response.user.photoURL ||
+                "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${response.user.accessToken}`,
+              },
+            }
+          );
+        });
 
         console.log(response);
         setTimeout(() => {

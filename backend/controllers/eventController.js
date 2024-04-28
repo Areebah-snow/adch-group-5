@@ -16,7 +16,7 @@ const createEvent = expressAsyncHandler(async (req, res) => {
 
   try {
     const creatorUID = await User.findOne({ uid: creator.uid });
-    const event = await Event.create({
+    var event = await Event.create({
       name,
       creator: creatorUID._id,
       description,
@@ -26,10 +26,9 @@ const createEvent = expressAsyncHandler(async (req, res) => {
       startDate,
       endDate,
       stats,
-    }).then(async (event) => {
-      const result = await event.populate("creator");
-      res.status(200).json(result);
     });
+    event = await event.populate("creator");
+    res.status(200).json(event);
   } catch (error) {
     res.status(403).send(error.message);
   }
@@ -37,24 +36,20 @@ const createEvent = expressAsyncHandler(async (req, res) => {
 
 const getEventByID = expressAsyncHandler(async (req, res) => {
   try {
-    const event = await Event.findById(req.params.id);
+    var event = await Event.findById(req.params.id);
     //checking if event exist
     if (!event) {
       res.status(404);
       throw new Error("Not Found");
     }
-    const populatedEvent = await event.populate("creator");
-    if (
-      populatedEvent.stats == "draft" &&
-      req.user.uid != populatedEvent.creator.uid
-    ) {
+    var event = await event.populate("creator");
+    if (event.stats == "draft" && req.user.uid != event.creator.uid) {
       res.status(400);
       throw new Error("User don't have required permission");
     } else {
-      res.status(200).json(populatedEvent);
+      res.status(200).json(event);
     }
   } catch (error) {
-    console.log(error);
     res.status(400).send({ message: error.message });
   }
 });
@@ -89,9 +84,9 @@ const updateEvent = expressAsyncHandler(async (req, res) => {
       stats,
       _id,
     } = req.body;
-    const event = await Event.findById(_id);
-    const creator = await User.findById(event.creator);
-    if (creator.uid != user.uid) {
+    var event = await Event.findById(_id);
+    event = await Event.populate("creator");
+    if (event.creator.uid != user.uid) {
       res.status(401);
       throw new Error("User dont have required permission");
     }
@@ -120,7 +115,7 @@ const getAllEventsByUser = expressAsyncHandler(async (req, res) => {
   try {
     console.log(req.user);
     const uid = req.user.uid;
-    
+
     const user = await User.findOne({ uid });
     var events = await Event.find({ creator: user._id });
     events = await events.populate("creator");
@@ -133,13 +128,13 @@ const deleteEvent = expressAsyncHandler(async (req, res) => {
   try {
     const uid = req.user.uid;
     const { _id } = req.body;
-    const creator = await User.findOne({ uid });
-    const event = await Event.findById(_id);
+    var event = await Event.findById(_id);
+
     if (event == undefined) {
       throw new Error("No event found");
     }
-    if (!event.creator.equals(creator._id)) {
-      console.log(event.creator, creator._id);
+    event = await Event.populate("creator");
+    if (event.creator.uid != uid) {
       throw new Error("User don't have reqd permissions");
     }
     await Event.findOneAndDelete({ _id, creator: creator._id });
