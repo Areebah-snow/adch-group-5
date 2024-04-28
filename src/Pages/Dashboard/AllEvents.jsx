@@ -12,6 +12,7 @@ import { useState, useEffect } from "react";
 import ClockLoader from "react-spinners/ClockLoader";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 const AllEvents = () => {
   const [showEvents, setShowEvents] = useState([]);
   const [loading, isLoading] = useState(false);
@@ -103,7 +104,9 @@ const AllEvents = () => {
                     </td>
                     <td className="flex items-center p-4 gap-2">
                       <FaPen size={25} color="#667185" role="button" />
-                      <LuEye size={25} color="#667185" role="button" />
+                      <Link to={`/allevent/${item._id}`}>
+                        <LuEye size={25} color="#667185" />
+                      </Link>
                       <RiDeleteBin6Fill
                         size={25}
                         color="red"

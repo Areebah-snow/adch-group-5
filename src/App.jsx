@@ -17,6 +17,7 @@ import Helpcenter from "./Pages/Dashboard/Helpcenter";
 import Eventsucess from "./Pages/Dashboard/Eventsucess";
 import Forgotpassword from "./Pages/Auth/Forgotpassword";
 import Invitation from "./Pages/Dashboard/Invitation";
+import Event from "./Pages/Dashboard/Event";
 function App() {
   const [authLoaded, setAuthLoaded] = useState(false);
   onAuthStateChanged(auth, (user) => {
@@ -41,6 +42,7 @@ function App() {
     { path: "/helpcenter", element: <Helpcenter /> },
     { path: "/invitation", element: <Invitation /> },
     { path: "/resetpassword", element: <Forgotpassword /> },
+    { path: "/allevent/:id", element: <Event /> },
   ]);
   return (
     <>

@@ -154,7 +154,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="">
+                <div className="overflow-x-auto">
                   <h1 className="text-dark font-semibold text-lg mt-5 over">
                     Created Events
                   </h1>
@@ -162,10 +162,10 @@ const Dashboard = () => {
                   <table className="text-left w-full whitespace-nowrap border border-[#E4E7EC] rounded-full">
                     <thead>
                       <tr>
-                        <th className="py-4">Recent Events</th>
-                        <th className="py-4">Created</th>
-                        <th className="py-4">Event Day</th>
-                        <th className="py-4">Stats</th>
+                        <th className="p-4">Recent Events</th>
+                        <th className="p-4">Created</th>
+                        <th className="p-4">Event Day</th>
+                        <th className="p-4">Stats</th>
                       </tr>
                     </thead>
                     {eventTable.length === 0 && "No events created"}
