@@ -4,7 +4,7 @@ import Mona from "../../assets/default.png";
 import Sidebar from "../../Components/Sidebar";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import CalendarComponent from "../../Components/CalendarComponent";
-import EventTable from "../../Components/EventTable";
+// import EventTable from "../../Components/EventTable";
 import Mobilesidebar from "../../Components/Mobilesidebar";
 import { Link } from "react-router-dom";
 import { auth } from "../../../firebaseConfig";
@@ -13,21 +13,49 @@ import axios from "../Auth/axios";
 import ClockLoader from "react-spinners/ClipLoader";
 const Dashboard = () => {
   const [loading, isLoading] = useState(false);
-  const [EventsCreated, setEventsCreated] = useState(false);
-  const [RSVP, SetRSVP] = useState(false);
+  const [EventsCreated, setEventsCreated] = useState([]);
+  const [upcommingEvent, setupcommingEvent] = useState([]);
+  const [RSVP, SetRSVP] = useState([]);
+  const [eventTable, setEventTable] = useState([]);
   const instance = axios.create({
     baseURL: "https://db-lhsk5bihpq-uc.a.run.app/",
     headers: {
       Authorization: `Bearer ${auth.currentUser.accessToken}`,
     },
   });
+  const formatday = (dateTimeString) => {
+    const formattedDateTime = new Date(dateTimeString).toDateString("en-GB");
+    return formattedDateTime;
+  };
   useEffect(() => {
     isLoading(true);
     instance
-      .get("/api/event/getEvents")
+      .get("/api/event/getEvents/1")
       .then((res) => {
         console.log(res.data);
         setEventsCreated(res.data);
+        isLoading(false);
+      })
+      .catch((error) => {
+        isLoading(false);
+        console.log(error);
+      });
+    instance
+      .get("/api/event/getEvents/2")
+      .then((res) => {
+        console.log(res.data);
+        setupcommingEvent(res.data);
+        isLoading(false);
+      })
+      .catch((error) => {
+        isLoading(false);
+        console.log(error);
+      });
+    instance
+      .get("/api/event/getEvents/0")
+      .then((res) => {
+        console.log(res.data);
+        setEventTable(res.data);
         isLoading(false);
       })
       .catch((error) => {
@@ -47,12 +75,6 @@ const Dashboard = () => {
       });
   }, []);
   const mores = [
-    {
-      id: 2,
-      title: 5,
-      details: "Upcoming Events",
-      BackgroundColor: "#AAA5F8",
-    },
     {
       id: 3,
       title: 3,
@@ -121,13 +143,63 @@ const Dashboard = () => {
                         Previous RSVP
                       </p>
                     </div>
+                    <div className="border border-[#AAA5F8] rounded-xl w-full bg-[#AAA5F8]">
+                      <h3 className="font-bold p-5 text-[2rem]">
+                        {loading && <ClockLoader color="black" />}
+                        {upcommingEvent.length}
+                      </h3>
+                      <p className="px-5 pb-12 text-base text-[#1D2739] font-semibold whitespace-break-spaces">
+                        Upcoming Events
+                      </p>
+                    </div>
                   </div>
                 </div>
                 <div className="">
                   <h1 className="text-dark font-semibold text-lg mt-5 over">
                     Created Events
                   </h1>
-                  <EventTable />
+                  {/* <EventTable /> */}
+                  <table className="text-left w-full whitespace-nowrap border border-[#E4E7EC] rounded-full">
+                    <thead>
+                      <tr>
+                        <th className="py-4">Recent Events</th>
+                        <th className="py-4">Created</th>
+                        <th className="py-4">Event Day</th>
+                        <th className="py-4">Stats</th>
+                      </tr>
+                    </thead>
+                    {eventTable.length === 0 && "No events created"}
+                    {loading && <ClockLoader color="blue" />}
+                    <tbody>
+                      {eventTable.map((item, index) => (
+                        <tr
+                          key={index}
+                          className="border-t-[1px] border-[#E4E7EC] font-semibold text-sm lg:text-base"
+                        >
+                          <td className="p-4 capitalize">{item.name}</td>
+                          <td className="p-4 capitalize">
+                            {formatday(item.createdAt)}
+                          </td>
+                          <td className="p-4 capitalize">
+                            {formatday(item.startDate)}
+                          </td>
+                          <td
+                            className="p-4 capitalize"
+                            style={{
+                              color:
+                                item.stats === "Open"
+                                  ? "green"
+                                  : item.stats === "Draft"
+                                  ? "gold"
+                                  : "black",
+                            }}
+                          >
+                            {item.stats}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
 

@@ -32,7 +32,7 @@ function App() {
     { path: "/register", element: <Register /> },
     { path: "/dashboard", element: <Dashboard /> },
     { path: "/createevent", element: <CreateEvent /> },
-    { path: "/createevent/eventsuccess", element: <Eventsucess /> },
+    { path: "/createevent/eventsuccess/:eventid", element: <Eventsucess /> },
     { path: "/allevents", element: <AllEvents /> },
     { path: "/calendar", element: <Calendar /> },
     { path: "/profile", element: <Profile /> },

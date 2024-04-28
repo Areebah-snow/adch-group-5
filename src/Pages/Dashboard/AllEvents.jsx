@@ -27,7 +27,7 @@ const AllEvents = () => {
   useEffect(() => {
     isLoading(true);
     instance
-      .get("/api/event/getEvents")
+      .get("/api/event/getEvents/1")
       .then((res) => {
         isLoading(false);
         console.log(res.data);
