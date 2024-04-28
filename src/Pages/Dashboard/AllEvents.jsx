@@ -40,9 +40,10 @@ const AllEvents = () => {
         console.log(error);
       });
   }, []);
-  const handleDelete = () => {
+  const handleDelete = (event) => {
+    const eventId = event.currentTarget.getAttribute("eventId");
     instance
-      .delete(`/api/event/deleteEvent/${eventId}`)
+      .delete(`/api/event/`, { data: { _id: eventId } })
       .then((res) => {
         console.log(res.data);
         toast.success("Event deleted successfully");
