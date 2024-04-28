@@ -20,17 +20,7 @@ const AllEvents = () => {
     const formattedDateTime = new Date(dateTimeString).toDateString("en-GB");
     return formattedDateTime;
   };
-  const formatDateTime = (dateTimeString) => {
-    const options = {
-      hour: "numeric",
-      minute: "numeric",
-    };
-    const formattedDateTime = new Date(dateTimeString).toLocaleTimeString(
-      "en-GB",
-      options
-    );
-    return formattedDateTime;
-  };
+
   useEffect(() => {
     instance
       .get("/api/event/getAllEvents")
@@ -69,7 +59,7 @@ const AllEvents = () => {
                   >
                     <td className="p-4 capitalize">{item.name}</td>
                     <td className="p-4 capitalize">
-                      {formatDateTime(item.createdAt)}
+                      {formatday(item.createdAt)}
                     </td>
                     <td className="p-4 capitalize">
                       {formatday(item.startDate)}
