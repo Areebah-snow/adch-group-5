@@ -1,4 +1,4 @@
-// import { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
 import Nav from "../../Components/Nav";
 import Mona from "../../assets/default.png";
 import Sidebar from "../../Components/Sidebar";
@@ -8,20 +8,45 @@ import EventTable from "../../Components/EventTable";
 import Mobilesidebar from "../../Components/Mobilesidebar";
 import { Link } from "react-router-dom";
 import { auth } from "../../../firebaseConfig";
+import { useEffect, useState } from "react";
+import axios from "../Auth/axios";
+import ClockLoader from "react-spinners/ClipLoader";
 const Dashboard = () => {
+  const [loading, isLoading] = useState(false);
+  const [EventsCreated, setEventsCreated] = useState(false);
+  const [RSVP, SetRSVP] = useState(false);
+  const instance = axios.create({
+    baseURL: "https://db-lhsk5bihpq-uc.a.run.app/",
+    headers: {
+      Authorization: `Bearer ${auth.currentUser.accessToken}`,
+    },
+  });
+  useEffect(() => {
+    isLoading(true);
+    instance
+      .get("/api/event/getEvents")
+      .then((res) => {
+        console.log(res.data);
+        setEventsCreated(res.data);
+        isLoading(false);
+      })
+      .catch((error) => {
+        isLoading(false);
+        console.log(error);
+      });
+    instance
+      .get("/api/rsvp")
+      .then((res) => {
+        console.log(res.data);
+        SetRSVP(res.data);
+        isLoading(false);
+      })
+      .catch((error) => {
+        isLoading(false);
+        console.log(error);
+      });
+  }, []);
   const mores = [
-    {
-      id: 0,
-      title: 2,
-      details: "Events Created",
-      BackgroundColor: "#AAA5F8",
-    },
-    {
-      id: 1,
-      title: 20,
-      BackgroundColor: "#847CF5",
-      details: "Previous RSVPs",
-    },
     {
       id: 2,
       title: 5,
@@ -78,22 +103,24 @@ const Dashboard = () => {
                     Do more with Will Be There
                   </h1>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-10 py-4">
-                    {mores.map((more) => {
-                      return (
-                        <div
-                          className="border border-[#AAA5F8] rounded-xl w-full"
-                          style={{ backgroundColor: more.BackgroundColor }}
-                          key={more.id}
-                        >
-                          <h3 className="font-bold p-5 text-[2rem]">
-                            {more.title}
-                          </h3>
-                          <p className="px-5 pb-12 text-base text-[#1D2739] font-semibold whitespace-break-spaces">
-                            {more.details}{" "}
-                          </p>
-                        </div>
-                      );
-                    })}
+                    <div className="border border-[#AAA5F8] rounded-xl w-full bg-[#AAA5F8]">
+                      <h3 className="font-bold p-5 text-[2rem]">
+                        {loading && <ClockLoader color="black" />}
+                        {EventsCreated.length}
+                      </h3>
+                      <p className="px-5 pb-12 text-base text-[#1D2739] font-semibold whitespace-break-spaces">
+                        Events Created
+                      </p>
+                    </div>
+                    <div className="border border-[#AAA5F8] rounded-xl w-full bg-[#847CF5]">
+                      <h3 className="font-bold p-5 text-[2rem]">
+                        {loading && <ClockLoader color="black" />}
+                        {RSVP.length}
+                      </h3>
+                      <p className="px-5 pb-12 text-base text-[#1D2739] font-semibold whitespace-break-spaces">
+                        Previous RSVP
+                      </p>
+                    </div>
                   </div>
                 </div>
                 <div className="">
