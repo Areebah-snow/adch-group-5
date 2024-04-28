@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 const Eventsucess = () => {
   const { eventId } = useParams();
   const [buttonText, setButtonText] = useState("Copy RSVP Link");
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setisLoading] = useState(true);
   const [successPage, setsuccessPage] = useState([]);
   const createdEvent = JSON.parse(localStorage.getItem("createdEvent"));
 
@@ -25,6 +25,7 @@ const Eventsucess = () => {
   useEffect(() => {
     // const {eventId}=user
     setisLoading(true);
+
     instance
       .get(`/api/event/${eventId}`)
       .then((res) => {
@@ -52,8 +53,9 @@ const Eventsucess = () => {
       });
   };
   const convertDate = (dateStr) => {
-    const date = new Date(dateStr);
+    if (dateStr == undefined) return "";
 
+    const date = new Date(dateStr);
     const options = {
       year: "numeric",
       month: "long",
@@ -81,8 +83,8 @@ const Eventsucess = () => {
             </p>
             <img className="mt-12" src={successicon} alt="" />
             <p className="font-[500] text-16px mt-4">
-
-              {successPage.name} on {convertDate(successPage.startDate)} at{" "}
+              {successPage.name} on{" "}
+              {isLoading == false ? convertDate(successPage.startDate) : ""} at{" "}
               {successPage.location}
             </p>
             <button
