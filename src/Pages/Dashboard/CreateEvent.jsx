@@ -1,6 +1,7 @@
 import Nav from "../../Components/Nav";
 import Sidebar from "../../Components/Sidebar";
 import Mobilesidebar from "../../Components/Mobilesidebar";
+import { ToastContainer, Zoom, toast } from "react-toastify";
 
 const CreateEvent = () => {
   return (
@@ -23,6 +24,7 @@ const CreateEvent = () => {
               <div className="my-4 flex flex-col">
                 <label className="font-semibold">Event Name</label>
                 <input
+                  value="eventName"
                   type="text"
                   placeholder="Name of the event"
                   className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
@@ -31,6 +33,7 @@ const CreateEvent = () => {
               <div className="my-4 flex flex-col">
                 <label className="font-semibold">Event Description</label>
                 <input
+                  value="eventDescription"
                   type="text"
                   placeholder="Give a brief description of the event..."
                   className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
@@ -40,6 +43,7 @@ const CreateEvent = () => {
                 <div className="my-4 w-full flex flex-col">
                   <label className="font-semibold">Start Time</label>
                   <input
+                    value="eventStartTime"
                     type="time"
                     className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
                   />
@@ -47,6 +51,7 @@ const CreateEvent = () => {
                 <div className="my-4 w-full flex flex-col">
                   <label className="font-semibold">Event Start Date</label>
                   <input
+                    value="eventStartDate"
                     type="date"
                     className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
                   />
@@ -56,6 +61,7 @@ const CreateEvent = () => {
                 <div className="my-4 w-full  flex flex-col">
                   <label className="font-semibold">End Time</label>
                   <input
+                    value="eventEndTime"
                     type="time"
                     className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
                   />
@@ -63,6 +69,7 @@ const CreateEvent = () => {
                 <div className="my-4 w-full flex flex-col">
                   <label className="font-semibold">Event End Date</label>
                   <input
+                    value="eventEndDate"
                     type="date"
                     className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
                   />
@@ -71,6 +78,7 @@ const CreateEvent = () => {
               <div className="my-4 flex flex-col">
                 <label className="font-semibold">Event Location</label>
                 <input
+                  value="eventLocation"
                   type="text"
                   placeholder="Enter event location..."
                   className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
@@ -78,6 +86,7 @@ const CreateEvent = () => {
               </div>
               <input
                 type="text"
+                value="eventotherInfo"
                 placeholder="Other additional information"
                 className="my-4 rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
               />
@@ -95,6 +104,7 @@ const CreateEvent = () => {
                 Create Event
               </button>
             </form>
+            <ToastContainer transition={Zoom} />
           </div>
         </div>
       </div>
