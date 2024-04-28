@@ -68,7 +68,7 @@ const Dashboard = () => {
                     <h1 className="text-black text-base md:text-[2rem] font-semibold">
                       Hello, {auth.currentUser?.displayName?.split(" ")[0]}
                     </h1>
-                    <p className="text-sm md:text-base text-black font-normal">
+                    <p className="text-sm md:text-base text-black font-normal mt-2">
                       Hava a great day
                     </p>
                   </div>

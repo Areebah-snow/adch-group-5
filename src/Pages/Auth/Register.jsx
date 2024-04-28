@@ -45,29 +45,14 @@ const Register = () => {
           toast.error("User with this email already exists. Please log in.", {
             theme: "colored",
           });
+          setTimeout(() => {
+            navigate('/');
+          }, 2000);
         }
       }
-    }
-      console.log(response);
-      setTimeout(() => {
-        navigate("/login");
-      }, 1500);
-      setLoading(false);
-      toast.success("Your account has been created");
-    } catch (error) {
-      setLoading(false);
-      console.error(error.message);
-      if (error.code === "auth/email-already-in-use") {
-        toast.error("User with this email already exists. Please log in.", {
-          theme: "colored",
-        });
-        setTimeout(() => {
-          navigate('/');
-        }, 2000);
-      }
-    }
-  }
+    }       
   };
+  
 
   const validate = () => {
     let result = true;
@@ -223,6 +208,7 @@ const Register = () => {
       </div>
     </div>
   );
-};
+}
+
 
 export default Register;
