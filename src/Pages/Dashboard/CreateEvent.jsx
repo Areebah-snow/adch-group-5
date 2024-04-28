@@ -104,8 +104,9 @@ const CreateEvent = () => {
         additionalInfo: eventotherInfo,
         startDate: eventStartDate,
         endDate: eventEndDate,
-        stats: "Event canceled",
+        stats: "Open",
         photoURL: photourl,
+        location: eventLocation,
       };
       console.log(requestData);
 
@@ -117,19 +118,75 @@ const CreateEvent = () => {
       });
 
       instance
-        .get("api/event/createEvent", requestData)
+        .post("api/event/createEvent", requestData)
         .then((res) => {
           setIsLoading(false);
-          e.target.reset();
           const resp = res.data.data;
-          console.log(resp.data);
-          toast.success("Event created successfully", {
+          if (resp.status === "success") {
+            toast.success("Event created successfully", {
+              theme: "colored",
+              autoClose: 1500,
+            });
+            setTimeout(() => {
+              navigate("/createevent/eventsuccess");
+            }, 1500);
+          } else {
+            toast.success(resp.message, {
+              theme: "colored",
+              autoClose: 3000,
+            });
+          }
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          toast.error("An error occoured: " + error.message, {
             theme: "colored",
             autoClose: 3000,
           });
-          setTimeout(() => {
-            navigate("/createevent/eventsuccess");
-          }, 1500);
+        });
+    }
+  };
+  const handleDraft = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      setIsLoading(true);
+
+      const requestData = {
+        name: eventName,
+        description: eventDescription,
+        additionalInfo: eventotherInfo,
+        startDate: eventStartDate,
+        endDate: eventEndDate,
+        stats: "Draft",
+        photoURL: photourl,
+        location: eventLocation,
+      };
+      console.log(requestData);
+
+      const instance = axios.create({
+        baseURL: "https://db-lhsk5bihpq-uc.a.run.app/",
+        headers: {
+          Authorization: `Bearer ${auth.currentUser.accessToken}`,
+        },
+      });
+
+      instance
+        .post("api/event/createEvent", requestData)
+        .then((res) => {
+          setIsLoading(false);
+          const resp = res.data.data;
+          if (resp.status === "success") {
+            toast.success("Event saved for later", {
+              theme: "colored",
+              autoClose: 3000,
+            });
+            e.target.reset();
+          } else {
+            toast.success(resp.message, {
+              theme: "colored",
+              autoClose: 3000,
+            });
+          }
         })
         .catch((error) => {
           setIsLoading(false);
@@ -156,7 +213,7 @@ const CreateEvent = () => {
                 clear understanding of what to anticipate.
               </h3>
             </div>
-            <form onSubmit={handleSubmit}>
+            <div>
               <div className="my-4 flex flex-col">
                 <label className="font-semibold">Event Name</label>
                 <input
@@ -243,13 +300,19 @@ const CreateEvent = () => {
                   className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
                 />
               </div>
-              <div className="w-full text-center text-[#473BF0] border-[#473BF0] font-semibold border-2 rounded-xl py-2">
-                Save for Later
-              </div>
-              <button className="w-full text-center border-2 border-[#473BF0] bg-[#473BF0] text-white py-2 rounded-xl mt-6">
+              <button
+                onClick={handleDraft}
+                className="w-full text-center text-[#473BF0] border-[#473BF0] font-semibold border-2 rounded-xl py-2"
+              >
+                {isLoading ? "Loading..." : "Save for Later"}
+              </button>
+              <button
+                onClick={handleSubmit}
+                className="w-full text-center border-2 border-[#473BF0] bg-[#473BF0] text-white py-2 rounded-xl mt-6"
+              >
                 {isLoading ? "Loading..." : "Create Event"}
               </button>
-            </form>
+            </div>
             <ToastContainer transition={Zoom} />
           </div>
         </div>
