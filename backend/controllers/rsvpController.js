@@ -3,7 +3,7 @@ import RSVP from "../models/rsvpModel.js";
 import Event from "../models/eventModel.js";
 const createRSVP = expressAsyncHandler(async (req, res) => {
   try {
-    const { name, email, isAttending, urlId, event } = req.body;
+    const { name, email, isAttending, event } = req.body;
     const plusOnes = req.body.plusOnes || undefined;
     const rsvp = await RSVP.findOne({ email });
     if (rsvp != undefined) {
