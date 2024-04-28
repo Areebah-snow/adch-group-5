@@ -7,6 +7,7 @@ import {
   updateRSVP,
   getRsvpByEvent,
 } from "../controllers/rsvpController.js";
+import { searchEvent } from "../controllers/eventController.js";
 
 const router = express.Router();
 
