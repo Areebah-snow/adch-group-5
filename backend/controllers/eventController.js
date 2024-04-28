@@ -16,7 +16,7 @@ const createEvent = expressAsyncHandler(async (req, res) => {
 
   try {
     const creatorUID = await User.findOne({ uid: creator.uid });
-    const event = await Event.create({
+    var event = await Event.create({
       name,
       creator: creatorUID._id,
       description,
@@ -26,10 +26,9 @@ const createEvent = expressAsyncHandler(async (req, res) => {
       startDate,
       endDate,
       stats,
-    }).then(async (event) => {
-      const result = await event.populate("creator");
-      res.status(200).json(result);
     });
+    event = await event.populate("creator");
+    res.status(200).json(event);
   } catch (error) {
     res.status(403).send(error.message);
   }
@@ -116,7 +115,7 @@ const getAllEventsByUser = expressAsyncHandler(async (req, res) => {
   try {
     console.log(req.user);
     const uid = req.user.uid;
-    
+
     const user = await User.findOne({ uid });
     var events = await Event.find({ creator: user._id });
     events = await events.populate("creator");
