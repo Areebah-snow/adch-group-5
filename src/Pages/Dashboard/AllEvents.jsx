@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
 import Sidebar from "../../Components/Sidebar";
 import Nav from "../../Components/Nav";
@@ -8,6 +9,7 @@ import Mobilesidebar from "../../Components/Mobilesidebar";
 import axios from "axios";
 import { auth } from "../../../firebaseConfig";
 import { useState, useEffect } from "react";
+import ClockLoader from "react-spinners/ClockLoader";
 const AllEvents = () => {
   const [showEvents, setShowEvents] = useState([]);
   const [loading, isLoading] = useState(false);
@@ -25,7 +27,7 @@ const AllEvents = () => {
   useEffect(() => {
     isLoading(true);
     instance
-      .get("/api/event/getAllEvents")
+      .get("/api/event/getEvents")
       .then((res) => {
         isLoading(false);
         console.log(res.data);
@@ -55,7 +57,8 @@ const AllEvents = () => {
                   <th className="p-4">Actions</th>
                 </tr>
               </thead>
-              {loading && "Loading..."}
+              {showEvents.length === 0 && "No events created"}
+              {loading && <ClockLoader color="blue" />}
               <tbody>
                 {showEvents.map((item, index) => (
                   <tr

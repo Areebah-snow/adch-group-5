@@ -6,6 +6,7 @@ import { ToastContainer, Zoom, toast } from "react-toastify";
 import { auth } from "../../../firebaseConfig";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ClockLoader from "react-spinners/ClipLoader";
 
 const CreateEvent = () => {
   const [eventName, seteventName] = useState("");
@@ -290,13 +291,21 @@ const CreateEvent = () => {
                 onClick={handleDraft}
                 className="w-full text-center text-[#473BF0] border-[#473BF0] font-semibold border-2 rounded-xl py-2"
               >
-                {isLoading ? "Loading..." : "Save for Later"}
+                {isLoading ? (
+                  <ClockLoader color="#473BF0" size={30} />
+                ) : (
+                  "Save for Later"
+                )}
               </button>
               <button
                 onClick={handleSubmit}
                 className="w-full text-center border-2 border-[#473BF0] bg-[#473BF0] text-white py-2 rounded-xl mt-6"
               >
-                {isLoading ? "Loading..." : "Create Event"}
+                {isLoading ? (
+                  <ClockLoader color="white" size={30} />
+                ) : (
+                  "Create Event"
+                )}
               </button>
             </div>
             <ToastContainer transition={Zoom} />
