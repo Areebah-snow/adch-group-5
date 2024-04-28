@@ -46,6 +46,7 @@ const AllEvents = () => {
       .delete(`/api/event/`, { data: { _id: eventId } })
       .then((res) => {
         console.log(res.data);
+        setShowEvents(showEvents.filter((item) => item._id != eventId));
         toast.success("Event deleted successfully");
       })
       .catch((error) => {
