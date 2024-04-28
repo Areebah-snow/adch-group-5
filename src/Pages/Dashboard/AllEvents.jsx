@@ -42,7 +42,7 @@ const AllEvents = () => {
   }, []);
   const handleDelete = () => {
     instance
-      .delete("/api/event/deleteEvent/${eventId}")
+      .delete(`/api/event/deleteEvent/${eventId}`)
       .then((res) => {
         console.log(res.data);
         toast.success("Event deleted successfully");
