@@ -10,6 +10,8 @@ import axios from "axios";
 import { auth } from "../../../firebaseConfig";
 import { useState, useEffect } from "react";
 import ClockLoader from "react-spinners/ClockLoader";
+import { ToastContainer, Zoom, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const AllEvents = () => {
   const [showEvents, setShowEvents] = useState([]);
   const [loading, isLoading] = useState(false);
@@ -38,6 +40,18 @@ const AllEvents = () => {
         console.log(error);
       });
   }, []);
+  const handleDelete = () => {
+    instance
+      .delete("/api/event/deleteEvent/${eventId}")
+      .then((res) => {
+        console.log(res.data);
+        toast.success("Event deleted successfully");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+        console.log(error);
+      });
+  };
 
   return (
     <div>
@@ -88,12 +102,19 @@ const AllEvents = () => {
                     <td className="flex items-center p-4 gap-2">
                       <FaPen size={25} color="#667185" role="button" />
                       <LuEye size={25} color="#667185" role="button" />
-                      <RiDeleteBin6Fill size={25} color="red" role="button" />
+                      <RiDeleteBin6Fill
+                        size={25}
+                        color="red"
+                        role="button"
+                        onClick={handleDelete}
+                        eventId={item._id}
+                      />
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+            <ToastContainer transition={Zoom} />
           </div>
         </div>
       </div>
