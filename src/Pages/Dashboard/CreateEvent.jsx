@@ -119,23 +119,18 @@ const CreateEvent = () => {
 
       instance
         .post("api/event/createEvent", requestData)
-        .then((res) => {
+        .then(() => {
           setIsLoading(false);
-          const resp = res.data.data;
-          if (resp.status === "success") {
-            toast.success("Event created successfully", {
-              theme: "colored",
-              autoClose: 1500,
-            });
-            setTimeout(() => {
-              navigate("/createevent/eventsuccess");
-            }, 1500);
-          } else {
-            toast.success(resp.message, {
-              theme: "colored",
-              autoClose: 3000,
-            });
-          }
+          setTimeout(() => {
+            navigate("/createevent/eventsuccess");
+          }, 1500);
+          toast.success("Event created successfully", {
+            theme: "colored",
+            autoClose: 1500,
+          });
+          setTimeout(() => {
+            navigate("/createevent/eventsuccess");
+          }, 1500);
         })
         .catch((error) => {
           setIsLoading(false);
@@ -172,21 +167,12 @@ const CreateEvent = () => {
 
       instance
         .post("api/event/createEvent", requestData)
-        .then((res) => {
+        .then(() => {
           setIsLoading(false);
-          const resp = res.data.data;
-          if (resp.status === "success") {
-            toast.success("Event saved for later", {
-              theme: "colored",
-              autoClose: 3000,
-            });
-            e.target.reset();
-          } else {
-            toast.success(resp.message, {
-              theme: "colored",
-              autoClose: 3000,
-            });
-          }
+          toast.success("Event saved for later", {
+            theme: "colored",
+            autoClose: 3000,
+          });
         })
         .catch((error) => {
           setIsLoading(false);
