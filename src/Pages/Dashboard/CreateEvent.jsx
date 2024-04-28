@@ -5,6 +5,7 @@ import Mobilesidebar from "../../Components/Mobilesidebar";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 import { auth } from "../../../firebaseConfig";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CreateEvent = () => {
   const [eventName, seteventName] = useState("");
@@ -17,6 +18,7 @@ const CreateEvent = () => {
   const [eventotherInfo, seteventotherInfo] = useState("");
   const [photourl, setphotourl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const validateForm = () => {
     let result = true;
@@ -125,6 +127,9 @@ const CreateEvent = () => {
             theme: "colored",
             autoClose: 3000,
           });
+          setTimeout(() => {
+            navigate("/createevent/eventsuccess");
+          }, 1500);
         })
         .catch((error) => {
           setIsLoading(false);
