@@ -14,6 +14,8 @@ const Eventsucess = () => {
   const [buttonText, setButtonText] = useState("Copy RSVP Link");
   const [isLoading, setisLoading] = useState(false);
   const [successPage, setsuccessPage] = useState([]);
+  const createdEvent = JSON.parse(localStorage.getItem("createdEvent"));
+
   const instance = axios.create({
     baseURL: "https://db-lhsk5bihpq-uc.a.run.app/",
     headers: {
@@ -79,6 +81,7 @@ const Eventsucess = () => {
             </p>
             <img className="mt-12" src={successicon} alt="" />
             <p className="font-[500] text-16px mt-4">
+
               {successPage.name} on {convertDate(successPage.startDate)} at{" "}
               {successPage.location}
             </p>

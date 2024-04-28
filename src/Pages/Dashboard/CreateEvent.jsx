@@ -120,17 +120,19 @@ const CreateEvent = () => {
 
       instance
         .post("api/event/createEvent", requestData)
-        .then(() => {
+        .then((res) => {
           setIsLoading(false);
+          localStorage.setItem("createdEvent", JSON.stringify(requestData));
+          const eventId = res.data.id;
           setTimeout(() => {
-            navigate("/createevent/eventsuccess");
+            navigate(`/createevent/eventsuccess/${eventId}`);
           }, 1500);
           toast.success("Event created successfully", {
             theme: "colored",
             autoClose: 1500,
           });
           setTimeout(() => {
-            navigate("/createevent/eventsuccess");
+            navigate(`/createevent/eventsuccess/${eventId}`);
           }, 1500);
         })
         .catch((error) => {
