@@ -1,6 +1,7 @@
 import expressAsyncHandler from "express-async-handler";
 import RSVP from "../models/rsvpModel.js";
 import Event from "../models/eventModel.js";
+
 const createRSVP = expressAsyncHandler(async (req, res) => {
   try {
     const { name, email, isAttending, event } = req.body;
@@ -110,4 +111,5 @@ const getRsvpByEvent = expressAsyncHandler(async (req, res) => {
     res.status(400).send(error.message);
   }
 });
+
 export { createRSVP, getRSVPById, getRSVPs, updateRSVP, getRsvpByEvent };

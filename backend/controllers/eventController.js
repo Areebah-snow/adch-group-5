@@ -115,12 +115,26 @@ const getAllEventsByUser = expressAsyncHandler(async (req, res) => {
   try {
     const uid = req.user.uid;
     const user = await User.findOne({ uid });
-    const limit = req.params.home == true || req.params.home == "true" ? 5 : 0;
-    const events = await Event.find({ creator: user._id })
-      .sort({ updatedAt: -1 })
-      .limit(limit)
-      .populate("creator");
-    res.status(200).json(events);
+    const limit = req.params.filter == 0 ? 5 : 0;
+
+    const currentDate = new Date();
+    var query = { creator: user._id };
+    if (req.params.filter == 1) {
+      query.stats = { $ne: "Drafts" };
+    } else if (req.params.filter == 2) {
+      query.stats = { $nin: ["Drafts", "Closed"] };
+    }
+    Event.updateMany({ endDate: { $lt: currentDate } }, { stats: "Closed" })
+      .then(async () => {
+        const events = await Event.find(query)
+          .sort({ createdAt: -1 })
+          .limit(limit)
+          .populate("creator");
+        res.status(200).json(events);
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -144,6 +158,23 @@ const deleteEvent = expressAsyncHandler(async (req, res) => {
     res.status(400).send(error.message);
   }
 });
+const searchEvent = expressAsyncHandler(async (req, res) => {
+  try {
+    const searchTerm = req.params.searchTerm;
+    const regex = new RegExp(searchTerm, "i");
+    const user = await User.find({ uid: req.user.uid });
+    const events = await Event.find({
+      creator: user._id,
+      name: { $regex: regex },
+    })
+      .populate("creator")
+      .sort({ createdAt: -1 });
+    res.status(200).json(events);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+
 export {
   createEvent,
   getEventByID,
@@ -151,4 +182,5 @@ export {
   updateEvent,
   getAllEventsByUser,
   deleteEvent,
+  searchEvent,
 };
