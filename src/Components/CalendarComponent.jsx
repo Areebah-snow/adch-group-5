@@ -1,41 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-
-const events = [
-  {
-    date: "2024-04-26",
-    time: "12:00pm - 3:00pm",
-    name: "Dr. Ernest McKelvin (Intro Party)",
-    description:
-      "University of Ibadan, International Conference Center, Ibadan, Nigeria",
-  },
-  {
-    date: "2024-04-30",
-    time: "11:55pm",
-    name: "Hackthon",
-    description: "Project deadline",
-  },
-];
+import axios from "axios";
 
 const CalendarComponent = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://db-lhsk5bihpq-uc.a.run.app/api/event/getEvents")
+      .then((response) => {
+        setEvents(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching events:", error);
+      });
+  }, []);
 
   const eventDates = events.map((event) => new Date(event.date));
 
   const tileClassName = ({ date }) => {
     if (
-      eventDates.some(
-        (eventDate) => date.toDateString() === eventDate.toDateString()
-      )
+      date.getDate() === selectedDate.getDate() &&
+      date.getMonth() === selectedDate.getMonth() &&
+      date.getFullYear() === selectedDate.getFullYear()
     ) {
-      return "highlight";
+      return "current-date";
     }
-    return "";
-  };
-
-  const formatShortWeekday = (locale, date) => {
-    return new Intl.DateTimeFormat(locale, { weekday: "short" }).format(date);
+    return null;
   };
 
   return (
@@ -47,7 +40,9 @@ const CalendarComponent = () => {
             onChange={setSelectedDate}
             value={selectedDate}
             tileClassName={tileClassName}
-            formatShortWeekday={formatShortWeekday}
+            formatShortWeekday={(locale, date) => {
+              return ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"][date.getDay()];
+            }}
             className="rounded-lg shadow-lg"
           />
         </div>
