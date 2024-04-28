@@ -1,10 +1,38 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Sidebar from "../../Components/Sidebar";
 import Mobilesidebar from "../../Components/Mobilesidebar";
 import Nav from "../../Components/Nav";
 import successicon from "../../assets/Rectangle 5083.png";
 import { FaLink } from "react-icons/fa6";
 import { FaPaperPlane } from "react-icons/fa";
+import { auth } from "../../../firebaseConfig";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 const Eventsucess = () => {
+  // const { eventid } = useParams();
+  const [isLoading, setisLoading] = useState(false);
+  const [successPage, setsuccessPage] = useState([]);
+  const instance = axios.create({
+    baseURL: "https://db-lhsk5bihpq-uc.a.run.app/",
+    headers: {
+      Authorization: `Bearer ${auth.currentUser.accessToken}`,
+    },
+  });
+  useEffect(() => {
+    setisLoading(true);
+    instance
+      .get("/api/event/:id")
+      .then((res) => {
+        console.log(res.data);
+        setsuccessPage(res.data);
+        setisLoading(false);
+      })
+      .catch((error) => {
+        setisLoading(false);
+        console.log(error);
+      });
+  }, []);
   return (
     <div>
       <Sidebar />
