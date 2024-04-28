@@ -13,6 +13,8 @@ const Eventsucess = () => {
   // const { eventid } = useParams();
   const [isLoading, setisLoading] = useState(false);
   const [successPage, setsuccessPage] = useState([]);
+  const createdEvent = JSON.parse(localStorage.getItem("createdEvent"));
+
   const instance = axios.create({
     baseURL: "https://db-lhsk5bihpq-uc.a.run.app/",
     headers: {
@@ -33,6 +35,12 @@ const Eventsucess = () => {
         console.log(error);
       });
   }, []);
+
+  const formatday = (dateTimeString) => {
+    const formattedDateTime = new Date(dateTimeString).toDateString("en-GB");
+    return formattedDateTime;
+  };
+  
   return (
     <div>
       <Sidebar />
@@ -49,8 +57,7 @@ const Eventsucess = () => {
             </p>
             <img className="mt-12" src={successicon} alt="" />
             <p className="font-[500] text-16px mt-4">
-              Queen Arit’s birthday on February 28th, 2025 1:00PM at the Lion’s
-              Club Event Center
+                {createdEvent.name} on {formatday(createdEvent.startDate)} {createdEvent.startTime} at {createdEvent.location}
             </p>
             <button className="w-full border-2 py-2 rounded-lg mt-6 flex justify-center items-center gap-4 text-primary border-primary font-[600]">
               Copy RSVP Link <FaLink size={20} />
