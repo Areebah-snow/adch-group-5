@@ -9,12 +9,13 @@ import { auth } from "../../../firebaseConfig";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ClockLoader from "react-spinners/ClipLoader";
 const Eventsucess = () => {
   const { eventId } = useParams();
   const [buttonText, setButtonText] = useState("Copy RSVP Link");
   const [isLoading, setisLoading] = useState(true);
   const [successPage, setsuccessPage] = useState([]);
-  const createdEvent = JSON.parse(localStorage.getItem("createdEvent"));
+  // const createdEvent = JSON.parse(localStorage.getItem("createdEvent"));
 
   const instance = axios.create({
     baseURL: "https://db-lhsk5bihpq-uc.a.run.app/",
@@ -86,11 +87,15 @@ const Eventsucess = () => {
               src={successPage.photoURL || successicon}
               alt=""
             />
-            <p className="font-[500] text-16px mt-4">
-              {successPage.name} on{" "}
-              {isLoading == false ? convertDate(successPage.startDate) : ""} at{" "}
-              {successPage.location}
-            </p>
+            {isLoading ? (
+              <ClockLoader color="blue" size={50} />
+            ) : (
+              <p className="font-[500] text-16px mt-4">
+                {successPage.name} on{" "}
+                {isLoading == false ? convertDate(successPage.startDate) : ""}{" "}
+                at {successPage.location}
+              </p>
+            )}
             <button
               onClick={handleCopyLink}
               className="w-full border-2 py-2 rounded-lg mt-6 flex justify-center items-center gap-4 text-primary border-primary font-[600]"
