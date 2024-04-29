@@ -81,7 +81,11 @@ const Eventsucess = () => {
             <p className="font-[500] text-16px">
               You can now share the link with your guests
             </p>
-            <img className="mt-12" src={successicon} alt="" />
+            <img
+              className="mt-12"
+              src={successPage.photoURL || successicon}
+              alt=""
+            />
             <p className="font-[500] text-16px mt-4">
               {successPage.name} on{" "}
               {isLoading == false ? convertDate(successPage.startDate) : ""} at{" "}
