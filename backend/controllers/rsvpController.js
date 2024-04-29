@@ -6,7 +6,7 @@ const createRSVP = expressAsyncHandler(async (req, res) => {
   try {
     const { name, email, isAttending, event, message } = req.body;
     const plusOnes = req.body.plusOnes || undefined;
-    const rsvp = await RSVP.findOne({ email });
+    const rsvp = await RSVP.findOne({ event, email });
     if (rsvp != undefined) {
       throw new Error(
         "You have already rsvp'ed using this email , please use another email address"

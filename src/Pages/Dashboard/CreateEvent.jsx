@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import ClockLoader from "react-spinners/ClipLoader";
 import LeftContent from "../../assets/Left Content.png";
 import RightContent from "../../assets/Right Content.png";
+import Profile from "../../Components/imageUpload/Profile";
 
 const CreateEvent = () => {
   const [eventName, seteventName] = useState("");
@@ -366,6 +367,7 @@ const CreateEvent = () => {
                   "Create Event"
                 )}
               </button>
+              <Profile />
             </div>
             <ToastContainer transition={Zoom} />
           </div>

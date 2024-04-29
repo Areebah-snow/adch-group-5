@@ -173,7 +173,18 @@ const searchEvent = expressAsyncHandler(async (req, res) => {
     res.status(400).send(error.message);
   }
 });
-
+const getEventNameById = expressAsyncHandler(async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const event = await Event.findOne({ _id });
+    if (!event) {
+      throw new Error("Event not found");
+    }
+    res.status(200).json({ name: event.name });
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
 export {
   createEvent,
   getEventByID,
@@ -182,4 +193,5 @@ export {
   getAllEventsByUser,
   deleteEvent,
   searchEvent,
+  getEventNameById,
 };
