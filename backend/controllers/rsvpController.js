@@ -4,7 +4,7 @@ import Event from "../models/eventModel.js";
 
 const createRSVP = expressAsyncHandler(async (req, res) => {
   try {
-    const { name, email, isAttending, event } = req.body;
+    const { name, email, isAttending, event, message } = req.body;
     const plusOnes = req.body.plusOnes || undefined;
     const rsvp = await RSVP.findOne({ email });
     if (rsvp != undefined) {
@@ -18,6 +18,7 @@ const createRSVP = expressAsyncHandler(async (req, res) => {
       isAttending,
       plusOnes,
       event,
+      message,
     });
     newRSVP = await newRSVP.populate("event");
     if (!newRSVP) {
@@ -33,7 +34,7 @@ const createRSVP = expressAsyncHandler(async (req, res) => {
     await Event.findByIdAndUpdate(event, {
       $inc: { totalCount: 1, acceptedCount: val },
     });
-    res.status(400).json(newRSVP);
+    res.status(200).json(newRSVP);
   } catch (error) {
     res.status(400).send(error.message);
   }
