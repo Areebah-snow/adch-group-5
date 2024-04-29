@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 import { auth } from "../../../firebaseConfig";
 import axios from "axios";
+import { TagsInput } from "react-tag-input-component";
 
 const Invitation = () => {
   const [checkedbox, setcheckedbox] = useState("");
@@ -15,6 +16,7 @@ const Invitation = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [plusOne, setPlusOne] = useState(0);
+  const [plusOnes, setPlusOnes] = useState([]);
 
   const handlePlusOne = (type) => {
     type === "+"
@@ -37,7 +39,7 @@ const Invitation = () => {
         email: email,
         message: message,
         event: eventId,
-        plusOnes: plusOne,
+        plusOnes: plusOnes,
         isAttending: checkedbox == "present",
       })
       .then(() => {
@@ -162,7 +164,7 @@ const Invitation = () => {
               </div>
               <div className="flex md:flex-row flex-col justify-start gap-6 w-full my-6 md:items-center">
                 <label className="font-semibold">Additional Guest(s):</label>
-                <div className="flex flex-row">
+                {/* <div className="flex flex-row">
                   <span
                     onClick={() => handlePlusOne("-")}
                     className="mx-2 text-3xl text-grey cursor-pointer grid place-content-center rounded-md w-[2ch] border shadow-md select-none"
@@ -182,8 +184,16 @@ const Invitation = () => {
                   >
                     &#43;
                   </span>
-                </div>
+                </div> */}
               </div>
+              {checkedbox == "present" && (
+                <TagsInput
+                  value={plusOnes}
+                  onChange={setPlusOnes}
+                  name="Plus Ones"
+                  placeHolder="Enter names"
+                />
+              )}
               <div className="flex flex-col w-full mt-9">
                 <label className="font-[500] text-[14px]" htmlFor="">
                   Message
