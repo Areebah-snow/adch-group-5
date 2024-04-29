@@ -65,7 +65,7 @@ const ImageCropper = ({ closeModal, updateAvatar }) => {
           type="file"
           accept="image/*"
           onChange={onSelectFile}
-          className="block w-full text-sm text-slate-500 file:mr-4 file:py-1 file:px-2 file:rounded-full file:border-0 file:text-xs file:bg-gray-700 file:text-sky-300 hover:file:bg-gray-600"
+          className="block w-full text-md text-white file:mr-4 file:py-1 file:px-2 file:rounded-full file:border-0 file:text-l file:cursor-pointer file:bg-blue-700 file:text-white hover:file:bg-gray-600"
         />
       </label>
       {error && <p className="text-red-400 text-xs">{error}</p>}
@@ -74,7 +74,6 @@ const ImageCropper = ({ closeModal, updateAvatar }) => {
           <ReactCrop
             crop={crop}
             onChange={(pixelCrop, percentCrop) => setCrop(percentCrop)}
-            circularCrop
             keepSelection
             aspect={ASPECT_RATIO}
             minWidth={MIN_DIMENSION}
