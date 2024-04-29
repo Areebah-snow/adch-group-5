@@ -7,6 +7,8 @@ import { auth } from "../../../firebaseConfig";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ClockLoader from "react-spinners/ClipLoader";
+import LeftContent from "../../assets/Left Content.png";
+import RightContent from "../../assets/Right Content.png";
 
 const CreateEvent = () => {
   const [eventName, seteventName] = useState("");
@@ -238,11 +240,11 @@ const CreateEvent = () => {
                   onChange={(e) => seteventDescription(e.target.value)}
                   type="text"
                   placeholder="Give a brief description of the event..."
-                  className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
+                  className="rounded-md px-4 pt-4 pb-32 w-full border border-gray outline-none shadow-md"
                 />
               </div>
-              <div className="flex flex-row-reverse md:flex-col gap-6 md:gap-0">
-                <div className="my-4 w-full flex flex-col">
+              <div className="flex flex-wrap justify-between gap-1">
+                <div className="my-2 w-[48%] flex flex-col">
                   <label className="font-semibold">Start Time</label>
                   <input
                     value={eventStartTime}
@@ -251,7 +253,7 @@ const CreateEvent = () => {
                     className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
                   />
                 </div>
-                <div className="my-4 w-full flex flex-col">
+                <div className="my-2 w-[48%] flex flex-col">
                   <label className="font-semibold">Event Start Date</label>
                   <input
                     value={eventStartDate}
@@ -260,9 +262,7 @@ const CreateEvent = () => {
                     className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
                   />
                 </div>
-              </div>
-              <div className="flex flex-row-reverse md:flex-col gap-6 md:gap-[0px]">
-                <div className="my-4 w-full  flex flex-col">
+                <div className="my-2 w-[48%] flex flex-col">
                   <label className="font-semibold">End Time</label>
                   <input
                     value={eventEndTime}
@@ -271,7 +271,7 @@ const CreateEvent = () => {
                     className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
                   />
                 </div>
-                <div className="my-4 w-full flex flex-col">
+                <div className="my-2 w-[48%] flex flex-col">
                   <label className="font-semibold">Event End Date</label>
                   <input
                     value={eventEndDate}
@@ -281,7 +281,7 @@ const CreateEvent = () => {
                   />
                 </div>
               </div>
-              <div className="my-4 flex flex-col">
+              <div className="my-2 flex flex-col">
                 <label className="font-semibold">Event Location</label>
                 <input
                   value={eventLocation}
@@ -296,15 +296,27 @@ const CreateEvent = () => {
                 value={eventotherInfo}
                 onChange={(e) => seteventotherInfo(e.target.value)}
                 placeholder="Other additional information"
-                className="my-4 rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
+                className="my-2 rounded-md px-4 pt-3 pb-20 w-full border border-gray outline-none shadow-md"
               />
               <div className="my-4 flex flex-col">
-                <label className="font-semibold">Upload Event Image</label>
                 <input
                   onChange={(e) => uploadImage(e.target.files[0])}
                   type="file"
-                  className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
+                  name="file"
+                  id="file"
+                  placeholder=""
+                  className="inputfile rounded-md px-4 py-20 w-1/3 border opacity-0 overflow-hidden absolute outline-none shadow-md"
                 />
+                <label
+                  className="font-semibold w-1/3 h-1/3"
+                  htmlFor="file"
+                >
+                  Tap to Upload Event Image
+                  <span className="py-20 rounded-md px-14 border-grey border-2 flex items-center">
+                    <img src={LeftContent} alt="hug" className="inline mr-2" />
+                    <img src={RightContent} alt="hug" className="inline" />
+                  </span>
+                </label>
               </div>
               <button
                 onClick={handleDraft}

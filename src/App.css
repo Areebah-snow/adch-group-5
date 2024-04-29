@@ -37,7 +37,7 @@ body {
 }
 
 .current-date {
-  background-color: #473BF0; /* Change background color to blue */
+  background-color: #473bf0; /* Change background color to blue */
   border-radius: 100%; /* Add border radius */
   color: white; /* Change text color to white for better visibility */
 }
