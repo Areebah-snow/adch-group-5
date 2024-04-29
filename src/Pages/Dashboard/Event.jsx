@@ -122,7 +122,7 @@ const Event = () => {
       .then((res) => {
         isLoading(false);
         // localStorage.setItem("createdEvent", JSON.stringify(updateData));
-        const eventId = res.data.id;
+        const eventId = res.data._id;
         toast.success("Event updated successfully", {
           theme: "colored",
           autoClose: 1500,
