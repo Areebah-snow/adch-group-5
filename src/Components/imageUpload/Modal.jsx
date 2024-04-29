@@ -1,6 +1,7 @@
 import CloseIcon from "./CloseIcon";
 import ImageCropper from "./ImageCropper";
 
+// eslint-disable-next-line react/prop-types
 const Modal = ({ updateAvatar, closeModal }) => {
   return (
     <div

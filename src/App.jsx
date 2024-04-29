@@ -18,6 +18,7 @@ import Eventsucess from "./Pages/Dashboard/Eventsucess";
 import Forgotpassword from "./Pages/Auth/Forgotpassword";
 import Invitation from "./Pages/Dashboard/Invitation";
 import Event from "./Pages/Dashboard/Event";
+import "react-image-crop/dist/ReactCrop.css";
 function App() {
   const [authLoaded, setAuthLoaded] = useState(false);
   onAuthStateChanged(auth, (user) => {
