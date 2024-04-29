@@ -263,13 +263,13 @@ const CreateEvent = () => {
               </div>
               <div className="my-4 flex flex-col">
                 <label className="font-semibold">Event Description</label>
-                <input
+                <textarea
                   value={eventDescription}
                   onChange={(e) => seteventDescription(e.target.value)}
                   type="text"
                   placeholder="Give a brief description of the event..."
                   className="rounded-md px-4 pt-4 pb-32 w-full border border-gray outline-none shadow-md"
-                />
+                ></textarea>
               </div>
               <div className="flex flex-wrap justify-between gap-1">
                 <div className="my-2 w-[48%] flex flex-col">
