@@ -16,14 +16,8 @@ const Invitation = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [plusOne, setPlusOne] = useState(0);
   const [plusOnes, setPlusOnes] = useState([]);
 
-  const handlePlusOne = (type) => {
-    type === "+"
-      ? setPlusOne((pl) => pl + 1)
-      : setPlusOne((pl) => (pl < 1 ? pl : pl - 1));
-  };
   const [loaded, setLoaded] = useState(false);
   const [loading, setloading] = useState(true);
   const [event, setEvent] = useState([]);
