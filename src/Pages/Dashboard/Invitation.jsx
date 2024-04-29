@@ -3,6 +3,7 @@
 import { Link, useParams } from "react-router-dom";
 import logo from "../../assets/image 2.png";
 import icon from "../../assets/Logo.png";
+import Woman from "../../assets/default.png";
 import { useState, useEffect } from "react";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 import { auth } from "../../../firebaseConfig";
