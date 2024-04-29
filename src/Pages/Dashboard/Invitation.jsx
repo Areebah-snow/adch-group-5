@@ -2,7 +2,7 @@
 import { Link, useParams } from "react-router-dom";
 import logo from "../../assets/image 2.png";
 import icon from "../../assets/Logo.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 
 import axios from "axios";
@@ -21,6 +21,8 @@ const Invitation = () => {
       : setPlusOne((pl) => (pl < 1 ? pl : pl - 1));
   };
   const [loaded, setLoaded] = useState(false);
+  const [loading, setloading] = useState(false);
+  const [event, setEvent] = useState([]);
   console.log(checkedbox);
   const instance = axios.create({
     baseURL: "https://db-lhsk5bihpq-uc.a.run.app/",
@@ -51,6 +53,20 @@ const Invitation = () => {
         });
       });
   };
+  useEffect(() => {
+    setloading(true);
+    instance
+      .get(`/api/event/${eventId}`)
+      .then((res) => {
+        setloading(false);
+        console.log(res.data);
+        setEvent(res.data.name);
+      })
+      .catch((error) => {
+        setloading(false);
+        console.log(error);
+      });
+  }, []);
   return (
     <div>
       <div className="hidden md:w-[15%] bg-primary h-screen fixed left-0 top-0 bottom-0 md:flex items-center">
@@ -81,7 +97,7 @@ const Invitation = () => {
             You are invited!
           </h1>
           <p className="font-[500] text-center">
-            It’s Queen Arit’s birthday. Please confirm your attendance below
+            {event} Please confirm your attendance below
           </p>
           <form onSubmit={handlesubmit}>
             <div className="flex flex-col w-full mt-9">
