@@ -5,6 +5,7 @@ import {
   getAllEvents,
   getAllEventsByUser,
   getEventByID,
+  getEventNameById,
   searchEvent,
   updateEvent,
 } from "../controllers/eventController.js";
@@ -19,4 +20,5 @@ router.get("/:id", protect, getEventByID);
 router.route("/").put(protect, updateEvent);
 router.route("/").delete(protect, deleteEvent);
 router.route("/searchEvent/:searchTerm").get(protect, searchEvent);
+router.route("/getEventName/:id").get(getEventNameById);
 export default router;
