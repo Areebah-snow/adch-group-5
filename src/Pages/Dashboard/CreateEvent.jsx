@@ -6,6 +6,7 @@ import { ToastContainer, Zoom, toast } from "react-toastify";
 import { auth } from "../../../firebaseConfig";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ClockLoader from "react-spinners/ClipLoader";
 
 const CreateEvent = () => {
   const [eventName, seteventName] = useState("");
@@ -16,7 +17,7 @@ const CreateEvent = () => {
   const [eventEndDate, seteventEndDate] = useState([]);
   const [eventLocation, seteventLocation] = useState("");
   const [eventotherInfo, seteventotherInfo] = useState("");
-  const [photourl, setphotourl] = useState("");
+  const [photoURL, setPhotoURL] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -72,7 +73,7 @@ const CreateEvent = () => {
         autoClose: 3000,
       });
     }
-    if (photourl === "" || photourl === null) {
+    if (photoURL === "" || photoURL === null) {
       result = false;
       toast.warning("Upload the event picture", {
         theme: "colored",
@@ -92,6 +93,24 @@ const CreateEvent = () => {
     }
     return result;
   };
+  const uploadImage = (image) => {
+    setIsLoading(true);
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "adch-05");
+    data.append("cloud_name", "dmtxpxm7m");
+    fetch("  https://api.cloudinary.com/v1_1/dmtxpxm7m/image/upload", {
+      method: "post",
+      body: data,
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        setPhotoURL(data.url);
+        console.log(data.url);
+        setIsLoading(false);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -104,8 +123,9 @@ const CreateEvent = () => {
         additionalInfo: eventotherInfo,
         startDate: eventStartDate,
         endDate: eventEndDate,
-        stats: "Event canceled",
-        photoURL: photourl,
+        stats: "Open",
+        photoURL: photoURL,
+        location: eventLocation,
       };
       console.log(requestData);
 
@@ -117,19 +137,63 @@ const CreateEvent = () => {
       });
 
       instance
-        .get("api/event/createEvent", requestData)
+        .post("api/event/createEvent", requestData)
         .then((res) => {
           setIsLoading(false);
-          e.target.reset();
-          const resp = res.data.data;
-          console.log(resp.data);
+          localStorage.setItem("createdEvent", JSON.stringify(requestData));
+          const eventId = res.data._id;
+          setTimeout(() => {
+            navigate(`/createevent/eventsuccess/${eventId}`);
+          }, 1500);
           toast.success("Event created successfully", {
+            theme: "colored",
+            autoClose: 1500,
+          });
+          setTimeout(() => {
+            navigate(`/createevent/eventsuccess/${eventId}`);
+          }, 1500);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          toast.error("An error occoured: " + error.message, {
             theme: "colored",
             autoClose: 3000,
           });
-          setTimeout(() => {
-            navigate("/createevent/eventsuccess");
-          }, 1500);
+        });
+    }
+  };
+  const handleDraft = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      setIsLoading(true);
+
+      const requestData = {
+        name: eventName,
+        description: eventDescription,
+        additionalInfo: eventotherInfo,
+        startDate: eventStartDate,
+        endDate: eventEndDate,
+        stats: "Draft",
+        photoURL: photoURL,
+        location: eventLocation,
+      };
+      console.log(requestData);
+
+      const instance = axios.create({
+        baseURL: "https://db-lhsk5bihpq-uc.a.run.app/",
+        headers: {
+          Authorization: `Bearer ${auth.currentUser.accessToken}`,
+        },
+      });
+
+      instance
+        .post("api/event/createEvent", requestData)
+        .then(() => {
+          setIsLoading(false);
+          toast.success("Event saved for later", {
+            theme: "colored",
+            autoClose: 3000,
+          });
         })
         .catch((error) => {
           setIsLoading(false);
@@ -156,7 +220,7 @@ const CreateEvent = () => {
                 clear understanding of what to anticipate.
               </h3>
             </div>
-            <form onSubmit={handleSubmit}>
+            <div>
               <div className="my-4 flex flex-col">
                 <label className="font-semibold">Event Name</label>
                 <input
@@ -237,19 +301,32 @@ const CreateEvent = () => {
               <div className="my-4 flex flex-col">
                 <label className="font-semibold">Upload Event Image</label>
                 <input
-                  value={photourl}
-                  onChange={(e) => setphotourl(e.target.value)}
+                  onChange={(e) => uploadImage(e.target.files[0])}
                   type="file"
                   className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
                 />
               </div>
-              <div className="w-full text-center text-[#473BF0] border-[#473BF0] font-semibold border-2 rounded-xl py-2">
-                Save for Later
-              </div>
-              <button className="w-full text-center border-2 border-[#473BF0] bg-[#473BF0] text-white py-2 rounded-xl mt-6">
-                {isLoading ? "Loading..." : "Create Event"}
+              <button
+                onClick={handleDraft}
+                className="w-full text-center text-[#473BF0] border-[#473BF0] font-semibold border-2 rounded-xl py-2"
+              >
+                {isLoading ? (
+                  <ClockLoader color="#473BF0" size={30} />
+                ) : (
+                  "Save for Later"
+                )}
               </button>
-            </form>
+              <button
+                onClick={handleSubmit}
+                className="w-full text-center border-2 border-[#473BF0] bg-[#473BF0] text-white py-2 rounded-xl mt-6"
+              >
+                {isLoading ? (
+                  <ClockLoader color="white" size={30} />
+                ) : (
+                  "Create Event"
+                )}
+              </button>
+            </div>
             <ToastContainer transition={Zoom} />
           </div>
         </div>

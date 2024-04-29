@@ -6,9 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GooggleAuth } from "./Login";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../.././../firebaseConfig";
-
+import axios from "./axios";
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -31,6 +31,25 @@ const Register = () => {
           email,
           password
         );
+        var user = response.user;
+        updateProfile(user, { displayName: username }).then((res) => {
+          axios.post(
+            "/user/",
+            {
+              name: username,
+              email: email,
+              uid: response.user.uid,
+              photoUrl:
+                response.user.photoURL ||
+                "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${response.user.accessToken}`,
+              },
+            }
+          );
+        });
 
         console.log(response);
         setTimeout(() => {
@@ -45,10 +64,14 @@ const Register = () => {
           toast.error("User with this email already exists. Please log in.", {
             theme: "colored",
           });
+          setTimeout(() => {
+            navigate('/');
+          }, 2000);
         }
       }
-    }
+    }       
   };
+  
 
   const validate = () => {
     let result = true;
@@ -92,7 +115,7 @@ const Register = () => {
         <img className="object-cover h-full w-full" src={AuthLogo} alt="Logo" />
       </div>
       <div className="w-full md:w-1/2 flex md:px-16 bg-white overflow-y-auto justify-center flex-col max-md:items-center">
-        <div className="max-w-md p-6 mt-2 md:mt-32">
+        <div className="max-w-md p-6 mt-2 md:mt-20">
           <h2 className="text-3xl text-center font-semibold mb-2">
             Create Your Account
           </h2>
@@ -204,6 +227,7 @@ const Register = () => {
       </div>
     </div>
   );
-};
+}
+
 
 export default Register;

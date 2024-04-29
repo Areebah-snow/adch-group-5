@@ -32,6 +32,16 @@ body {
   color: #473bf0;
 }
 
+.react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none;
+}
+
+.current-date {
+  background-color: #473BF0; /* Change background color to blue */
+  border-radius: 100%; /* Add border radius */
+  color: white; /* Change text color to white for better visibility */
+}
+
 .testimonial-container:hover > .test-con {
   animation-play-state: paused;
 }

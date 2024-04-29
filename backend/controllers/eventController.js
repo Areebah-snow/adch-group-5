@@ -16,7 +16,7 @@ const createEvent = expressAsyncHandler(async (req, res) => {
 
   try {
     const creatorUID = await User.findOne({ uid: creator.uid });
-    const event = await Event.create({
+    var event = await Event.create({
       name,
       creator: creatorUID._id,
       description,
@@ -26,10 +26,9 @@ const createEvent = expressAsyncHandler(async (req, res) => {
       startDate,
       endDate,
       stats,
-    }).then(async (event) => {
-      const result = await event.populate("creator");
-      res.status(200).json(result);
     });
+    event = await event.populate("creator");
+    res.status(200).json(event);
   } catch (error) {
     res.status(403).send(error.message);
   }
@@ -114,13 +113,28 @@ const updateEvent = expressAsyncHandler(async (req, res) => {
 });
 const getAllEventsByUser = expressAsyncHandler(async (req, res) => {
   try {
-    console.log(req.user);
     const uid = req.user.uid;
-    
     const user = await User.findOne({ uid });
-    var events = await Event.find({ creator: user._id });
-    events = await events.populate("creator");
-    res.status(200).json(events);
+    const limit = req.params.filter == 0 ? 5 : 0;
+
+    const currentDate = new Date();
+    var query = { creator: user._id };
+    if (req.params.filter == 1) {
+      query.stats = { $ne: "Drafts" };
+    } else if (req.params.filter == 2) {
+      query.stats = { $nin: ["Drafts", "Closed"] };
+    }
+    Event.updateMany({ endDate: { $lt: currentDate } }, { stats: "Closed" })
+      .then(async () => {
+        const events = await Event.find(query)
+          .sort({ createdAt: -1 })
+          .limit(limit)
+          .populate("creator");
+        res.status(200).json(events);
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -129,21 +143,38 @@ const deleteEvent = expressAsyncHandler(async (req, res) => {
   try {
     const uid = req.user.uid;
     const { _id } = req.body;
-    var event = await Event.findById(_id);
+    var event = await Event.findById(_id).populate("creator");
 
     if (event == undefined) {
       throw new Error("No event found");
     }
-    event = await Event.populate("creator");
+
     if (event.creator.uid != uid) {
       throw new Error("User don't have reqd permissions");
     }
-    await Event.findOneAndDelete({ _id, creator: creator._id });
+    await Event.findOneAndDelete({ _id, creator: event.creator._id });
     res.status(200).send("Event Deleted");
   } catch (error) {
     res.status(400).send(error.message);
   }
 });
+const searchEvent = expressAsyncHandler(async (req, res) => {
+  try {
+    const searchTerm = req.params.searchTerm;
+    const regex = new RegExp(searchTerm, "i");
+    const user = await User.find({ uid: req.user.uid });
+    const events = await Event.find({
+      creator: user._id,
+      name: { $regex: regex },
+    })
+      .populate("creator")
+      .sort({ createdAt: -1 });
+    res.status(200).json(events);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+
 export {
   createEvent,
   getEventByID,
@@ -151,4 +182,5 @@ export {
   updateEvent,
   getAllEventsByUser,
   deleteEvent,
+  searchEvent,
 };

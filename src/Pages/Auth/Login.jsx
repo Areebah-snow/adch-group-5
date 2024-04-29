@@ -16,6 +16,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
+import axios from "./axios.js";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,6 +36,7 @@ const Login = () => {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           console.log(userCredential);
+
           navigate("/dashboard");
           setLoading(false);
         })
@@ -71,7 +73,7 @@ const Login = () => {
     }
     if (password === "" || password === null) {
       result = false;
-      toast.warning("Please Enter Password", {
+      toast.error("Please Enter Password", {
         theme: "colored",
         autoClose: 3000,
       });
@@ -85,7 +87,7 @@ const Login = () => {
         <img className="object-cover h-full w-full" src={AuthLogo} alt="Logo" />
       </div>
       <div className="w-full md:w-1/2 flex md:px-16 bg-white overflow-y-auto justify-center max-md:items-center flex-col">
-        <form className="max-w-md p-6  md:mt-12">
+        <form className="max-w-md p-6  md:mt-4">
           <h2 className="text-center text-dark font-bold mb-1 text-2xl">
             Log In
           </h2>
@@ -207,7 +209,22 @@ export function GooggleAuth({ navigate }) {
       .then((result) => {
         console.log(result);
         //TODO : Store user detail in the db
-        navigate("/dashboard");
+        axios
+          .post(
+            "/user/",
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${result.user.accessToken}`,
+              },
+            }
+          )
+          .then(() => {
+            navigate("/dashboard");
+          })
+          .catch((error) => {
+            throw new Error(error);
+          });
       })
       .catch((error) => {
         // const errorCode = error.code;
@@ -216,7 +233,7 @@ export function GooggleAuth({ navigate }) {
         // const email = error.customData.email;
         // const credential = GoogleAuthProvider.credentialFromError(error);
         // TODO: Handle errors
-        toast.error("An eeror occured:" + error.message, {
+        toast.error("An error occured:" + error.message, {
           theme: "colored",
           autoClose: 3000,
         });

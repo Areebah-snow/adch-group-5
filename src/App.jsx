@@ -17,6 +17,7 @@ import Helpcenter from "./Pages/Dashboard/Helpcenter";
 import Eventsucess from "./Pages/Dashboard/Eventsucess";
 import Forgotpassword from "./Pages/Auth/Forgotpassword";
 import Invitation from "./Pages/Dashboard/Invitation";
+import Event from "./Pages/Dashboard/Event";
 function App() {
   const [authLoaded, setAuthLoaded] = useState(false);
   onAuthStateChanged(auth, (user) => {
@@ -32,15 +33,16 @@ function App() {
     { path: "/register", element: <Register /> },
     { path: "/dashboard", element: <Dashboard /> },
     { path: "/createevent", element: <CreateEvent /> },
-    { path: "/createevent/eventsuccess", element: <Eventsucess /> },
+    { path: "/createevent/eventsuccess/:eventId", element: <Eventsucess /> },
     { path: "/allevents", element: <AllEvents /> },
     { path: "/calendar", element: <Calendar /> },
     { path: "/profile", element: <Profile /> },
     { path: "/rsvp", element: <Rsvp /> },
     { path: "/settings", element: <Settings /> },
     { path: "/helpcenter", element: <Helpcenter /> },
-    { path: "/invitation", element: <Invitation /> },
+    { path: "/invitation/:eventId", element: <Invitation /> },
     { path: "/resetpassword", element: <Forgotpassword /> },
+    { path: "/allevents/:id", element: <Event /> },
   ]);
   return (
     <>
