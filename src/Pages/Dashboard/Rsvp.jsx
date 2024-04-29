@@ -17,7 +17,7 @@ const Rsvp = () => {
       id: 1,
       title: 13,
       BackgroundColor: "#FBE2B7",
-      details: "Yess",
+      details: "Yes",
     },
     {
       id: 2,
@@ -32,6 +32,7 @@ const Rsvp = () => {
       BackgroundColor: "#FCD2C2",
     },
   ];
+
   return (
     <div>
       <Sidebar />
@@ -57,7 +58,9 @@ const Rsvp = () => {
                     style={{ backgroundColor: rsvp.BackgroundColor }}
                     key={rsvp.id}
                   >
-                    <h3 className="font-bold p-5 text-base lg:text-[2rem]">{rsvp.title}</h3>
+                    <h3 className="font-bold p-5 text-base lg:text-[2rem]">
+                      {rsvp.title}
+                    </h3>
                     <p className="px-5 pb-12 text-[#1D2739] font-semibold">
                       {rsvp.details}
                     </p>
