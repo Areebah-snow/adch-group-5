@@ -73,7 +73,7 @@ const CreateEvent = () => {
         autoClose: 3000,
       });
     }
-    if (photourl === "" || photourl === null) {
+    if (photoURL === "" || photoURL === null) {
       result = false;
       toast.warning("Upload the event picture", {
         theme: "colored",
@@ -122,7 +122,7 @@ const CreateEvent = () => {
         startDate: eventStartDate,
         endDate: eventEndDate,
         stats: "Open",
-        photoURL: photourl,
+        photoURL: photoURL,
         location: eventLocation,
       };
       console.log(requestData);
