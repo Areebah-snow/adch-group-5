@@ -12,7 +12,7 @@ import { ToastContainer, Zoom, toast } from "react-toastify";
 
 const Event = () => {
   const [editMode, setEditMode] = useState(false);
-  // const [saving, setSaving] = useState(false);
+  const [saving, setSaving] = useState(false);
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
@@ -99,7 +99,7 @@ const Event = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    isLoading(true);
+    setSaving(true);
 
     const combinedStartDate = combineDateTime(eventStartDate, eventStartTime);
     const combinedEndDate = combineDateTime(eventEndDate, eventEndTime);
@@ -119,20 +119,20 @@ const Event = () => {
 
     instance
       .put(`/api/event`, updateData)
-      .then((res) => {
-        isLoading(false);
+      .then(() => {
+        setSaving(false);
         // localStorage.setItem("createdEvent", JSON.stringify(updateData));
-        const eventId = res.data._id;
+        // const eventId = res.data._id;
         toast.success("Event updated successfully", {
           theme: "colored",
           autoClose: 1500,
         });
         setTimeout(() => {
-          navigate(`/allevents/${eventId}`);
+          navigate(`/allevents/`);
         }, 1500);
       })
       .catch((error) => {
-        isLoading(false);
+        setSaving(false);
         toast.error("An error occoured: " + error.message, {
           theme: "colored",
           autoClose: 3000,
@@ -148,7 +148,6 @@ const Event = () => {
         <div className="lg:ml-[17%]">
           <Nav />
           <div className="bg-[#F9FAFB] min-h-screen pt-12 px-6 lg:px-24">
-            {loading && <ScaleLoader color="black" />}
             <h1 className="text-center font-bold text-2xl items-center flex justify-between capitalize">
               <div
                 className="flex gap-2 items-center"
@@ -160,162 +159,191 @@ const Event = () => {
               </div>
               Event Details
             </h1>
-            <div className="mt-6">
-              <div className="my-4 flex flex-col">
-                <h1 className="font-semibold">Event Name</h1>
-                {editMode ? (
-                  <input
-                    value={eventName}
-                    onChange={(e) => setEventName(e.target.value)}
-                    type="text"
-                    autoFocus
-                    placeholder="Name of the event"
-                    className="rounded-md px-2 py-3 w-full border border-gray"
-                  />
-                ) : (
-                  <h1 className="rounded-md px-2 py-3 w-full border border-gray shadow-md">
-                    {event.name}
-                  </h1>
-                )}
-              </div>
-              <div className="my-4 flex flex-col">
-                <h1 className="font-semibold">Event Description</h1>
-                {editMode ? (
-                  <input
-                    value={eventDescription}
-                    onChange={(e) => setEventDescription(e.target.value)}
-                    type="text"
-                    placeholder="Name of the event"
-                    className="rounded-md px-2 py-3 w-full border border-gray"
-                  />
-                ) : (
-                  <h1 className="rounded-md px-2 py-3 w-full border border-gray shadow-md">
-                    {event.description}
-                  </h1>
-                )}
-              </div>
-              <div className="my-4 flex flex-col">
-                <h1 className="font-semibold">Start Time</h1>
-                {editMode ? (
-                  <input
-                    value={eventStartTime}
-                    onChange={(e) => setEventStartTime(e.target.value)}
-                    type="time"
-                    className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
-                  />
-                ) : (
-                  <h1 className="rounded-md px-2 py-3 w-full border border-gray shadow-md">
-                    {formatTime(eventStartTime)}
-                  </h1>
-                )}
-              </div>
-              <div className="my-4 flex flex-col">
-                <h1 className="font-semibold">Event Start Date</h1>
-                {editMode ? (
-                  <input
-                    value={eventStartDate}
-                    onChange={(e) => setEventStartDate(e.target.value)}
-                    type="date"
-                    className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
-                  />
-                ) : (
-                  <h1 className="rounded-md px-2 py-3 w-full border border-gray shadow-md">
-                    {formatDate(eventStartDate)}
-                  </h1>
-                )}
-              </div>
-              <div className="my-4 flex flex-col">
-                <h1 className="font-semibold">End Time</h1>
-                {editMode ? (
-                  <input
-                    value={eventEndTime}
-                    onChange={(e) => setEventEndTime(e.target.value)}
-                    type="time"
-                    placeholder="Name of the event"
-                    className="rounded-md px-4 py-3 w-full border border-gray shadow-md"
-                  />
-                ) : (
-                  <h1 className="rounded-md px-2 py-3 w-full border border-gray shadow-md">
-                    {formatTime(eventEndDate)}
-                  </h1>
-                )}
-              </div>
-              <div className="my-4 flex flex-col">
-                <h1 className="font-semibold">Event End Date</h1>
-                {editMode ? (
-                  <input
-                    value={eventEndDate}
-                    onChange={(e) => setEventEndDate(e.target.value)}
-                    type="date"
-                    placeholder="Name of the event"
-                    className="rounded-md px-4 py-3 w-full border border-gray shadow-md"
-                  />
-                ) : (
-                  <h1 className="rounded-md px-2 py-3 w-full border border-gray shadow-md">
-                    {formatDate(eventEndDate)}
-                  </h1>
-                )}
-              </div>
-              <div className="my-4 flex flex-col">
-                <h1 className="font-semibold">Event Location</h1>
-                {editMode ? (
-                  <input
-                    value={eventLocation}
-                    onChange={(e) => setEventLocation(e.target.value)}
-                    type="text"
-                    placeholder="Name of the event"
-                    className="rounded-md px-2 py-3 w-full border border-gray"
-                  />
-                ) : (
-                  <h1 className="rounded-md px-2 py-3 w-full border border-gray shadow-md">
-                    {eventLocation}
-                  </h1>
-                )}
-              </div>
-              <div className="my-4 flex flex-col">
-                <h1 className="font-semibold">Additional Info</h1>
-                {editMode ? (
-                  <input
-                    value={eventotherInfo}
-                    onChange={(e) => setEventOtherInfo(e.target.value)}
-                    type="text"
-                    placeholder="Name of the event"
-                    className="rounded-md px-2 py-3 w-full border border-gray shadow-md"
-                  />
-                ) : (
-                  <h1 className="rounded-md px-2 py-3 w-full border border-gray shadow-md">
-                    {event.additionalInfo}
-                  </h1>
-                )}
-              </div>
+            {loading ? (
+              <ScaleLoader color="black" />
+            ) : (
+              <div className="mt-6">
+                <div className="my-4 flex flex-col">
+                  <h1 className="font-semibold">Event Name</h1>
+                  {editMode ? (
+                    <input
+                      value={eventName}
+                      onChange={(e) => setEventName(e.target.value)}
+                      type="text"
+                      autoFocus
+                      required
+                      placeholder="Name of the event"
+                      className="rounded-md px-2 py-3 w-full border border-gray"
+                    />
+                  ) : (
+                    <h1 className="rounded-md px-2 py-3 w-full border border-gray shadow-md">
+                      {event.name}
+                    </h1>
+                  )}
+                </div>
+                <div className="my-4 flex flex-col">
+                  <h1 className="font-semibold">Event Description</h1>
+                  {editMode ? (
+                    <input
+                      value={eventDescription}
+                      onChange={(e) => setEventDescription(e.target.value)}
+                      type="text"
+                      required
+                      placeholder="Name of the event"
+                      className="rounded-md px-2 py-3 w-full border border-gray"
+                    />
+                  ) : (
+                    <h1 className="rounded-md px-2 py-3 w-full border border-gray shadow-md">
+                      {event.description}
+                    </h1>
+                  )}
+                </div>
+                <div className="flex gap-2 items-center">
+                  <div className="my-4 flex flex-col w-full">
+                    <h1 className="font-semibold">Start Time</h1>
+                    {editMode ? (
+                      <input
+                        value={eventStartTime}
+                        onChange={(e) => setEventStartTime(e.target.value)}
+                        type="time"
+                        required
+                        className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
+                      />
+                    ) : (
+                      <h1 className="rounded-md px-2 py-3 w-full border border-gray shadow-md">
+                        {formatTime(eventStartTime)}
+                      </h1>
+                    )}
+                  </div>
+                  <div className="my-4 flex flex-col w-full">
+                    <h1 className="font-semibold">Event Start Date</h1>
+                    {editMode ? (
+                      <input
+                        value={eventStartDate}
+                        onChange={(e) => setEventStartDate(e.target.value)}
+                        type="date"
+                        required
+                        className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
+                      />
+                    ) : (
+                      <h1 className="rounded-md px-2 py-3 w-full border border-gray shadow-md">
+                        {formatDate(eventStartDate)}
+                      </h1>
+                    )}
+                  </div>
+                </div>
+                <div className="flex gap-2 items-center">
+                  <div className="my-4 flex flex-col w-full">
+                    <h1 className="font-semibold">End Time</h1>
+                    {editMode ? (
+                      <input
+                        value={eventEndTime}
+                        onChange={(e) => setEventEndTime(e.target.value)}
+                        type="time"
+                        required
+                        placeholder="Name of the event"
+                        className="rounded-md px-4 py-3 w-full border border-gray shadow-md"
+                      />
+                    ) : (
+                      <h1 className="rounded-md px-2 py-3 w-full border border-gray shadow-md">
+                        {formatTime(eventEndDate)}
+                      </h1>
+                    )}
+                  </div>
+                  <div className="my-4 flex flex-col w-full">
+                    <h1 className="font-semibold">Event End Date</h1>
+                    {editMode ? (
+                      <input
+                        value={eventEndDate}
+                        onChange={(e) => setEventEndDate(e.target.value)}
+                        type="date"
+                        required
+                        placeholder="Name of the event"
+                        className="rounded-md px-4 py-3 w-full border border-gray shadow-md"
+                      />
+                    ) : (
+                      <h1 className="rounded-md px-2 py-3 w-full border border-gray shadow-md">
+                        {formatDate(eventEndDate)}
+                      </h1>
+                    )}
+                  </div>
+                </div>
+                <div className="my-4 flex flex-col">
+                  <h1 className="font-semibold">Event Location</h1>
+                  {editMode ? (
+                    <input
+                      value={eventLocation}
+                      onChange={(e) => setEventLocation(e.target.value)}
+                      type="text"
+                      required
+                      placeholder="Name of the event"
+                      className="rounded-md px-2 py-3 w-full border border-gray"
+                    />
+                  ) : (
+                    <h1 className="rounded-md px-2 py-3 w-full border border-gray shadow-md">
+                      {eventLocation}
+                    </h1>
+                  )}
+                </div>
+                <div className="my-4 flex flex-col">
+                  <h1 className="font-semibold">Additional Info</h1>
+                  {editMode ? (
+                    <input
+                      value={eventotherInfo}
+                      onChange={(e) => setEventOtherInfo(e.target.value)}
+                      type="text"
+                      required
+                      placeholder="Name of the event"
+                      className="rounded-md px-2 py-3 w-full border border-gray shadow-md"
+                    />
+                  ) : (
+                    <h1 className="rounded-md px-2 py-3 w-full border border-gray shadow-md">
+                      {event.additionalInfo}
+                    </h1>
+                  )}
+                </div>
 
-              <div className="">
-                {editMode ? (
-                  <>
-                    <button
-                      onClick={handleSubmit}
-                      className="w-full text-center text-[#473BF0] border-[#473BF0] font-semibold border-2 rounded-xl py-2"
-                    >
-                      Save Event
-                    </button>
+                <div className="">
+                  {editMode ? (
+                    <>
+                      <button
+                        onClick={handleSubmit}
+                        className="w-full text-center text-[#473BF0] border-[#473BF0] font-semibold border-2 rounded-xl py-2"
+                      >
+                        {saving ? "Loading..." : "Save Event"}
+                      </button>
+                      <button
+                        onClick={() => setEditMode(!editMode)}
+                        className="w-full text-center text-[#473BF0] border-[#473BF0] font-semibold border-2 rounded-xl py-2 my-6"
+                      >
+                        Cancel
+                      </button>
+                    </>
+                  ) : (
                     <button
                       onClick={() => setEditMode(!editMode)}
-                      className="w-full text-center text-[#473BF0] border-[#473BF0] font-semibold border-2 rounded-xl py-2 my-6"
+                      className="w-full text-center border-2 border-[#473BF0] bg-[#473BF0] text-white py-2 rounded-xl my-6"
                     >
-                      Cancel
+                      Edit Event
                     </button>
-                  </>
-                ) : (
-                  <button
-                    onClick={() => setEditMode(!editMode)}
-                    className="w-full text-center border-2 border-[#473BF0] bg-[#473BF0] text-white py-2 rounded-xl my-6"
+                  )}
+                </div>
+                <div className="py-6">
+                  <h1 className="font-semibold">RSVP Link</h1>
+                  <a
+                    href={`
+                    https://adch-group-5.vercel.app/invitation/${eventID}`}
+                    target="blank"
                   >
-                    Edit Event
-                  </button>
-                )}
+                    https://adch-group-5.vercel.app/invitation/{eventID}
+                  </a>
+                </div>
+                <div>
+                  <h1 className="font-semibold">RSVP Member</h1>
+                </div>
+                <ToastContainer transition={Zoom} />
               </div>
-              <ToastContainer transition={Zoom} />
-            </div>
+            )}
           </div>
         </div>
       </div>
