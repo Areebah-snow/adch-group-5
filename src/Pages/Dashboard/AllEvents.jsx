@@ -69,7 +69,7 @@ const AllEvents = () => {
               <table className="text-left w-full whitespace-nowrap">
                 <thead>
                   <tr>
-                    <th className="p-2">Recent Events</th>
+                    <th className="p-2">Event Name</th>
                     <th className="p-4">Created</th>
                     <th className="p-4">Event Day</th>
                     <th className="p-4">Stats</th>

@@ -124,30 +124,39 @@ const Dashboard = () => {
                   <h1 className="text-dark font-semibold text-lg mt-10">
                     Do more with Will Be There
                   </h1>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-10 py-4">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-10 py-4">
                     <div className="border border-[#AAA5F8] rounded-xl w-full bg-[#AAA5F8]">
-                      <h3 className="font-bold p-5 text-[2rem]">
-                        {loading && <ClockLoader color="black" />}
-                        {EventsCreated.length}
-                      </h3>
+                      {loading ? (
+                        <ClockLoader color="black" size={50} />
+                      ) : (
+                        <h3 className="font-bold p-5 text-[2rem]">
+                          {EventsCreated.length}
+                        </h3>
+                      )}
                       <p className="px-5 pb-12 text-base text-[#1D2739] font-semibold whitespace-break-spaces">
                         Events Created
                       </p>
                     </div>
                     <div className="border border-[#AAA5F8] rounded-xl w-full bg-[#847CF5]">
-                      <h3 className="font-bold p-5 text-[2rem]">
-                        {loading && <ClockLoader color="black" />}
-                        {RSVP.length}
-                      </h3>
+                      {loading ? (
+                        <ClockLoader color="black" size={50} />
+                      ) : (
+                        <h3 className="font-bold p-5 text-[2rem]">
+                          {RSVP.length}
+                        </h3>
+                      )}
                       <p className="px-5 pb-12 text-base text-[#1D2739] font-semibold whitespace-break-spaces">
                         Previous RSVP
                       </p>
                     </div>
                     <div className="border border-[#AAA5F8] rounded-xl w-full bg-[#AAA5F8]">
-                      <h3 className="font-bold p-5 text-[2rem]">
-                        {loading && <ClockLoader color="black" />}
-                        {upcommingEvent.length}
-                      </h3>
+                      {loading ? (
+                        <ClockLoader color="black" size={50} />
+                      ) : (
+                        <h3 className="font-bold p-5 text-[2rem]">
+                          {upcommingEvent.length}
+                        </h3>
+                      )}
                       <p className="px-5 pb-12 text-base text-[#1D2739] font-semibold whitespace-break-spaces">
                         Upcoming Events
                       </p>
@@ -168,38 +177,46 @@ const Dashboard = () => {
                         <th className="p-4">Stats</th>
                       </tr>
                     </thead>
-                    {eventTable.length === 0 && "No events created"}
-                    {loading && <ClockLoader color="blue" />}
-                    <tbody>
-                      {eventTable.map((item, index) => (
-                        <tr
-                          key={index}
-                          className="border-t-[1px] border-[#E4E7EC] font-semibold text-sm lg:text-base"
-                        >
-                          <td className="p-4 capitalize">{item.name}</td>
-                          <td className="p-4 capitalize">
-                            {formatday(item.createdAt)}
-                          </td>
-                          <td className="p-4 capitalize">
-                            {formatday(item.startDate)}
-                          </td>
-                          <td
-                            className="p-4 capitalize"
-                            style={{
-                              color:
-                                item.stats === "Open"
-                                  ? "green"
-                                  : item.stats === "Draft"
-                                  ? "gold"
-                                  : "black",
-                            }}
+                    {loading ? (
+                      <ClockLoader color="blue" />
+                    ) : (
+                      <tbody>
+                        {eventTable.length === 0 && "No events created"}
+                        {eventTable.map((item, index) => (
+                          <tr
+                            key={index}
+                            className="border-t-[1px] border-[#E4E7EC] font-semibold text-sm lg:text-base"
                           >
-                            {item.stats}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
+                            <td className="p-4 capitalize">{item.name}</td>
+                            <td className="p-4 capitalize">
+                              {formatday(item.createdAt)}
+                            </td>
+                            <td className="p-4 capitalize">
+                              {formatday(item.startDate)}
+                            </td>
+                            <td
+                              className="p-4 capitalize"
+                              style={{
+                                color:
+                                  item.stats === "Open"
+                                    ? "green"
+                                    : item.stats === "Draft"
+                                    ? "gold"
+                                    : "black",
+                              }}
+                            >
+                              {item.stats}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    )}
                   </table>
+                  <Link to="/allevents">
+                    <button className="text-center bg-primary text-white font-bold my-6 px-6 py-2 rounded-xl">
+                      View All
+                    </button>
+                  </Link>
                 </div>
               </div>
 

@@ -75,6 +75,18 @@ const Event = () => {
         isLoading(false);
         console.log(error);
       });
+    //rsvp members
+    instance
+      .get(`/api/rsvp/getRsvpByEvent/${id}`)
+      .then((res) => {
+        isLoading(false);
+        console.log(res.data);
+        // setEvent(res.data);
+      })
+      .catch((error) => {
+        isLoading(false);
+        console.log(error);
+      });
   }, [id]);
   const [eventName, setEventName] = useState("");
   const [eventDescription, setEventDescription] = useState("");

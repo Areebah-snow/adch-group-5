@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
 import { Link, useParams } from "react-router-dom";
 import logo from "../../assets/image 2.png";
@@ -36,6 +37,7 @@ const Invitation = () => {
         email: email,
         message: message,
         event: eventId,
+        plusOnes: plusOne,
         isAttending: checkedbox == "present",
       })
       .then(() => {
@@ -56,7 +58,7 @@ const Invitation = () => {
   useEffect(() => {
     setloading(true);
     instance
-      .get(`/api/event/${eventId}`)
+      .get(`/api/event/getEventName/${eventId}`)
       .then((res) => {
         setloading(false);
         console.log(res.data);
@@ -93,11 +95,11 @@ const Invitation = () => {
           </div>
         </div>
         <div className="lg:px-24 px-6">
-          <h1 className="font-[700] text-center text-[24px]">
-            You are invited!
+          <h1 className="font-[700] text-center text-[24px] capitalize">
+            You are invited to {event} !
           </h1>
           <p className="font-[500] text-center">
-            {event} Please confirm your attendance below
+            Please confirm your attendance below
           </p>
           <form onSubmit={handlesubmit}>
             <div className="flex flex-col w-full mt-9">
