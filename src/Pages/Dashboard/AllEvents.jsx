@@ -102,9 +102,8 @@ const AllEvents = () => {
                     >
                       {item.stats}
                     </td>
-                    <td className="flex items-center p-4 gap-2">
-                      <FaPen size={25} color="#667185" role="button" />
-                      <Link to={`/allevent/${item._id}`}>
+                    <td className="flex items-center p-4 gap-4">
+                      <Link to={`/allevents/${item._id}`}>
                         <LuEye size={25} color="#667185" />
                       </Link>
                       <RiDeleteBin6Fill

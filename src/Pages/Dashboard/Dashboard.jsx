@@ -74,14 +74,14 @@ const Dashboard = () => {
         console.log(error);
       });
   }, []);
-  const mores = [
-    {
-      id: 3,
-      title: 3,
-      details: "Shared links",
-      BackgroundColor: "#847CF5",
-    },
-  ];
+  // const mores = [
+  //   {
+  //     id: 3,
+  //     title: 3,
+  //     details: "Shared links",
+  //     BackgroundColor: "#847CF5",
+  //   },
+  // ];
 
   return (
     <div className="">

@@ -57,7 +57,9 @@ const Rsvp = () => {
                     style={{ backgroundColor: rsvp.BackgroundColor }}
                     key={rsvp.id}
                   >
-                    <h3 className="font-bold p-5 text-base lg:text-[2rem]">{rsvp.title}</h3>
+                    <h3 className="font-bold p-5 text-base lg:text-[2rem]">
+                      {rsvp.title}
+                    </h3>
                     <p className="px-5 pb-12 text-[#1D2739] font-semibold">
                       {rsvp.details}
                     </p>
@@ -69,53 +71,53 @@ const Rsvp = () => {
               <h1 className=" font-[600] text-[18px]">
                 Queen Arit's Birthday RSVP list
               </h1>
-              <table className="text-center lg:text-left w-full whitespace-nowrap">
+              <table className="text-left w-full whitespace-nowrap">
                 <thead>
                   <tr>
-                    <th className="py-2">Name</th>
-                    <th className="py-4">Email Address</th>
-                    <th className="py-4">RSVP Status</th>
+                    <th className="">Name</th>
+                    <th className="p-2">Email Address</th>
+                    <th className="">RSVP Status</th>
                   </tr>
                 </thead>
                 <tbody className="">
                   <tr className="border-t-[1px] border-[#E4E7EC] font-semibold text-sm lg:text-base">
-                    <td className="py-4">Muhammed M.</td>
-                    <td>muhammed@yahoo.com</td>
+                    <td>Muhammed M.</td>
+                    <td className="px-2 py-4">muhammed@yahoo.com</td>
                     <td>Yes</td>
                   </tr>
                   <tr className="border-t-[1px] border-[#E4E7EC] font-semibold">
-                    <td className="py-4">Ernest E.</td>
-                    <td>lolaol@gmail.com</td>
+                    <td>Ernest E.</td>
+                    <td className="px-2 py-4">lolaol@gmail.com</td>
                     <td>Yes</td>
                   </tr>
                   <tr className="border-t-[1px] border-[#E4E7EC] font-semibold">
-                    <td className="py-4">Aishat J.</td>
-                    <td>kiol@gmail.com</td>
+                    <td>Aishat J.</td>
+                    <td className="px-2 py-4">kiol@gmail.com</td>
                     <td>Yes</td>
                   </tr>
                   <tr className="border-t-[1px] border-[#E4E7EC] font-semibold">
-                    <td className="py-4">Emmanuel O.</td>
-                    <td>ol@gmail.com</td>
+                    <td>Emmanuel O.</td>
+                    <td className="px-2 py-4">ol@gmail.com</td>
                     <td>No</td>
                   </tr>
                   <tr className="border-t-[1px] border-[#E4E7EC] font-semibold">
-                    <td className="py-4">Solomon P.</td>
-                    <td>ol@gmail.com</td>
+                    <td>Solomon P.</td>
+                    <td className="px-2 py-4">ol@gmail.com</td>
                     <td>No</td>
                   </tr>
                   <tr className="border-t-[1px] border-[#E4E7EC] font-semibold">
-                    <td className="py-4">Hritik H.</td>
-                    <td>ol@gmail.com</td>
+                    <td>Hritik H.</td>
+                    <td className="px-2 py-4">ol@gmail.com</td>
                     <td>No</td>
                   </tr>
                   <tr className="border-t-[1px] border-[#E4E7EC] font-semibold">
-                    <td className="py-4">Uthman U.</td>
-                    <td>ol@gmail.com</td>
+                    <td>Uthman U.</td>
+                    <td className="px-2 py-4">ol@gmail.com</td>
                     <td>No</td>
                   </tr>
                   <tr className="border-t-[1px] border-[#E4E7EC] font-semibold">
-                    <td className="py-4">Huncho O.</td>
-                    <td>ol@gmail.com</td>
+                    <td>Huncho O.</td>
+                    <td className="px-2 py-4">ol@gmail.com</td>
                     <td>No</td>
                   </tr>
                 </tbody>

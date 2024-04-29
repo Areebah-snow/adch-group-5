@@ -42,7 +42,7 @@ function App() {
     { path: "/helpcenter", element: <Helpcenter /> },
     { path: "/invitation/:eventId", element: <Invitation /> },
     { path: "/resetpassword", element: <Forgotpassword /> },
-    { path: "/allevent/:id", element: <Event /> },
+    { path: "/allevents/:id", element: <Event /> },
   ]);
   return (
     <>
