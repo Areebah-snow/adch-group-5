@@ -30,6 +30,14 @@ const Invitation = () => {
   });
   const handlesubmit = (e) => {
     e.preventDefault();
+
+    if (checkedbox === "") {
+      toast.warning("Please select your attendance status", {
+        theme: "colored",
+        autoClose: 3000,
+      });
+      return;
+    }
     setLoaded(true);
     instance
       .post("api/rsvp", {
