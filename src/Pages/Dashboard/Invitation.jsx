@@ -22,6 +22,7 @@ const Invitation = () => {
       : setPlusOne((pl) => (pl < 1 ? pl : pl - 1));
   };
   const [loaded, setLoaded] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [loading, setloading] = useState(false);
   const [event, setEvent] = useState([]);
   console.log(checkedbox);
@@ -30,6 +31,14 @@ const Invitation = () => {
   });
   const handlesubmit = (e) => {
     e.preventDefault();
+
+    if (checkedbox === "") {
+      toast.warning("Please select your attendance status", {
+        theme: "colored",
+        autoClose: 3000,
+      });
+      return;
+    }
     setLoaded(true);
     instance
       .post("api/rsvp", {
