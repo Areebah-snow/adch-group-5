@@ -17,7 +17,7 @@ const CreateEvent = () => {
   const [eventEndDate, seteventEndDate] = useState([]);
   const [eventLocation, seteventLocation] = useState("");
   const [eventotherInfo, seteventotherInfo] = useState("");
-  const [photourl, setphotourl] = useState("");
+  const [photoURL, setPhotoURL] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -73,7 +73,7 @@ const CreateEvent = () => {
         autoClose: 3000,
       });
     }
-    if (photourl === "" || photourl === null) {
+    if (photoURL === "" || photoURL === null) {
       result = false;
       toast.warning("Upload the event picture", {
         theme: "colored",
@@ -93,6 +93,22 @@ const CreateEvent = () => {
     }
     return result;
   };
+  const uploadImage = (image) => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "adch-05");
+    data.append("cloud_name", "dmtxpxm7m");
+    fetch("  https://api.cloudinary.com/v1_1/dmtxpxm7m/image/upload", {
+      method: "post",
+      body: data,
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        setPhotoURL(data.url);
+        console.log(data.url);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -106,7 +122,7 @@ const CreateEvent = () => {
         startDate: eventStartDate,
         endDate: eventEndDate,
         stats: "Open",
-        photoURL: photourl,
+        photoURL: photoURL,
         location: eventLocation,
       };
       console.log(requestData);
@@ -156,7 +172,7 @@ const CreateEvent = () => {
         startDate: eventStartDate,
         endDate: eventEndDate,
         stats: "Draft",
-        photoURL: photourl,
+        photoURL: photoURL,
         location: eventLocation,
       };
       console.log(requestData);
@@ -283,8 +299,7 @@ const CreateEvent = () => {
               <div className="my-4 flex flex-col">
                 <label className="font-semibold">Upload Event Image</label>
                 <input
-                  value={photourl}
-                  onChange={(e) => setphotourl(e.target.value)}
+                  onChange={(e) => uploadImage(e.target.files[0])}
                   type="file"
                   className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
                 />
