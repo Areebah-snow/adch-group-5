@@ -336,11 +336,11 @@ const CreateEvent = () => {
                   className="inputfile rounded-md px-4 py-20 w-1/3 border opacity-0 overflow-hidden absolute outline-none shadow-md"
                 />
                 <label
-                  className="font-semibold w-1/3 h-1/3"
+                  className="font-semibold w-full md:w-1/3 h-1/3"
                   htmlFor="file"
                 >
                   Tap to Upload Event Image
-                  <span className="py-20 rounded-md px-14 border-grey border-2 flex items-center">
+                  <span className="py-20 rounded-md px-14 mx-auto border-grey border-2 flex items-center justify-center">
                     <img src={LeftContent} alt="hug" className="inline mr-2" />
                     <img src={RightContent} alt="hug" className="inline" />
                   </span>
