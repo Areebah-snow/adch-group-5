@@ -2,9 +2,8 @@
 import { Link, useParams } from "react-router-dom";
 import logo from "../../assets/image 2.png";
 import icon from "../../assets/Logo.png";
-import { useEffect, useState } from "react";
-import { setDefaultEventParameters } from "firebase/analytics";
-import { toast } from "react-toastify";
+import { useState } from "react";
+import { ToastContainer, Zoom, toast } from "react-toastify";
 
 import axios from "axios";
 
@@ -15,13 +14,14 @@ const Invitation = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  // const [loaded,setLoaded]=useState(false);
+  const [loaded, setLoaded] = useState(false);
   console.log(checkedbox);
   const instance = axios.create({
     baseURL: "https://db-lhsk5bihpq-uc.a.run.app/",
   });
   const handlesubmit = (e) => {
     e.preventDefault();
+    setLoaded(true);
     instance
       .post("api/rsvp", {
         name: name,
@@ -30,13 +30,15 @@ const Invitation = () => {
         event: eventId,
         isAttending: checkedbox == "present",
       })
-      .then((res) => {
+      .then(() => {
+        setLoaded(false);
         toast.success("Your response has been sent successfully", {
           theme: "colored",
           autoClose: 3000,
         });
       })
       .catch((error) => {
+        setLoaded(false);
         toast.error("An error occoured: " + error.message, {
           theme: "colored",
           autoClose: 3000,
@@ -139,9 +141,10 @@ const Invitation = () => {
               className="text-center bg-primary w-full my-6 py-4 text-white font-[600] rounded-lg"
               type="submit"
             >
-              Send RSVP
+              {loaded ? "Loading..." : "Send RSVP"}
             </button>
           </form>
+          <ToastContainer transition={Zoom} />
         </div>
       </div>
     </div>
