@@ -3,7 +3,6 @@
 import Sidebar from "../../Components/Sidebar";
 import Nav from "../../Components/Nav";
 import { RiDeleteBin6Fill } from "react-icons/ri";
-import { FaPen } from "react-icons/fa";
 import { LuEye } from "react-icons/lu";
 import Mobilesidebar from "../../Components/Mobilesidebar";
 import axios from "axios";
@@ -64,60 +63,63 @@ const AllEvents = () => {
         <div className="lg:ml-[17%]">
           <Nav />
           <div className="bg-[#F9FAFB] min-h-[90vh] overflow-x-auto p-4">
-            <table className="text-left w-full whitespace-nowrap">
-              <thead>
-                <tr>
-                  <th className="p-2">Recent Events</th>
-                  <th className="p-4">Created</th>
-                  <th className="p-4">Event Day</th>
-                  <th className="p-4">Stats</th>
-                  <th className="p-4">Actions</th>
-                </tr>
-              </thead>
-              {showEvents.length === 0 && "No events created"}
-              {loading && <ClockLoader color="blue" />}
-              <tbody>
-                {showEvents.map((item, index) => (
-                  <tr
-                    key={index}
-                    className="border-t-[1px] border-[#E4E7EC] font-semibold text-sm lg:text-base"
-                  >
-                    <td className="p-4 capitalize">{item.name}</td>
-                    <td className="p-4 capitalize">
-                      {formatday(item.createdAt)}
-                    </td>
-                    <td className="p-4 capitalize">
-                      {formatday(item.startDate)}
-                    </td>
-                    <td
-                      className="p-4 capitalize"
-                      style={{
-                        color:
-                          item.stats === "Open"
-                            ? "green"
-                            : item.stats === "Draft"
-                            ? "gold"
-                            : "black",
-                      }}
-                    >
-                      {item.stats}
-                    </td>
-                    <td className="flex items-center p-4 gap-4">
-                      <Link to={`/allevents/${item._id}`}>
-                        <LuEye size={25} color="#667185" />
-                      </Link>
-                      <RiDeleteBin6Fill
-                        size={25}
-                        color="red"
-                        role="button"
-                        onClick={handleDelete}
-                        eventId={item._id}
-                      />
-                    </td>
+            {loading ? (
+              <ClockLoader color="blue" />
+            ) : (
+              <table className="text-left w-full whitespace-nowrap">
+                <thead>
+                  <tr>
+                    <th className="p-2">Recent Events</th>
+                    <th className="p-4">Created</th>
+                    <th className="p-4">Event Day</th>
+                    <th className="p-4">Stats</th>
+                    <th className="p-4">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                {showEvents.length === 0 && "No events created"}
+                <tbody>
+                  {showEvents.map((item, index) => (
+                    <tr
+                      key={index}
+                      className="border-t-[1px] border-[#E4E7EC] font-semibold text-sm lg:text-base"
+                    >
+                      <td className="p-4 capitalize">{item.name}</td>
+                      <td className="p-4 capitalize">
+                        {formatday(item.createdAt)}
+                      </td>
+                      <td className="p-4 capitalize">
+                        {formatday(item.startDate)}
+                      </td>
+                      <td
+                        className="p-4 capitalize"
+                        style={{
+                          color:
+                            item.stats === "Open"
+                              ? "green"
+                              : item.stats === "Draft"
+                              ? "gold"
+                              : "black",
+                        }}
+                      >
+                        {item.stats}
+                      </td>
+                      <td className="flex items-center p-4 gap-4">
+                        <Link to={`/allevents/${item._id}`}>
+                          <LuEye size={25} color="#667185" />
+                        </Link>
+                        <RiDeleteBin6Fill
+                          size={25}
+                          color="red"
+                          role="button"
+                          onClick={handleDelete}
+                          eventId={item._id}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
             <ToastContainer transition={Zoom} />
           </div>
         </div>
