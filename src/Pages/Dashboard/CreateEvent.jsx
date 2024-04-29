@@ -94,6 +94,7 @@ const CreateEvent = () => {
     return result;
   };
   const uploadImage = (image) => {
+    setIsLoading(true);
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "adch-05");
@@ -106,6 +107,7 @@ const CreateEvent = () => {
       .then((data) => {
         setPhotoURL(data.url);
         console.log(data.url);
+        setIsLoading(false);
       })
       .catch((err) => console.log(err));
   };
@@ -139,7 +141,7 @@ const CreateEvent = () => {
         .then((res) => {
           setIsLoading(false);
           localStorage.setItem("createdEvent", JSON.stringify(requestData));
-          const eventId = res.data.id;
+          const eventId = res.data._id;
           setTimeout(() => {
             navigate(`/createevent/eventsuccess/${eventId}`);
           }, 1500);
