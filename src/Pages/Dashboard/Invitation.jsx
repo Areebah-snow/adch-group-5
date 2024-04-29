@@ -22,7 +22,6 @@ const Invitation = () => {
       : setPlusOne((pl) => (pl < 1 ? pl : pl - 1));
   };
   const [loaded, setLoaded] = useState(false);
-  const [loading, setloading] = useState(false);
   const [event, setEvent] = useState([]);
   console.log(checkedbox);
   const instance = axios.create({
@@ -64,16 +63,13 @@ const Invitation = () => {
       });
   };
   useEffect(() => {
-    setloading(true);
     instance
       .get(`/api/event/getEventName/${eventId}`)
       .then((res) => {
-        setloading(false);
         console.log(res.data);
         setEvent(res.data.name);
       })
       .catch((error) => {
-        setloading(false);
         console.log(error);
       });
   }, []);

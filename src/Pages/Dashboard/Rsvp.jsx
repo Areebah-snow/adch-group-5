@@ -1,9 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
 import Nav from "../../Components/Nav";
 import Sidebar from "../../Components/Sidebar";
 import { Link } from "react-router-dom";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import Mobilesidebar from "../../Components/Mobilesidebar";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { auth } from "../../../firebaseConfig";
 
 const Rsvp = () => {
   const events = [
@@ -32,6 +36,30 @@ const Rsvp = () => {
       BackgroundColor: "#FCD2C2",
     },
   ];
+
+  const [RSVP, SetRSVP] = useState([]);
+  const [loading, isLoading] = useState(false);
+  const instance = axios.create({
+    baseURL: "https://db-lhsk5bihpq-uc.a.run.app/",
+    headers: {
+      Authorization: `Bearer ${auth.currentUser.accessToken}`,
+    },
+  });
+
+  useEffect(() => {
+    isLoading(true);
+    instance
+      .get("/api/rsvp")
+      .then((res) => {
+        console.log(res.data);
+        SetRSVP(res.data);
+        isLoading(false);
+      })
+      .catch((error) => {
+        isLoading(false);
+        console.log(error);
+      });
+  }, []);
 
   return (
     <div>

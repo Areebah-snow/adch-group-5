@@ -9,6 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { ToastContainer, Zoom, toast } from "react-toastify";
+import { FaLink } from "react-icons/fa6";
 
 const Event = () => {
   const [editMode, setEditMode] = useState(false);
@@ -45,6 +46,7 @@ const Event = () => {
   const { id } = useParams();
   const [loading, isLoading] = useState(false);
   const [event, setEvent] = useState([]);
+  const [rsvp, setRsvp] = useState([]);
   const instance = axios.create({
     baseURL: "https://db-lhsk5bihpq-uc.a.run.app/",
     headers: {
@@ -81,7 +83,7 @@ const Event = () => {
       .then((res) => {
         isLoading(false);
         console.log(res.data);
-        // setEvent(res.data);
+        setRsvp(res.data);
       })
       .catch((error) => {
         isLoading(false);
@@ -152,6 +154,21 @@ const Event = () => {
       });
   };
 
+  const [buttonText, setButtonText] = useState("Copy RSVP Link");
+  const handleCopyLink = () => {
+    const link = `adch-group-5.vercel.app/invitation/${eventID}`;
+    navigator.clipboard
+      .writeText(link)
+      .then(() => {
+        setButtonText("Link Copied");
+        setTimeout(() => {
+          setButtonText("Copy RSVP Link");
+        }, 3000);
+      })
+      .catch((error) => {
+        console.error("Failed to copy link: ", error);
+      });
+  };
   return (
     <div>
       <div>
@@ -341,17 +358,54 @@ const Event = () => {
                   )}
                 </div>
                 <div className="py-6">
-                  <h1 className="font-semibold">RSVP Link</h1>
-                  <a
-                    href={`
-                    https://adch-group-5.vercel.app/invitation/${eventID}`}
-                    target="blank"
+                  <button
+                    onClick={handleCopyLink}
+                    className="w-full border-2 py-2 rounded-lg mt-6 flex justify-center items-center gap-4 text-primary border-primary font-[600]"
                   >
-                    https://adch-group-5.vercel.app/invitation/{eventID}
-                  </a>
+                    {buttonText} <FaLink size={20} />
+                  </button>
                 </div>
-                <div>
-                  <h1 className="font-semibold">RSVP Member</h1>
+                <div className="overflow-x-auto py-6">
+                  <h1 className="font-bold ">RSVP Member</h1>
+                  <table className="text-left w-full whitespace-nowrap">
+                    <thead>
+                      <tr>
+                        <th className="py-2">Name</th>
+                        <th className="p-4">Email Address</th>
+                        <th className="p-4">RSVP Status</th>
+                        <th className="p-4">Additional People</th>
+                        <th className="p-4">Message</th>
+                      </tr>
+                    </thead>
+                    {rsvp.length === 0 && "No RSVP member"}
+                    <tbody>
+                      {rsvp.map((item, index) => (
+                        <tr
+                          key={index}
+                          className="border-t-[1px] border-[#E4E7EC] font-semibold text-sm lg:text-base"
+                        >
+                          <td className="py-4 capitalize">{item.name}</td>
+                          <td className="p-4">{item.email}</td>
+                          <td
+                            className={`p-4 ${
+                              item.isAttending === false
+                                ? "text-red-500"
+                                : "text-[#00C68D]"
+                            }`}
+                          >
+                            {item.isAttending === false ? "NO" : "YES"}
+                          </td>
+
+                          <td className="p-4 capitalize">
+                            {item.plusOnes.length}
+                          </td>
+                          <td className="p-4 capitalize text-wrap">
+                            {item.message}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
                 <ToastContainer transition={Zoom} />
               </div>
