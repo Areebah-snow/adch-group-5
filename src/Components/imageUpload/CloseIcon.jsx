@@ -1,6 +1,6 @@
 const CloseIcon = () => (
   <svg
-    className="h-4 w-4"
+    className="h-8 w-8"
     xmlns="http://www.w3.org/2000/svg"
     fill="black"
     viewBox="0 0 24 24"

@@ -105,7 +105,7 @@ const updateRSVP = expressAsyncHandler(async (req, res) => {
 });
 const getRsvpByEvent = expressAsyncHandler(async (req, res) => {
   try {
-    const { event } = req.params.event;
+    const event = req.params.event;
     var rsvps = await RSVP.find({ event });
     res.status(200).json(rsvps);
   } catch (error) {
