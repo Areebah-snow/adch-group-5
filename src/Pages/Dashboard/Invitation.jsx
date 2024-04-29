@@ -1,14 +1,47 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import logo from "../../assets/image 2.png";
 import icon from "../../assets/Logo.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { setDefaultEventParameters } from "firebase/analytics";
+import { toast } from "react-toastify";
+
+import axios from "axios";
 
 const Invitation = () => {
   const [checkedbox, setcheckedbox] = useState("");
+  const { eventId } = useParams();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  // const [loaded,setLoaded]=useState(false);
   console.log(checkedbox);
+  const instance = axios.create({
+    baseURL: "https://db-lhsk5bihpq-uc.a.run.app/",
+  });
   const handlesubmit = (e) => {
     e.preventDefault();
+    instance
+      .post("api/rsvp", {
+        name: name,
+        email: email,
+        message: message,
+        event: eventId,
+        isAttending: checkedbox == "present",
+      })
+      .then((res) => {
+        toast.success("Your response has been sent successfully", {
+          theme: "colored",
+          autoClose: 3000,
+        });
+      })
+      .catch((error) => {
+        toast.error("An error occoured: " + error.message, {
+          theme: "colored",
+          autoClose: 3000,
+        });
+      });
   };
   return (
     <div>
@@ -48,6 +81,8 @@ const Invitation = () => {
                 Guest Name
               </label>
               <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="p-2 border-gray border-2 outline-none shadow-md rounded-xl"
                 type="text"
                 required
@@ -58,6 +93,8 @@ const Invitation = () => {
                 Guest Email Address
               </label>
               <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="p-2 border-gray border-2 outline-none shadow-md rounded-xl"
                 type="email"
                 required
@@ -88,6 +125,8 @@ const Invitation = () => {
                 Message
               </label>
               <textarea
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
                 className="p-2 border-gray border-2 outline-none shadow-md rounded-xl"
                 name=""
                 id=""

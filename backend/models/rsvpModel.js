@@ -11,6 +11,7 @@ const rsvpSchema = mongoose.Schema(
       required: true,
     },
     isAttending: { type: Boolean, required: true },
+    message: { type: String, trim: true },
     // urlId: { type: String, required: true, unique: true },
   },
   { timestamps: true }
