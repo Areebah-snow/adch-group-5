@@ -84,8 +84,7 @@ const updateEvent = expressAsyncHandler(async (req, res) => {
       stats,
       _id,
     } = req.body;
-    var event = await Event.findById(_id);
-    event = await Event.populate("creator");
+    var event = await Event.findById(_id).populate("creator");
     if (event.creator.uid != user.uid) {
       res.status(401);
       throw new Error("User dont have required permission");

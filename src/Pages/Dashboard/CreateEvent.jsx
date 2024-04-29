@@ -110,21 +110,43 @@ const CreateEvent = () => {
         setPhotoURL(data.url);
         console.log(data.url);
         setIsLoading(false);
+        toast.success("Picture uploaded successfully", {
+          theme: "colored",
+          autoClose: 1500,
+        });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
+        toast.warning("Error uploading picture" + err.message, {
+          theme: "colored",
+          autoClose: 1500,
+        });
+      });
+  };
+  const combineDateTime = (dateString, timeString) => {
+    const date = new Date(dateString);
+    const time = timeString.split(":").map(Number);
+
+    date.setHours(time[0]);
+    date.setMinutes(time[1]);
+
+    return date.toISOString();
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
       setIsLoading(true);
+      const combinedStartDate = combineDateTime(eventStartDate, eventStartTime);
+      const combinedEndDate = combineDateTime(eventEndDate, eventEndTime);
 
       const requestData = {
         name: eventName,
         description: eventDescription,
         additionalInfo: eventotherInfo,
-        startDate: eventStartDate,
-        endDate: eventEndDate,
+        startDate: combinedStartDate,
+        endDate: combinedEndDate,
         stats: "Open",
         photoURL: photoURL,
         location: eventLocation,
@@ -169,12 +191,15 @@ const CreateEvent = () => {
     if (validateForm()) {
       setIsLoading(true);
 
+      const combinedStartDate = combineDateTime(eventStartDate, eventStartTime);
+      const combinedEndDate = combineDateTime(eventEndDate, eventEndTime);
+
       const requestData = {
         name: eventName,
         description: eventDescription,
         additionalInfo: eventotherInfo,
-        startDate: eventStartDate,
-        endDate: eventEndDate,
+        startDate: combinedStartDate,
+        endDate: combinedEndDate,
         stats: "Draft",
         photoURL: photoURL,
         location: eventLocation,
@@ -196,6 +221,9 @@ const CreateEvent = () => {
             theme: "colored",
             autoClose: 3000,
           });
+          setTimeout(() => {
+            navigate(`/allevents`);
+          }, 1500);
         })
         .catch((error) => {
           setIsLoading(false);
