@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Nav from "../../Components/Nav";
 import Sidebar from "../../Components/Sidebar";
 import Mobilesidebar from "../../Components/Mobilesidebar";
@@ -7,8 +7,8 @@ import { auth } from "../../../firebaseConfig";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ClockLoader from "react-spinners/ClipLoader";
-import LeftContent from "../../assets/Left Content.png";
-import RightContent from "../../assets/Right Content.png";
+// import LeftContent from "../../assets/Left Content.png";
+// import RightContent from "../../assets/Right Content.png";
 import Profile from "../../Components/imageUpload/Profile";
 
 const CreateEvent = () => {
@@ -79,7 +79,7 @@ const CreateEvent = () => {
     }
     if (photoURL === "" || photoURL === null) {
       result = false;
-      toast.warning("Upload the event picture", {
+      toast.warning("Event picture is yet to be uploaded", {
         theme: "colored",
         autoClose: 3000,
       });

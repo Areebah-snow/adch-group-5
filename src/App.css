@@ -33,7 +33,7 @@ body {
   margin-bottom: 10px;
 }
 
-.react-calendar{
+.react-calendar {
   padding: 8px 0;
 }
 
@@ -42,9 +42,9 @@ body {
 }
 
 .current-date {
-  background-color: #473bf0; 
-  border-radius: 100%; 
-  color: white; 
+  background-color: #473bf0;
+  border-radius: 100%;
+  color: white;
 }
 
 .testimonial-container:hover > .test-con {
@@ -92,4 +92,12 @@ body {
     right: 0;
     background: linear-gradient(to right, transparent, #ebe9fd);
   }
+}
+
+li {
+  cursor: pointer;
+}
+
+html {
+  scroll-behavior: smooth;
 }
