@@ -66,10 +66,11 @@ const Register = () => {
         if (error.code === "auth/email-already-in-use") {
           toast.error("User with this email already exists. Please log in.", {
             theme: "colored",
+            autoClose: 1500,
           });
           setTimeout(() => {
-            navigate("/");
-          }, 2000);
+            navigate("/login");
+          }, 1500);
         }
       }
     }

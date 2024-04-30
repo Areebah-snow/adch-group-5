@@ -126,18 +126,6 @@ const Sidebar = () => {
                   )}
                 </div>
               </NavLink>
-              <NavLink onClick={() => setmenubar(!menubar)} to="/profile">
-                {({ isActive }) => (
-                  <div
-                    className={`${
-                      isActive && "bg-[#FFECE5] text-primary"
-                    } flex items-center rounded-lg p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary my-2`}
-                  >
-                    <IoPersonOutline size={30} />
-                    <span className="text-base leading-[120%]">Profile</span>
-                  </div>
-                )}
-              </NavLink>
               <NavLink onClick={() => setmenubar(!menubar)} to="/rsvp">
                 {({ isActive }) => (
                   <div
@@ -152,6 +140,18 @@ const Sidebar = () => {
               </NavLink>
             </div>
             <div>
+              <NavLink onClick={() => setmenubar(!menubar)} to="/profile">
+                {({ isActive }) => (
+                  <div
+                    className={`${
+                      isActive && "bg-[#FFECE5] text-primary"
+                    } flex items-center rounded-lg p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary my-2`}
+                  >
+                    <IoPersonOutline size={30} />
+                    <span className="text-base leading-[120%]">Profile</span>
+                  </div>
+                )}
+              </NavLink>
               <NavLink
                 onClick={() => setmenubar(!menubar)}
                 className="flex items-center p-2 gap-4 hover:bg-[#FFECE5] hover:text-primary my-2"
