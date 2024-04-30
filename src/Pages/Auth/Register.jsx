@@ -53,10 +53,13 @@ const Register = () => {
 
         console.log(response);
         setTimeout(() => {
-          navigate("/login");
+          navigate("/dashboard");
         }, 1500);
         setLoading(false);
-        toast.success("Your account has been created");
+        toast.success("Account created successfully", {
+          theme: "colored",
+          autoClose: 1500,
+        });
       } catch (error) {
         setLoading(false);
         console.error(error.message);

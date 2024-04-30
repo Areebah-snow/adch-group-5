@@ -125,7 +125,7 @@ const Eventsucess = () => {
             >
               Share RSVP link via email <FaPaperPlane size={20} />
             </button>
-          </div>
+          </div>e
         </div>
       </div>
     </div>
