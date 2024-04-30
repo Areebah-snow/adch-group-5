@@ -40,7 +40,7 @@ const Eventsucess = () => {
       });
   }, []);
   const handleCopyLink = () => {
-    const link = `adch-group-5.vercel.app/invitation/${eventId}`;
+    const link = `https://adch-group-5.vercel.app/invitation/${eventId}`;
     navigator.clipboard
       .writeText(link)
       .then(() => {
@@ -99,20 +99,23 @@ const Eventsucess = () => {
             <p className="font-[500] text-16px">
               You can now share the link with your guests
             </p>
-            <img
-              className="mt-12"
-              src={successPage.photoURL || successicon}
-              alt=""
-            />
             {isLoading ? (
               <ClockLoader color="blue" size={50} />
             ) : (
-              <p className="font-[500] text-16px mt-4">
-                {successPage.name} on{" "}
-                {isLoading == false ? convertDate(successPage.startDate) : ""}{" "}
-                at {successPage.location}
-              </p>
+              <div>
+                <img
+                  className="mt-12 max-w-96"
+                  src={successPage.photoURL || successicon}
+                  alt=""
+                />
+                <p className="font-[500] text-16px mt-4">
+                  {successPage.name} on{" "}
+                  {isLoading == false ? convertDate(successPage.startDate) : ""}{" "}
+                  at {successPage.location}
+                </p>
+              </div>
             )}
+
             <button
               onClick={handleCopyLink}
               className="w-full border-2 py-2 rounded-lg mt-6 flex justify-center items-center gap-4 text-primary border-primary font-[600]"
@@ -125,7 +128,8 @@ const Eventsucess = () => {
             >
               Share RSVP link via email <FaPaperPlane size={20} />
             </button>
-          </div>e
+          </div>
+          e
         </div>
       </div>
     </div>
