@@ -50,7 +50,7 @@ const Login = () => {
               theme: "colored",
             });
           } else if (error.code === "auth/invalid-credential") {
-            toast.error("User not found. Please sign up.", {
+            toast.error("Incorrect Email Address or Password.", {
               theme: "colored",
             });
           } else {
