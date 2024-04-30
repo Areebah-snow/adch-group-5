@@ -21,6 +21,7 @@ export default function HowItWorks() {
   return (
     <section
       className="how-it-works md:max-w-[1440px] mx-auto text-[#161C2D]"
+      id="events"
     >
       <h2 className="works-heading relative text-center pt-10 md:w-1/2 mx-auto text-4xl font-semibold mb-6">
         How It Works

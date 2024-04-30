@@ -15,11 +15,11 @@ const Navbar = () => {
         <div className="md:w-[224px] h-[50px]">
           <img src={logo} alt="" />
         </div>
-        <ul className="md:flex hidden gap-8">
-          <Link to="">Home</Link>
-          <Link to="">About</Link>
-          <Link to="">Events</Link>
-          <Link to="">Support</Link>
+        <ul className="md:flex hidden gap-8 text-xl">
+          <a href="#">Home</a>
+          <a href="#about">About</a>
+          <a href="#events">Events</a>
+          <a href="#testimonials">Testimonials</a>
         </ul>
         <div className="md:flex gap-4 hidden">
           <Link

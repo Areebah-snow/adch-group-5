@@ -39,9 +39,13 @@ const featuresArr = [
 ];
 export default function Features() {
   return (
-    <section className="features container-xl max-w-[1440px] mx-auto md:my-20 my-9 flex justify-center items-center flex-col">
+    <section
+      className="features container-xl max-w-[1440px] mx-auto md:my-20 my-9 flex justify-center items-center flex-col"
+      id="about"
+    >
       <h2 className="feature-heading relative text-center md:p-10 pt-8 md:w-1/2 md:text-4xl text-2xl font-semibold mb-6">
-        Our Powerful <br/>Features for Seamless Planning
+        Our Powerful <br />
+        Features for Seamless Planning
       </h2>
       <div className="flex justify-center items-center flex-wrap ">
         {featuresArr.map((f, i) => (

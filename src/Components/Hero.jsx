@@ -21,6 +21,7 @@ const Hero = () => {
           className="max-md:w-[350px] max-md:h-[460px] absolute bottom-4 md:bottom-0 left-1/2 transform -translate-x-1/2"
           src={png1}
           alt=""
+          style={{ zIndex: 0 }}
         />
       </div>
     </section>
