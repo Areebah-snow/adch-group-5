@@ -1,7 +1,7 @@
 import expressAsyncHandler from "express-async-handler";
 import RSVP from "../models/rsvpModel.js";
 import Event from "../models/eventModel.js";
-
+import axios from "axios";
 const createRSVP = expressAsyncHandler(async (req, res) => {
   try {
     const { name, email, isAttending, event, message } = req.body;
@@ -31,9 +31,31 @@ const createRSVP = expressAsyncHandler(async (req, res) => {
     } else {
       val = 0;
     }
-    await Event.findByIdAndUpdate(event, {
+    const eventDetails = await Event.findByIdAndUpdate(event, {
       $inc: { totalCount: 1, acceptedCount: val },
     });
+    axios.post("https://db-lhsk5bihpq-uc.a.run.app/api/email/", {
+      to: email,
+      subject: "RSVP made",
+      text: `Congratulations
+            You succesfully RSVP'd for ${eventDetails.name}.
+            Below are the details of your event:
+            Event Name:${eventDetails.name}
+            Event Location:${eventDetails.location}
+            Event Start Date:${eventDetails.startDate}
+            Event End Date:${eventDetails.endDate}
+            Description:${eventDetails.description}
+            Looking forward to seeing you.`,
+      html: `<p>Congratulations</p><p>You succesfully RSVP'd for ${eventDetails.name}.</p>
+            <p>Below are the details of your event:</p>
+            <p>Event Name:${eventDetails.name}</p>
+            <p>Event Location:${eventDetails.location}</p>
+            <p>Event Start Date:${eventDetails.startDate}</p>
+            <p>Event End Date:${eventDetails.endDate}</p>
+            <p>Description:${eventDetails.description}</p>
+            <p>Looking forward to seeing you.</p>`,
+    });
+
     res.status(200).json(newRSVP);
   } catch (error) {
     res.status(400).send(error.message);

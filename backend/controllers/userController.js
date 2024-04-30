@@ -4,7 +4,7 @@ import expressAsyncHandler from "express-async-handler";
 const registerUser = expressAsyncHandler(async (req, res) => {
   const { name, uid, photoURL, email } = req.user;
   try {
-    var user = await User.findOne({ uid });
+    var user = await User.findOne({ email });
     if (user) {
       res.status(200).json(user);
     }
