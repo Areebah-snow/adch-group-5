@@ -45,30 +45,6 @@ const Profile = () => {
                 : auth.currentUser?.phoneNumber
             }
           />
-          {/* <h1 className="mt-12 font-semibold text-2xl text-zinc-400 flex items-center gap-2">
-            <IoPersonCircleOutline />
-            Full name:
-          </h1>
-          <h1 className="font-semibold w-fit text-lg rounded-xl">
-            {auth.currentUser?.displayName}
-          </h1>
-          <h1 className="mt-8 font-semibold text-2xl text-zinc-400 flex items-center gap-2">
-            <IoIosMail />
-            Email Address:
-          </h1>
-          <h1 className="font-semibold w-fit text-lg rounded-xl">
-            {auth.currentUser?.email}
-          </h1>
-
-          <h1 className="mt-8 font-semibold text-2xl text-zinc-400 flex items-center gap-2">
-            <IoCall />
-            Phone Number:
-          </h1>
-          <h1 className="font-semibold w-fit text-lg rounded-xl">
-            {auth.currentUser?.phoneNumber === null
-              ? "Null"
-              : auth.currentUser?.phoneNumber}
-          </h1> */}
         </div>
       </div>
     </div>
