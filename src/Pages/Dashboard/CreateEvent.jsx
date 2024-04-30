@@ -114,7 +114,6 @@ const CreateEvent = () => {
       setIsLoading(true);
       const combinedStartDate = combineDateTime(eventStartDate, eventStartTime);
       const combinedEndDate = combineDateTime(eventEndDate, eventEndTime);
-
       const requestData = {
         name: eventName,
         description: eventDescription,

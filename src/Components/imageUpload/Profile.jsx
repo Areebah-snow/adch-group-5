@@ -3,6 +3,8 @@ import PencilIcon from "./PencilIcon";
 import Modal from "./Modal";
 import LeftContent from "../../assets/Left Content.png";
 import RightContent from "../../assets/Right Content.png";
+import { ToastContainer, Zoom, toast } from "react-toastify";
+
 const Profile = ({ setPhotoURL }) => {
   const avatarUrl = useRef("");
   const [modalOpen, setModalOpen] = useState(false);
@@ -20,7 +22,7 @@ const Profile = ({ setPhotoURL }) => {
       .then((data) => {
         setPhotoURL(data.url);
         console.log(data.url);
-        setIsLoading(false);
+
         toast.success("Picture uploaded successfully", {
           theme: "colored",
           autoClose: 1500,
@@ -28,7 +30,6 @@ const Profile = ({ setPhotoURL }) => {
       })
       .catch((err) => {
         console.log(err);
-        setIsLoading(false);
         toast.warning("Error uploading picture" + err.message, {
           theme: "colored",
           autoClose: 1500,
@@ -38,7 +39,7 @@ const Profile = ({ setPhotoURL }) => {
 
   const updateAvatar = (imgSrc) => {
     avatarUrl.current = imgSrc;
-    uploadImage;
+    uploadImage();
   };
 
   return (
