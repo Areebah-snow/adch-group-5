@@ -167,38 +167,18 @@ const Invitation = () => {
                   {""} Sadly, I can't be there
                 </label>
               </div>
-              <div className="flex md:flex-row flex-col justify-start gap-6 w-full my-6 md:items-center">
-                <label className="font-semibold">Additional Guest(s):</label>
-                {/* <div className="flex flex-row">
-                  <span
-                    onClick={() => handlePlusOne("-")}
-                    className="mx-2 text-3xl text-grey cursor-pointer grid place-content-center rounded-md w-[2ch] border shadow-md select-none"
-                  >
-                    &minus;
-                  </span>
-                  <span
-                    contentEditable="true"
-                    className="plusOne mx-2 p-1 text-3xl text-grey cursor-pointer text-center rounded-md min-w-[3ch] shadow-md border border-grey"
-                    onChange={(e) => setPlusOne(e.target.value)}
-                  >
-                    {plusOne}
-                  </span>
-                  <span
-                    onClick={() => handlePlusOne("+")}
-                    className="mx-2 text-3xl text-grey cursor-pointer grid place-content-center rounded-md border w-[2ch] shadow-md select-none"
-                  >
-                    &#43;
-                  </span>
-                </div> */}
-              </div>
               {checkedbox == "present" && (
-                <TagsInput
-                  value={plusOnes}
-                  onChange={setPlusOnes}
-                  name="Plus Ones"
-                  placeHolder="Enter names"
-                />
+                <div className="my-6">
+                  <label className="font-semibold">Additional Guest(s):</label>
+                  <TagsInput
+                    value={plusOnes}
+                    onChange={setPlusOnes}
+                    name="Plus Ones"
+                    placeHolder="Enter names"
+                  />
+                </div>
               )}
+
               <div className="flex flex-col w-full mt-9">
                 <label className="font-[500] text-[14px]" htmlFor="">
                   Message
