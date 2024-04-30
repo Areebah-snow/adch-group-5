@@ -12,8 +12,6 @@ import AllEvents from "./Pages/Dashboard/AllEvents";
 import Calendar from "./Pages/Dashboard/Calendar";
 import Profile from "./Pages/Dashboard/Profile";
 import Rsvp from "./Pages/Dashboard/Rsvp";
-import Settings from "./Pages/Dashboard/Settings";
-import Helpcenter from "./Pages/Dashboard/Helpcenter";
 import Eventsucess from "./Pages/Dashboard/Eventsucess";
 import Forgotpassword from "./Pages/Auth/Forgotpassword";
 import Invitation from "./Pages/Dashboard/Invitation";
@@ -39,8 +37,6 @@ function App() {
     { path: "/calendar", element: <Calendar /> },
     { path: "/profile", element: <Profile /> },
     { path: "/rsvp", element: <Rsvp /> },
-    { path: "/settings", element: <Settings /> },
-    { path: "/helpcenter", element: <Helpcenter /> },
     { path: "/invitation/:eventId", element: <Invitation /> },
     { path: "/resetpassword", element: <Forgotpassword /> },
     { path: "/allevents/:id", element: <Event /> },

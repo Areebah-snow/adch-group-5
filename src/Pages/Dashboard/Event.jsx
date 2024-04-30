@@ -383,7 +383,7 @@ const Event = () => {
                       {rsvp.map((item, index) => (
                         <tr
                           key={index}
-                          className="border-t-[1px] border-[#E4E7EC] font-semibold text-sm lg:text-base"
+                          className="border-t-[1px] border-[#E4E7EC] font-semibold text-sm lg:text-base text-wrap"
                         >
                           <td className="py-4 capitalize">{item.name}</td>
                           <td className="p-4">{item.email}</td>
@@ -396,9 +396,10 @@ const Event = () => {
                           >
                             {item.isAttending === false ? "NO" : "YES"}
                           </td>
-
                           <td className="p-4 capitalize">
-                            {item.plusOnes.length}
+                            {item.plusOnes.length > 0
+                              ? item.plusOnes.join(", ")
+                              : "None"}
                           </td>
                           <td className="p-4 capitalize text-wrap">
                             {item.message}

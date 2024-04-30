@@ -34,7 +34,7 @@ const CalendarComponent = () => {
   return (
     <div className="container mx-auto px-4 py-8 border border-[#E4E7EC] mt-[30px]">
       <h1 className="text-[#101928] text-lg font-semibold">Calendar</h1>
-      <div className="grid grid-cols-1 gap-4">
+      <div className="grid grid-cols-1 gap-y-4">
         <div className="col-span-1">
           <Calendar
             onChange={setSelectedDate}

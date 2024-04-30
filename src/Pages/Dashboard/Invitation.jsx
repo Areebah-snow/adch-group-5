@@ -45,11 +45,21 @@ const Invitation = () => {
         });
       })
       .catch((error) => {
+        console.log(error.response.data);
         setLoaded(false);
-        toast.error("An error occoured: " + error.message, {
-          theme: "colored",
-          autoClose: 3000,
-        });
+        if (
+          error.response.data ===
+          "You have already rsvp'ed using this email , please use another email address"
+        )
+          return toast.error(error.response.data, {
+            theme: "colored",
+            autoClose: 3000,
+          });
+        else
+          toast.error("An error occoured: " + error.message, {
+            theme: "colored",
+            autoClose: 3000,
+          });
       });
   };
   useEffect(() => {

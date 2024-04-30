@@ -125,42 +125,48 @@ const Dashboard = () => {
                     Do more with Will Be There
                   </h1>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-10 py-4">
-                    <div className="border border-[#AAA5F8] rounded-xl w-full bg-[#AAA5F8]">
-                      {loading ? (
-                        <ClockLoader color="black" size={50} />
-                      ) : (
-                        <h3 className="font-bold p-5 text-[2rem]">
-                          {EventsCreated.length}
-                        </h3>
-                      )}
-                      <p className="px-5 pb-12 text-base text-[#1D2739] font-semibold whitespace-break-spaces">
-                        Events Created
-                      </p>
-                    </div>
-                    <div className="border border-[#AAA5F8] rounded-xl w-full bg-[#847CF5]">
-                      {loading ? (
-                        <ClockLoader color="black" size={50} />
-                      ) : (
-                        <h3 className="font-bold p-5 text-[2rem]">
-                          {RSVP.length}
-                        </h3>
-                      )}
-                      <p className="px-5 pb-12 text-base text-[#1D2739] font-semibold whitespace-break-spaces">
-                        Previous RSVP
-                      </p>
-                    </div>
-                    <div className="border border-[#AAA5F8] rounded-xl w-full bg-[#AAA5F8]">
-                      {loading ? (
-                        <ClockLoader color="black" size={50} />
-                      ) : (
-                        <h3 className="font-bold p-5 text-[2rem]">
-                          {upcommingEvent.length}
-                        </h3>
-                      )}
-                      <p className="px-5 pb-12 text-base text-[#1D2739] font-semibold whitespace-break-spaces">
-                        Upcoming Events
-                      </p>
-                    </div>
+                    <Link to="/allevents">
+                      <div className="border border-[#AAA5F8] rounded-xl w-full bg-[#AAA5F8]">
+                        {loading ? (
+                          <ClockLoader color="black" size={50} />
+                        ) : (
+                          <h3 className="font-bold p-5 text-[2rem]">
+                            {EventsCreated.length}
+                          </h3>
+                        )}
+                        <p className="px-5 pb-12 text-base text-[#1D2739] font-semibold whitespace-break-spaces">
+                          Events Created
+                        </p>
+                      </div>
+                    </Link>
+                    <Link to="/rsvp">
+                      <div className="border border-[#AAA5F8] rounded-xl w-full bg-[#847CF5]">
+                        {loading ? (
+                          <ClockLoader color="black" size={50} />
+                        ) : (
+                          <h3 className="font-bold p-5 text-[2rem]">
+                            {RSVP.length}
+                          </h3>
+                        )}
+                        <p className="px-5 pb-12 text-base text-[#1D2739] font-semibold whitespace-break-spaces">
+                          Previous RSVP
+                        </p>
+                      </div>
+                    </Link>
+                    <Link to="/allevents">
+                      <div className="border border-[#AAA5F8] rounded-xl w-full bg-[#AAA5F8]">
+                        {loading ? (
+                          <ClockLoader color="black" size={50} />
+                        ) : (
+                          <h3 className="font-bold p-5 text-[2rem]">
+                            {upcommingEvent.length}
+                          </h3>
+                        )}
+                        <p className="px-5 pb-12 text-base text-[#1D2739] font-semibold whitespace-break-spaces">
+                          Upcoming Events
+                        </p>
+                      </div>
+                    </Link>
                   </div>
                 </div>
                 <div className="overflow-x-auto">
