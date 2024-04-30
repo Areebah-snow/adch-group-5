@@ -71,7 +71,7 @@ const Rsvp = () => {
             </div>
             <div className="flex gap-6 justify-between mt-12 lg:flex-nowrap flex-wrap">
               <div className="rounded-xl w-full lg:w-[236px] bg-[#FCD2C2]">
-                <h3 className="font-bold p-5 text-base lg:text-[2rem]">
+                <h3 className="font-bold p-5 text-[2rem]">
                   {loading ? (
                     <ClockLoader color="black" size={50} />
                   ) : (
@@ -83,7 +83,7 @@ const Rsvp = () => {
                 </p>
               </div>
               <div className="rounded-xl w-full lg:w-[236px] bg-[#FBE2B7]">
-                <h3 className="font-bold p-5 text-base lg:text-[2rem]">
+                <h3 className="font-bold p-5 text-[2rem]">
                   {loading ? (
                     <ClockLoader color="black" size={50} />
                   ) : (
@@ -93,7 +93,7 @@ const Rsvp = () => {
                 <p className="px-5 pb-12 text-[#1D2739] font-semibold">Yes</p>
               </div>
               <div className="rounded-xl w-full lg:w-[236px] bg-[#B5E3C4]">
-                <h3 className="font-bold p-5 text-base lg:text-[2rem]">
+                <h3 className="font-bold p-5 text-[2rem]">
                   {loading ? (
                     <ClockLoader color="black" size={50} />
                   ) : (

@@ -218,12 +218,12 @@ const Dashboard = () => {
                       </tbody>
                     )}
                   </table>
-                  <Link to="/allevents">
-                    <button className="text-center bg-primary text-white font-bold my-6 px-6 py-2 rounded-xl">
-                      View All
-                    </button>
-                  </Link>
                 </div>
+                <Link to="/allevents">
+                  <button className="text-center bg-primary text-white font-bold my-6 px-6 py-2 rounded-xl">
+                    View All
+                  </button>
+                </Link>
               </div>
 
               <div className="lg:w-[30%] mt-[-30px]">

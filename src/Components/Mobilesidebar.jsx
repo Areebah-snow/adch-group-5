@@ -30,7 +30,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="lg:hidden absolute right-4 top-4">
+      <div className="lg:hidden absolute right-4 top-6">
         <BiMenuAltRight
           onClick={() => setmenubar(!menubar)}
           role="button"
@@ -47,7 +47,7 @@ const Sidebar = () => {
         <aside>
           <MdCancel onClick={() => setmenubar(!menubar)} size={40} />
           <img src={DbLogo} alt="" className="w-full my-2" />
-          <div className="flex flex-col justify-between h-[70vh]">
+          <div className="flex flex-col justify-between h-[60vh]">
             <div>
               <NavLink onClick={() => setmenubar(!menubar)} to="/dashboard">
                 {({ isActive }) => (

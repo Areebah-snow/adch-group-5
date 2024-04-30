@@ -24,7 +24,7 @@ const Sidebar = () => {
     <div className="w-[17%] fixed left-0 top-0 bottom-0 lg:h-screen text-[#FFECE5] bg-primary hidden lg:flex flex-col lg:px-7 gap-8 py-[2.375rem] px-0 z-10">
       <aside>
         <img src={DbLogo} alt="" className="w-full my-2" />
-        <div className="flex flex-col justify-between h-[70vh]">
+        <div className="flex flex-col justify-between h-[60vh]">
           <div>
             <NavLink to="/dashboard">
               {({ isActive }) => (

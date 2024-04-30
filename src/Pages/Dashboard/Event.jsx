@@ -174,7 +174,7 @@ const Event = () => {
         <Mobilesidebar />
         <div className="lg:ml-[17%]">
           <Nav />
-          <div className="bg-[#F9FAFB] min-h-screen pt-12 px-6">
+          <div className="bg-[#F9FAFB] min-h-screen p-6">
             <h1 className="text-center font-bold text-2xl items-center flex justify-between capitalize">
               <div
                 className="flex gap-2 items-center"

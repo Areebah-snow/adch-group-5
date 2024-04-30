@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import Noti from "../assets/noti.svg";
 import Woman from "../assets/default.png";
 import { IoIosSearch } from "react-icons/io";
 import { auth } from "../../firebaseConfig.js";
@@ -30,9 +29,6 @@ const Nav = () => {
         </form>
       </div>
       <div className="flex flex-row items-center justify-center">
-        <span className="mr-5 cursor-pointer">
-          <img src={Noti} alt="Notification" />
-        </span>
         <span className=" cursor-pointer flex items-center gap-2 text-dark text-sm">
           <Link to="/profile">
             <img

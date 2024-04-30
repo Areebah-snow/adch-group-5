@@ -332,6 +332,7 @@ const CreateEvent = () => {
                   onChange={(e) => uploadImage(e.target.files[0])}
                   type="file"
                   name="file"
+                  accept="image/*"
                   id="file"
                   placeholder=""
                   className="inputfile rounded-md px-4 py-20 w-1/3 border opacity-0 overflow-hidden absolute outline-none shadow-md"
@@ -367,7 +368,7 @@ const CreateEvent = () => {
                   "Create Event"
                 )}
               </button>
-              <Profile />
+              {/* <Profile /> */}
             </div>
             <ToastContainer transition={Zoom} />
           </div>
