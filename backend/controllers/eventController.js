@@ -1,6 +1,15 @@
 import Event from "../models/eventModel.js";
 import expressAsyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
+import {
+  log,
+  info,
+  debug,
+  warn,
+  error,
+  write,
+} from "firebase-functions/logger";
+
 const createEvent = expressAsyncHandler(async (req, res) => {
   const creator = req.user;
   const {
@@ -160,11 +169,14 @@ const deleteEvent = expressAsyncHandler(async (req, res) => {
 const searchEvent = expressAsyncHandler(async (req, res) => {
   try {
     const searchTerm = req.params.searchTerm;
+
     const regex = new RegExp(searchTerm, "i");
-    const user = await User.find({ uid: req.user.uid });
+    log("Regex", regex);
+    const user = await User.findOne({ uid: req.user.uid });
+    console.log(user._id);
     const events = await Event.find({
       creator: user._id,
-      name: { $regex: regex },
+      name: { $regex: new RegExp(searchTerm, "i") },
     })
       .populate("creator")
       .sort({ createdAt: -1 });

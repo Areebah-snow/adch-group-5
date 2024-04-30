@@ -34,10 +34,11 @@ const createRSVP = expressAsyncHandler(async (req, res) => {
     const eventDetails = await Event.findByIdAndUpdate(event, {
       $inc: { totalCount: 1, acceptedCount: val },
     });
-    axios.post("https://db-lhsk5bihpq-uc.a.run.app/api/email/", {
-      to: email,
-      subject: "RSVP made",
-      text: `Congratulations
+    if (isAttending) {
+      axios.post("https://db-lhsk5bihpq-uc.a.run.app/api/email/", {
+        to: email,
+        subject: "RSVP made",
+        text: `Congratulations
             You succesfully RSVP'd for ${eventDetails.name}.
             Below are the details of your event:
             Event Name:${eventDetails.name}
@@ -46,7 +47,7 @@ const createRSVP = expressAsyncHandler(async (req, res) => {
             Event End Date:${eventDetails.endDate}
             Description:${eventDetails.description}
             Looking forward to seeing you.`,
-      html: `<p>Congratulations</p><p>You succesfully RSVP'd for ${eventDetails.name}.</p>
+        html: `<p>Congratulations</p><p>You succesfully RSVP'd for ${eventDetails.name}.</p>
             <p>Below are the details of your event:</p>
             <p>Event Name:${eventDetails.name}</p>
             <p>Event Location:${eventDetails.location}</p>
@@ -54,8 +55,8 @@ const createRSVP = expressAsyncHandler(async (req, res) => {
             <p>Event End Date:${eventDetails.endDate}</p>
             <p>Description:${eventDetails.description}</p>
             <p>Looking forward to seeing you.</p>`,
-    });
-
+      });
+    }
     res.status(200).json(newRSVP);
   } catch (error) {
     res.status(400).send(error.message);
