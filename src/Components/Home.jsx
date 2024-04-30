@@ -11,15 +11,13 @@ import { useState, useEffect } from "react";
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    // setTimeout(() => {
-    //   setIsLoading(false);
-    // }, 5000);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
   }, []);
   return isLoading ? (
-    <div className="flex justify-center items-center h-full">
-      <div className="flex justify-center items-center h-full">
-        <JellyTriangle size={80} speed={1.75} color="#044aac" />
-      </div>
+    <div className="flex justify-center items-center h-screen">
+      <JellyTriangle size={80} speed={1.75} color="#044aac" />
     </div>
   ) : (
     <div>
