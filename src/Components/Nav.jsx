@@ -11,7 +11,7 @@ const Nav = () => {
     }
   }, [navigate]);
   return (
-    <div className="w-full my-3 flex items-center justify-between px-2 py-2 md:px-10 gap-12 md:py-1 bg-white mx-auto">
+    <div className="w-full my-3 flex items-center justify-between px-2 py-2 md:px-10 gap-28 md:py-1 bg-white mx-auto">
       <div className="w-full hidden lg:block">
         <form className="flex items-center">
           <label className="sr-only">Search</label>

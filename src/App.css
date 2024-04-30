@@ -30,6 +30,11 @@ body {
   background-color: #aaa5f8;
   border-radius: 80%;
   color: #473bf0;
+  margin-bottom: 10px;
+}
+
+.react-calendar{
+  padding: 8px 0;
 }
 
 .react-calendar__month-view__weekdays__weekday abbr {
@@ -37,9 +42,9 @@ body {
 }
 
 .current-date {
-  background-color: #473bf0; /* Change background color to blue */
-  border-radius: 100%; /* Add border radius */
-  color: white; /* Change text color to white for better visibility */
+  background-color: #473bf0; 
+  border-radius: 100%; 
+  color: white; 
 }
 
 .testimonial-container:hover > .test-con {
