@@ -164,11 +164,11 @@ const Dashboard = () => {
                   </div>
                 </div>
                 {eventTable.length === 0 ? (
-                  <div className="text-xl font-semibold text-center my-6 flex flex-col gap-2">
+                  <div className="text-xl font-semibold text-center my-6">
                     <h1 className="font-bold text-3xl flex justify-center gap-4 items-center my-4">
                       Get started <FaFly />
-                    </h1>{" "}
-                    Create events and manage them easily
+                    </h1>
+                    <h1 className="my-4">Create events and manage them easily</h1>
                     <Button text={"Create an Event"} />
                   </div>
                 ) : (
