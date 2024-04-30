@@ -139,9 +139,15 @@ const Event = () => {
           theme: "colored",
           autoClose: 1500,
         });
-        setTimeout(() => {
-          navigate(`/allevents/`);
-        }, 1500);
+        instance
+          .get(`/api/event/${id}`)
+          .then((res) => {
+            setEvent(res.data);
+            setEditMode(false);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         setSaving(false);

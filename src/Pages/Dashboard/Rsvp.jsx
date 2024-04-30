@@ -9,16 +9,95 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { auth } from "../../../firebaseConfig";
 import ClockLoader from "react-spinners/ClipLoader";
+import { FaPen } from "react-icons/fa6";
+import { ToastContainer, Zoom, toast } from "react-toastify";
 
 const Rsvp = () => {
   const [RSVP, SetRSVP] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [editMode, setEditMode] = useState({});
+  const [saving, setSaving] = useState(false);
+  const [status, setStatus] = useState({});
   const instance = axios.create({
     baseURL: "https://db-lhsk5bihpq-uc.a.run.app/",
     headers: {
       Authorization: `Bearer ${auth.currentUser?.accessToken}`,
     },
   });
+
+  useEffect(() => {
+    setLoading(true);
+    instance
+      .get("/api/rsvp")
+      .then((res) => {
+        setLoading(false);
+        console.log(res.data);
+        SetRSVP(res.data);
+        res.data.forEach((item) => {
+          setStatus((prevStatus) => ({
+            ...prevStatus,
+            [item._id]: item.isAttending,
+          }));
+          setEditMode((prevEditMode) => ({
+            ...prevEditMode,
+            [item._id]: false,
+          }));
+        });
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log(error);
+      });
+  }, []);
+  const notAttendingRSVP = RSVP.filter((item) => item.isAttending === false);
+  const attendingRSVP = RSVP.filter((item) => item.isAttending === true);
+
+  const handleChangeStatus = (id, newStatus) => {
+    setStatus((prevStatus) => ({
+      ...prevStatus,
+      [id]: newStatus,
+    }));
+  };
+
+  const handleSubmit = (eventID) => {
+    setSaving(true);
+
+    const updateData = {
+      _id: eventID,
+      isAttending: status[eventID],
+    };
+    console.log(updateData);
+
+    instance
+      .put(`/api/rsvp`, updateData)
+      .then(() => {
+        setSaving(false);
+        setEditMode((prevEditMode) => ({
+          ...prevEditMode,
+          [eventID]: false,
+        }));
+        toast.success("Status updated successfully", {
+          theme: "colored",
+          autoClose: 1500,
+        });
+        instance
+          .get("/api/rsvp")
+          .then((res) => {
+            SetRSVP(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        setSaving(false);
+        toast.error("An error occoured: " + error.message, {
+          theme: "colored",
+          autoClose: 3000,
+        });
+      });
+  };
+
   const formatDate = (dateTimeString) => {
     const options = {
       day: "numeric",
@@ -33,24 +112,6 @@ const Rsvp = () => {
     );
     return formattedDateTime;
   };
-
-  useEffect(() => {
-    setLoading(true);
-    instance
-      .get("/api/rsvp")
-      .then((res) => {
-        setLoading(false);
-        console.log(res.data);
-        SetRSVP(res.data);
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.log(error);
-      });
-  }, []);
-
-  const notAttendingRSVP = RSVP.filter((item) => item.isAttending === false);
-  const attendingRSVP = RSVP.filter((item) => item.isAttending === true);
 
   return (
     <div>
@@ -108,24 +169,22 @@ const Rsvp = () => {
               <table className="text-left w-full whitespace-nowrap">
                 <thead>
                   <tr>
-                    <th className="py-2">Name</th>
+                    <th className="py-2">Event Name</th>
                     <th className="p-4">RSVP Status</th>
-                    <th className="p-4">Event Location</th>
+                    <th className="p-4">Location</th>
                     <th className="p-4">Date</th>
                     <th className="p-4">Additional People</th>
+                    <th className="p-4">Edit Status</th>
                   </tr>
                 </thead>
-                <tbody className="">
+                <tbody className=" capitalize font-semibold">
                   {loading ? (
                     <ClockLoader color="black" size={50} />
                   ) : RSVP.length === 0 ? (
                     "No prvious RSVPs found"
                   ) : (
                     RSVP.map((item) => (
-                      <tr
-                        key={item._id}
-                        className="border-t-[1px] border-[#E4E7EC] font-semibold text-sm lg:text-base capitalize text-wrap"
-                      >
+                      <tr key={item._id}>
                         <td className="py-4">{item.event.name}</td>{" "}
                         <td
                           className={`p-4 ${
@@ -134,7 +193,24 @@ const Rsvp = () => {
                               : "text-[#00C68D]"
                           }`}
                         >
-                          {item.isAttending === false ? "NO" : "YES"}
+                          {editMode[item._id] ? (
+                            <div>
+                              <select
+                                autoFocus
+                                value={status[item._id]}
+                                onChange={(e) =>
+                                  handleChangeStatus(item._id, e.target.value)
+                                }
+                              >
+                                <option value="false">No</option>
+                                <option value="true">Yes</option>
+                              </select>
+                            </div>
+                          ) : item.isAttending === false ? (
+                            "NO"
+                          ) : (
+                            "YES"
+                          )}
                         </td>
                         <td className="p-4">{item.event.location}</td>
                         <td className="p-4">
@@ -145,11 +221,46 @@ const Rsvp = () => {
                             ? item.plusOnes.join(", ")
                             : "None"}
                         </td>
+                        <td className="p-4">
+                          {editMode[item._id] ? (
+                            <div className="flex gap-2">
+                              <button
+                                className="border border-primary rounded px-2"
+                                onClick={() => handleSubmit(item._id)}
+                              >
+                                {saving ? <ClockLoader size={20} /> : "Save"}
+                              </button>
+                              <button
+                                className="border border-primary rounded px-2"
+                                onClick={() =>
+                                  setEditMode((prevEditMode) => ({
+                                    ...prevEditMode,
+                                    [item._id]: false,
+                                  }))
+                                }
+                              >
+                                Cancel
+                              </button>
+                            </div>
+                          ) : (
+                            <FaPen
+                              role="button"
+                              size={20}
+                              onClick={() =>
+                                setEditMode((prevEditMode) => ({
+                                  ...prevEditMode,
+                                  [item._id]: true,
+                                }))
+                              }
+                            />
+                          )}
+                        </td>
                       </tr>
                     ))
                   )}
                 </tbody>
               </table>
+              <ToastContainer transition={Zoom} />
             </div>
           </div>
         </>
