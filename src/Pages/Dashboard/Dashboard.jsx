@@ -20,7 +20,7 @@ const Dashboard = () => {
   const instance = axios.create({
     baseURL: "https://db-lhsk5bihpq-uc.a.run.app/",
     headers: {
-      Authorization: `Bearer ${auth.currentUser.accessToken}`,
+      Authorization: `Bearer ${auth.currentUser?.accessToken}`,
     },
   });
   const formatday = (dateTimeString) => {
