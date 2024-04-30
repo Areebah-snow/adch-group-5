@@ -19,18 +19,16 @@ const Event = () => {
     navigate(-1);
   };
   const formatDate = (dateTimeString) => {
-    const options = {
-      day: "numeric",
-      month: "numeric",
-      year: "numeric",
-      // hour: "numeric",
-      // minute: "numeric",
-    };
-    const formattedDateTime = new Date(dateTimeString).toLocaleDateString(
-      "en-GB",
-      options
-    );
+    const formattedDateTime = dateTimeString.split("T")[0];
     return formattedDateTime;
+  };
+  const dateFormat = (dateTimeString) => {
+    const date = new Date(dateTimeString).toLocaleDateString("en-GB", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
+    return date;
   };
   const formatTime = (dateTimeString) => {
     const options = {
@@ -64,10 +62,10 @@ const Event = () => {
         setEvent(res.data);
         setEventName(res.data.name);
         setEventDescription(res.data.description);
-        setEventStartTime(res.data.startDate);
-        setEventStartDate(res.data.startDate);
-        setEventEndTime(res.data.endDate);
-        setEventEndDate(res.data.endDate);
+        setEventStartTime(formatTime(res.data.startDate));
+        setEventStartDate(formatDate(res.data.startDate));
+        setEventEndTime(formatTime(res.data.endDate));
+        setEventEndDate(formatDate(res.data.endDate));
         setEventLocation(res.data.location);
         setEventOtherInfo(res.data.additionalInfo);
         setPhotoUrl(res.data.photoURL);
@@ -240,7 +238,7 @@ const Event = () => {
                       />
                     ) : (
                       <h1 className="rounded-md px-2 py-3 w-full border border-gray shadow-md">
-                        {formatTime(eventStartTime)}
+                        {eventStartTime}
                       </h1>
                     )}
                   </div>
@@ -249,14 +247,17 @@ const Event = () => {
                     {editMode ? (
                       <input
                         value={eventStartDate}
-                        onChange={(e) => setEventStartDate(e.target.value)}
+                        onChange={(e) => {
+                          console.log(e.target.value);
+                          setEventStartDate(e.target.value);
+                        }}
                         type="date"
                         required
                         className="rounded-md px-4 py-3 w-full border border-gray outline-none shadow-md"
                       />
                     ) : (
                       <h1 className="rounded-md px-2 py-3 w-full border border-gray shadow-md">
-                        {formatDate(eventStartDate)}
+                        {dateFormat(eventStartDate)}
                       </h1>
                     )}
                   </div>
@@ -275,7 +276,7 @@ const Event = () => {
                       />
                     ) : (
                       <h1 className="rounded-md px-2 py-3 w-full border border-gray shadow-md">
-                        {formatTime(eventEndDate)}
+                        {eventEndTime}
                       </h1>
                     )}
                   </div>
@@ -292,7 +293,7 @@ const Event = () => {
                       />
                     ) : (
                       <h1 className="rounded-md px-2 py-3 w-full border border-gray shadow-md">
-                        {formatDate(eventEndDate)}
+                        {dateFormat(eventEndDate)}
                       </h1>
                     )}
                   </div>
