@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Woman from "../assets/default.png";
 import { IoIosSearch } from "react-icons/io";
 import { auth } from "../../firebaseConfig.js";
 import { Link, useNavigate } from "react-router-dom";
 const Nav = () => {
+  const [searchParam, setSearchParam] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
     if (!auth.currentUser) {
@@ -13,7 +14,13 @@ const Nav = () => {
   return (
     <div className="w-full my-3 flex items-center justify-between px-2 py-2 md:px-10 gap-28 md:py-1 bg-white mx-auto">
       <div className="w-full hidden lg:block">
-        <form className="flex items-center">
+        <form
+          className="flex items-center"
+          onSubmit={(e) => {
+            e.preventDefault();
+            navigate(`/search/${searchParam}`);
+          }}
+        >
           <label className="sr-only">Search</label>
           <div className="relative w-full">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -23,6 +30,8 @@ const Nav = () => {
               type="text"
               className="bg-[#F9FAFB] border-2 border-[#F9FAFB] text-dark-100 text-sm rounded-md block w-full pl-10 p-2.5 outline-none"
               placeholder="Search reference"
+              value={searchParam}
+              onChange={(e) => setSearchParam(e.target.value)}
               required
             />
           </div>

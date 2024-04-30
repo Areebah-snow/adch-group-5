@@ -16,6 +16,7 @@ import Eventsucess from "./Pages/Dashboard/Eventsucess";
 import Forgotpassword from "./Pages/Auth/Forgotpassword";
 import Invitation from "./Pages/Dashboard/Invitation";
 import Event from "./Pages/Dashboard/Event";
+import SearchEvent from "./Pages/Dashboard/SearchEvent";
 import "react-image-crop/dist/ReactCrop.css";
 function App() {
   const [authLoaded, setAuthLoaded] = useState(false);
@@ -40,6 +41,7 @@ function App() {
     { path: "/invitation/:eventId", element: <Invitation /> },
     { path: "/resetpassword", element: <Forgotpassword /> },
     { path: "/allevents/:id", element: <Event /> },
+    { path: "/search/:searchParam", element: <SearchEvent /> },
   ]);
   return (
     <>
