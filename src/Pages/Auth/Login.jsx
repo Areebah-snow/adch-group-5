@@ -9,9 +9,6 @@ import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   signInWithEmailAndPassword,
-  // setPersistence,
-  // inMemoryPersistence,
-  // browserSessionPersistence,
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";

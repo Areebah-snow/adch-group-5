@@ -5,7 +5,6 @@ import Mona from "../../assets/default.png";
 import Sidebar from "../../Components/Sidebar";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import CalendarComponent from "../../Components/CalendarComponent";
-// import EventTable from "../../Components/EventTable";
 import Mobilesidebar from "../../Components/Mobilesidebar";
 import { Link } from "react-router-dom";
 import { auth } from "../../../firebaseConfig";
@@ -77,14 +76,6 @@ const Dashboard = () => {
         console.log(error);
       });
   }, []);
-  // const mores = [
-  //   {
-  //     id: 3,
-  //     title: 3,
-  //     details: "Shared links",
-  //     BackgroundColor: "#847CF5",
-  //   },
-  // ];
 
   return (
     <div className="">
@@ -185,7 +176,6 @@ const Dashboard = () => {
                     <h1 className="text-dark font-semibold text-lg mt-5 over">
                       Created Events
                     </h1>
-                    {/* <EventTable /> */}
                     <div>
                       <table className="text-left w-full whitespace-nowrap border border-[#E4E7EC] rounded-full">
                         <thead>

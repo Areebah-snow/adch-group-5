@@ -20,15 +20,12 @@ const Resetpassword = () => {
         setLoading(false);
       })
       .catch((error) => {
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
         console.log(error.message);
         toast.error("An eeror occured:" + error.message, {
           theme: "colored",
           autoClose: 3000,
         });
         setLoading(false);
-        // Handle error
       });
   };
   return (
