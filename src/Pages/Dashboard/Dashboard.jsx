@@ -5,13 +5,14 @@ import Mona from "../../assets/default.png";
 import Sidebar from "../../Components/Sidebar";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import CalendarComponent from "../../Components/CalendarComponent";
-// import EventTable from "../../Components/EventTable";
 import Mobilesidebar from "../../Components/Mobilesidebar";
 import { Link } from "react-router-dom";
 import { auth } from "../../../firebaseConfig";
 import { useEffect, useState } from "react";
 import axios from "../Auth/axios";
 import ClockLoader from "react-spinners/ClipLoader";
+import { FaFly } from "react-icons/fa";
+import { Button } from "../../Components/Hero";
 const Dashboard = () => {
   const [loading, isLoading] = useState(false);
   const [EventsCreated, setEventsCreated] = useState([]);
@@ -75,14 +76,6 @@ const Dashboard = () => {
         console.log(error);
       });
   }, []);
-  // const mores = [
-  //   {
-  //     id: 3,
-  //     title: 3,
-  //     details: "Shared links",
-  //     BackgroundColor: "#847CF5",
-  //   },
-  // ];
 
   return (
     <div className="">
@@ -170,61 +163,71 @@ const Dashboard = () => {
                     </Link>
                   </div>
                 </div>
-                <div className="overflow-x-auto">
-                  <h1 className="text-dark font-semibold text-lg mt-5 over">
-                    Created Events
-                  </h1>
-                  {/* <EventTable /> */}
-                  <table className="text-left w-full whitespace-nowrap border border-[#E4E7EC] rounded-full">
-                    <thead>
-                      <tr>
-                        <th className="p-4">Recent Events</th>
-                        <th className="p-4">Created</th>
-                        <th className="p-4">Event Day</th>
-                        <th className="p-4">Stats</th>
-                      </tr>
-                    </thead>
-                    {loading ? (
-                      <ClockLoader color="blue" />
-                    ) : (
-                      <tbody>
-                        {eventTable.length === 0 && "No events created"}
-                        {eventTable.map((item, index) => (
-                          <tr
-                            key={index}
-                            className="border-t-[1px] border-[#E4E7EC] font-semibold text-sm lg:text-base"
-                          >
-                            <td className="p-4 capitalize">{item.name}</td>
-                            <td className="p-4 capitalize">
-                              {formatday(item.createdAt)}
-                            </td>
-                            <td className="p-4 capitalize">
-                              {formatday(item.startDate)}
-                            </td>
-                            <td
-                              className="p-4 capitalize"
-                              style={{
-                                color:
-                                  item.stats === "Open"
-                                    ? "green"
-                                    : item.stats === "Draft"
-                                    ? "gold"
-                                    : "black",
-                              }}
-                            >
-                              {item.stats}
-                            </td>
+                {eventTable.length === 0 ? (
+                  <div className="text-xl font-semibold text-center my-6 flex flex-col gap-2">
+                    <h1 className="font-bold text-3xl flex justify-center gap-4 items-center my-4">
+                      Get started <FaFly />
+                    </h1>{" "}
+                    Create events and manage them easily
+                    <Button text={"Create an Event"} />
+                  </div>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <h1 className="text-dark font-semibold text-lg mt-5 over">
+                      Created Events
+                    </h1>
+                    <div>
+                      <table className="text-left w-full whitespace-nowrap border border-[#E4E7EC] rounded-full">
+                        <thead>
+                          <tr>
+                            <th className="p-4">Recent Events</th>
+                            <th className="p-4">Created</th>
+                            <th className="p-4">Event Day</th>
+                            <th className="p-4">Stats</th>
                           </tr>
-                        ))}
-                      </tbody>
-                    )}
-                  </table>
-                </div>
-                <Link to="/allevents">
-                  <button className="text-center bg-primary text-white font-bold my-6 px-6 py-2 rounded-xl">
-                    View All
-                  </button>
-                </Link>
+                        </thead>
+                        {loading ? (
+                          <ClockLoader color="blue" />
+                        ) : (
+                          <tbody>
+                            {eventTable.map((item, index) => (
+                              <tr
+                                key={index}
+                                className="border-t-[1px] border-[#E4E7EC] font-semibold text-sm lg:text-base"
+                              >
+                                <td className="p-4 capitalize">{item.name}</td>
+                                <td className="p-4 capitalize">
+                                  {formatday(item.createdAt)}
+                                </td>
+                                <td className="p-4 capitalize">
+                                  {formatday(item.startDate)}
+                                </td>
+                                <td
+                                  className="p-4 capitalize"
+                                  style={{
+                                    color:
+                                      item.stats === "Open"
+                                        ? "green"
+                                        : item.stats === "Draft"
+                                        ? "gold"
+                                        : "black",
+                                  }}
+                                >
+                                  {item.stats}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        )}
+                      </table>
+                    </div>
+                    <Link to="/allevents">
+                      <button className="text-center bg-primary text-white font-bold my-6 px-6 py-2 rounded-xl">
+                        View All
+                      </button>
+                    </Link>
+                  </div>
+                )}
               </div>
 
               <div className="lg:w-[30%] mt-[-30px]">
