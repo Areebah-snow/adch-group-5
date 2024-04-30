@@ -68,6 +68,23 @@ const Eventsucess = () => {
 
     return new Intl.DateTimeFormat("en-US", options).format(date);
   };
+
+  const handleShare = () => {
+    // Copy link to clipboard
+    const link = `adch-group-5.vercel.app/invitation/${eventId}`;
+    navigator.clipboard
+      .writeText(link)
+      .then(() => {
+        const emailBody = encodeURIComponent(
+          `You are cordinally invited to my event, kindly register via this link: ${link}`
+        );
+        window.location.href = `mailto:?body=${emailBody}`;
+      })
+      .catch((error) => {
+        console.error("Failed to copy link to clipboard:", error);
+        // Handle error
+      });
+  };
   return (
     <div>
       <Sidebar />
@@ -102,7 +119,10 @@ const Eventsucess = () => {
             >
               {buttonText} <FaLink size={20} />
             </button>
-            <button className="w-full border-2 py-2 rounded-lg mt-6 flex justify-center items-center gap-4 text-white bg-primary border-primary font-[600]">
+            <button
+              onClick={handleShare}
+              className="w-full border-2 py-2 rounded-lg mt-6 flex justify-center items-center gap-4 text-white bg-primary border-primary font-[600]"
+            >
               Share RSVP link via email <FaPaperPlane size={20} />
             </button>
           </div>
