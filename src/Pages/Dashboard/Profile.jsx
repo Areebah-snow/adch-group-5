@@ -15,12 +15,12 @@ const Profile = () => {
       <Mobilesidebar />
       <div className="lg:ml-[17%]">
         <Nav />
-        <div className="flex flex-col px-6 h-full lg:px-20 mt-12 justify-between">
+        <div className="flex flex-col px-6 lg:px-20 mt-12 justify-between items-start">
           <h1 className="font-semibold text-4xl mb-4">My Profile</h1>
-          <div className="w-80 m-4">
+          <div className="w-80">
             <h1 className=" text-2xl my-2">Profile Picture</h1>
             <img
-              width="30%"
+              width="35%"
               className="rounded-full aspect-square"
               src={auth.currentUser?.photoURL || profilepic}
               alt="profile pic"
@@ -76,9 +76,9 @@ const Profile = () => {
 };
 const ProfileItem = function ({ icon, item, category }) {
   return (
-    <div className="flex justify center items-start my-4 gap-4 rounded-md p-4 pl-0">
-      <span className="text-4xl md:text-5xl text-[#473bf0]">{icon}</span>
-      <div className="flex flex-col justify-center items-start gap-2">
+    <div className="flex justify center items-start gap-1 rounded-md p-4 pl-0">
+      <span className="text-4xl md:text-3xl text-[#473bf0]">{icon}</span>
+      <div className="flex flex-col justify-center items-start gap-1">
         <h1 className="font-semibold text-xl md:text-2xl">{category}</h1>
         <h2 className="text-l md:text-xl">{item}</h2>
       </div>
