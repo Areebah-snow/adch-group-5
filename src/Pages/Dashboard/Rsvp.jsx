@@ -103,8 +103,6 @@ const Rsvp = () => {
       day: "numeric",
       month: "numeric",
       year: "numeric",
-      // hour: "numeric",
-      // minute: "numeric",
     };
     const formattedDateTime = new Date(dateTimeString).toLocaleDateString(
       "en-GB",

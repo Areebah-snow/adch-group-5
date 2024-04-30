@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Nav from "../../Components/Nav";
 import Sidebar from "../../Components/Sidebar";
 import Mobilesidebar from "../../Components/Mobilesidebar";
@@ -7,8 +7,6 @@ import { auth } from "../../../firebaseConfig";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ClockLoader from "react-spinners/ClipLoader";
-import LeftContent from "../../assets/Left Content.png";
-import RightContent from "../../assets/Right Content.png";
 import Profile from "../../Components/imageUpload/Profile";
 
 const CreateEvent = () => {
@@ -79,7 +77,7 @@ const CreateEvent = () => {
     }
     if (photoURL === "" || photoURL === null) {
       result = false;
-      toast.warning("Upload the event picture", {
+      toast.warning("Event picture is yet to be uploaded", {
         theme: "colored",
         autoClose: 3000,
       });
@@ -300,25 +298,6 @@ const CreateEvent = () => {
                 className="my-2 rounded-md px-4 pt-3 pb-20 w-full border border-gray outline-none shadow-md"
               />
               <div className="my-4 flex flex-col">
-                {/* <input
-                  onChange={(e) => uploadImage(e.target.files[0])}
-                  type="file"
-                  name="file"
-                  accept="image/*"
-                  id="file"
-                  placeholder=""
-                  className="inputfile rounded-md px-4 py-20 w-1/3 border opacity-0 overflow-hidden absolute outline-none shadow-md"
-                /> */}
-                {/* <label
-                  className="font-semibold w-full md:w-1/3 h-1/3"
-                  htmlFor="file"
-                >
-                  Tap to Upload Event Image
-                  <span className="py-20 rounded-md px-14 mx-auto border-grey border-2 flex items-center justify-center">
-                    <img src={LeftContent} alt="hug" className="inline mr-2" />
-                    <img src={RightContent} alt="hug" className="inline" />
-                  </span>
-                </label> */}
                 <Profile setPhotoURL={setPhotoURL} />
               </div>
 

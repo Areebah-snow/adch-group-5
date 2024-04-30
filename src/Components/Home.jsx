@@ -5,9 +5,23 @@ import Hero from "./Hero";
 import HowItWorks from "./HowItWorks";
 import Navbar from "./Navbar";
 import Testimonials from "./Testimonial";
+import { JellyTriangle } from "@uiball/loaders";
+import { useState, useEffect } from "react";
 
 const Home = () => {
-  return (
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    // setTimeout(() => {
+    //   setIsLoading(false);
+    // }, 5000);
+  }, []);
+  return isLoading ? (
+    <div className="flex justify-center items-center h-full">
+      <div className="flex justify-center items-center h-full">
+        <JellyTriangle size={80} speed={1.75} color="#044aac" />
+      </div>
+    </div>
+  ) : (
     <div>
       <Navbar />
       <Hero />

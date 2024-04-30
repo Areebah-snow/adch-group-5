@@ -174,7 +174,7 @@ const Invitation = () => {
                     value={plusOnes}
                     onChange={setPlusOnes}
                     name="Plus Ones"
-                    placeHolder="Enter names"
+                    placeHolder="Enter names (Press enter to save)"
                   />
                 </div>
               )}

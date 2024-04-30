@@ -7,6 +7,7 @@ import profilepic from "../../assets/default.png";
 import { IoCall } from "react-icons/io5";
 import { IoIosMail } from "react-icons/io";
 import { IoPersonCircleOutline } from "react-icons/io5";
+import { MdVerified } from "react-icons/md";
 
 const Profile = () => {
   return (
@@ -37,6 +38,15 @@ const Profile = () => {
             item={auth.currentUser?.email}
           />
           <ProfileItem
+            icon={<MdVerified />}
+            category={"Email Verification:"}
+            item={
+              auth.currentUser?.emailVerified === true
+                ? "Verified"
+                : "Not Verified"
+            }
+          />
+          <ProfileItem
             icon={<IoCall />}
             category={"Phone:"}
             item={
@@ -45,30 +55,6 @@ const Profile = () => {
                 : auth.currentUser?.phoneNumber
             }
           />
-          {/* <h1 className="mt-12 font-semibold text-2xl text-zinc-400 flex items-center gap-2">
-            <IoPersonCircleOutline />
-            Full name:
-          </h1>
-          <h1 className="font-semibold w-fit text-lg rounded-xl">
-            {auth.currentUser?.displayName}
-          </h1>
-          <h1 className="mt-8 font-semibold text-2xl text-zinc-400 flex items-center gap-2">
-            <IoIosMail />
-            Email Address:
-          </h1>
-          <h1 className="font-semibold w-fit text-lg rounded-xl">
-            {auth.currentUser?.email}
-          </h1>
-
-          <h1 className="mt-8 font-semibold text-2xl text-zinc-400 flex items-center gap-2">
-            <IoCall />
-            Phone Number:
-          </h1>
-          <h1 className="font-semibold w-fit text-lg rounded-xl">
-            {auth.currentUser?.phoneNumber === null
-              ? "Null"
-              : auth.currentUser?.phoneNumber}
-          </h1> */}
         </div>
       </div>
     </div>

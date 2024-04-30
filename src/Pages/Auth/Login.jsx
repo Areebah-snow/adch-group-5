@@ -9,9 +9,6 @@ import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   signInWithEmailAndPassword,
-  // setPersistence,
-  // inMemoryPersistence,
-  // browserSessionPersistence,
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
@@ -50,7 +47,7 @@ const Login = () => {
               theme: "colored",
             });
           } else if (error.code === "auth/invalid-credential") {
-            toast.error("User not found. Please sign up.", {
+            toast.error("Incorrect Email Address or Password.", {
               theme: "colored",
             });
           } else {

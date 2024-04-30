@@ -66,10 +66,15 @@ const Register = () => {
         if (error.code === "auth/email-already-in-use") {
           toast.error("User with this email already exists. Please log in.", {
             theme: "colored",
+            autoClose: 1500,
           });
           setTimeout(() => {
-            navigate("/");
-          }, 2000);
+            navigate("/login");
+          }, 1500);
+        } else if (error.code === "auth/weak-password") {
+          toast.error("Password should be at least 8 characters.", {
+            theme: "colored",
+          });
         }
       }
     }

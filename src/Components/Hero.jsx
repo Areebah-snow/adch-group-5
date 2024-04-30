@@ -31,7 +31,7 @@ const Hero = () => {
 // eslint-disable-next-line react/prop-types
 export function Button({ text }) {
   return (
-    <Link to="/register">
+    <Link to="/createevent">
       <button className="text-white rounded-[42px] bg-[#473BF0] text-bold text-[20px] w-[201px] h-[66px]">
         {text}
       </button>
