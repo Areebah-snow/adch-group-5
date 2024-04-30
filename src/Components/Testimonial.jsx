@@ -24,7 +24,10 @@ const userExps = [
 ];
 export default function Testimonials() {
   return (
-    <section className="testimonials bg-[#473BF01C] overflow-hidden">
+    <section
+      className="testimonials bg-[#473BF01C] overflow-hidden"
+      id="testimonials"
+    >
       <div className="testimonial-container my-4 md:p-24 flex items-center justify-evenly relative">
         <TestCon>
           {userExps.map((exp, i) => (

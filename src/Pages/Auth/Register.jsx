@@ -65,13 +65,12 @@ const Register = () => {
             theme: "colored",
           });
           setTimeout(() => {
-            navigate('/');
+            navigate("/");
           }, 2000);
         }
       }
-    }       
+    }
   };
-  
 
   const validate = () => {
     let result = true;
@@ -95,16 +94,6 @@ const Register = () => {
         theme: "colored",
         autoClose: 3000,
       });
-    }
-    if (!password.match(/^(?=.*\d)(?=.*[@$!%-*?&_#~><])/)) {
-      toast.warning(
-        "Password should contain at least one letter, one number, and one special character",
-        {
-          theme: "colored",
-          autoClose: 3000,
-        }
-      );
-      return false;
     }
 
     return result;
@@ -227,7 +216,6 @@ const Register = () => {
       </div>
     </div>
   );
-}
-
+};
 
 export default Register;
