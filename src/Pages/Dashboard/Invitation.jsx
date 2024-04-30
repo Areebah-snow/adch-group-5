@@ -3,6 +3,7 @@
 import { Link, useParams } from "react-router-dom";
 import logo from "../../assets/image 2.png";
 import icon from "../../assets/Logo.png";
+import Woman from "../../assets/default.png";
 import { useState, useEffect } from "react";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 import { auth } from "../../../firebaseConfig";
@@ -15,14 +16,8 @@ const Invitation = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [plusOne, setPlusOne] = useState(0);
   const [plusOnes, setPlusOnes] = useState([]);
 
-  const handlePlusOne = (type) => {
-    type === "+"
-      ? setPlusOne((pl) => pl + 1)
-      : setPlusOne((pl) => (pl < 1 ? pl : pl - 1));
-  };
   const [loaded, setLoaded] = useState(false);
   const [loading, setloading] = useState(true);
   const [event, setEvent] = useState([]);
