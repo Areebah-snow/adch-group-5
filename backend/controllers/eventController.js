@@ -197,6 +197,12 @@ const getEventNameById = expressAsyncHandler(async (req, res) => {
     res.status(400).send(error.message);
   }
 });
+const getDashboard = expressAsyncHandler(async (req, res) => {
+  try {
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
 export {
   createEvent,
   getEventByID,
