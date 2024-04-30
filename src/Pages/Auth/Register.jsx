@@ -53,10 +53,13 @@ const Register = () => {
 
         console.log(response);
         setTimeout(() => {
-          navigate("/login");
+          navigate("/dashboard");
         }, 1500);
         setLoading(false);
-        toast.success("Your account has been created");
+        toast.success("Account created successfully", {
+          theme: "colored",
+          autoClose: 1500,
+        });
       } catch (error) {
         setLoading(false);
         console.error(error.message);
@@ -65,13 +68,12 @@ const Register = () => {
             theme: "colored",
           });
           setTimeout(() => {
-            navigate('/');
+            navigate("/");
           }, 2000);
         }
       }
-    }       
+    }
   };
-  
 
   const validate = () => {
     let result = true;
@@ -95,16 +97,6 @@ const Register = () => {
         theme: "colored",
         autoClose: 3000,
       });
-    }
-    if (!password.match(/^(?=.*\d)(?=.*[@$!%-*?&_#~><])/)) {
-      toast.warning(
-        "Password should contain at least one letter, one number, and one special character",
-        {
-          theme: "colored",
-          autoClose: 3000,
-        }
-      );
-      return false;
     }
 
     return result;
@@ -227,7 +219,6 @@ const Register = () => {
       </div>
     </div>
   );
-}
-
+};
 
 export default Register;
