@@ -88,11 +88,3 @@ body {
     background: linear-gradient(to right, transparent, #ebe9fd);
   }
 }
-
-li {
-  cursor: pointer;
-}
-
-html {
-  scroll-behavior: smooth;
-}
