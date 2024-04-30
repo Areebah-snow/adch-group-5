@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Nav from "../../Components/Nav";
 import Sidebar from "../../Components/Sidebar";
 import Mobilesidebar from "../../Components/Mobilesidebar";
@@ -13,6 +13,7 @@ import Profile from "../../Components/imageUpload/Profile";
 
 const CreateEvent = () => {
   const [eventName, seteventName] = useState("");
+  const avatarUrl = useRef("");
   const [eventDescription, seteventDescription] = useState("");
   const [eventStartTime, seteventStartTime] = useState("");
   const [eventStartDate, seteventStartDate] = useState("");
@@ -96,35 +97,7 @@ const CreateEvent = () => {
     }
     return result;
   };
-  const uploadImage = (image) => {
-    setIsLoading(true);
-    const data = new FormData();
-    data.append("file", image);
-    data.append("upload_preset", "adch-05");
-    data.append("cloud_name", "dmtxpxm7m");
-    fetch("  https://api.cloudinary.com/v1_1/dmtxpxm7m/image/upload", {
-      method: "post",
-      body: data,
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setPhotoURL(data.url);
-        console.log(data.url);
-        setIsLoading(false);
-        toast.success("Picture uploaded successfully", {
-          theme: "colored",
-          autoClose: 1500,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsLoading(false);
-        toast.warning("Error uploading picture" + err.message, {
-          theme: "colored",
-          autoClose: 1500,
-        });
-      });
-  };
+
   const combineDateTime = (dateString, timeString) => {
     const date = new Date(dateString);
     const time = timeString.split(":").map(Number);
@@ -328,7 +301,7 @@ const CreateEvent = () => {
                 className="my-2 rounded-md px-4 pt-3 pb-20 w-full border border-gray outline-none shadow-md"
               />
               <div className="my-4 flex flex-col">
-                <input
+                {/* <input
                   onChange={(e) => uploadImage(e.target.files[0])}
                   type="file"
                   name="file"
@@ -336,8 +309,8 @@ const CreateEvent = () => {
                   id="file"
                   placeholder=""
                   className="inputfile rounded-md px-4 py-20 w-1/3 border opacity-0 overflow-hidden absolute outline-none shadow-md"
-                />
-                <label
+                /> */}
+                {/* <label
                   className="font-semibold w-full md:w-1/3 h-1/3"
                   htmlFor="file"
                 >
@@ -346,8 +319,10 @@ const CreateEvent = () => {
                     <img src={LeftContent} alt="hug" className="inline mr-2" />
                     <img src={RightContent} alt="hug" className="inline" />
                   </span>
-                </label>
+                </label> */}
+                <Profile avatarUrl={(avatarUrl, setPhotoURL)} />
               </div>
+
               <button
                 onClick={handleDraft}
                 className="w-full text-center text-[#473BF0] border-[#473BF0] font-semibold border-2 rounded-xl py-2"
@@ -368,7 +343,6 @@ const CreateEvent = () => {
                   "Create Event"
                 )}
               </button>
-              {/* <Profile /> */}
             </div>
             <ToastContainer transition={Zoom} />
           </div>
