@@ -161,7 +161,7 @@ const Rsvp = () => {
                     notAttendingRSVP.length
                   )}
                 </h3>
-                <p className="px-5 pb-12 text-[#1D2739] font-semibold">NO</p>
+                <p className="px-5 pb-12 text-[#1D2739] font-semibold">No</p>
               </div>
             </div>
             <div className="mt-8 overflow-x-auto">
@@ -181,7 +181,7 @@ const Rsvp = () => {
                   {loading ? (
                     <ClockLoader color="black" size={50} />
                   ) : RSVP.length === 0 ? (
-                    "No prvious RSVPs found"
+                    "No previous RSVPs found"
                   ) : (
                     RSVP.map((item) => (
                       <tr key={item._id}>

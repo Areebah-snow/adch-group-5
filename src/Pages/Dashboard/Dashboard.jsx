@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react-hooks/exhaustive-deps */
 import Nav from "../../Components/Nav";
 import Mona from "../../assets/default.png";
@@ -116,7 +117,7 @@ const Dashboard = () => {
                       Hello, {auth.currentUser?.displayName?.split(" ")[0]}
                     </h1>
                     <p className="text-sm md:text-base text-black font-normal mt-2">
-                      Hava a great day
+                      What does today's schedule look like?
                     </p>
                   </div>
                 </div>
