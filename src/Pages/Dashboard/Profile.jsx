@@ -7,6 +7,7 @@ import profilepic from "../../assets/default.png";
 import { IoCall } from "react-icons/io5";
 import { IoIosMail } from "react-icons/io";
 import { IoPersonCircleOutline } from "react-icons/io5";
+import { MdVerified } from "react-icons/md";
 
 const Profile = () => {
   return (
@@ -35,6 +36,15 @@ const Profile = () => {
             icon={<IoIosMail />}
             category={"Email:"}
             item={auth.currentUser?.email}
+          />
+          <ProfileItem
+            icon={<MdVerified />}
+            category={"Email Verification:"}
+            item={
+              auth.currentUser?.emailVerified === true
+                ? "Verified"
+                : "Not Verified"
+            }
           />
           <ProfileItem
             icon={<IoCall />}
