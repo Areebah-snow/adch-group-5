@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Sidebar from "../../Components/Sidebar";
 import Mobilesidebar from "../../Components/Mobilesidebar";
 import Nav from "../../Components/Nav";
@@ -14,17 +15,37 @@ const Profile = () => {
       <Mobilesidebar />
       <div className="lg:ml-[17%]">
         <Nav />
-        <div className="flex flex-col px-6 lg:px-20 mt-12">
-          <div className="w-80">
-            <h1 className="font-black text-3xl">My Profile</h1>
+        <div className="flex flex-col px-6 h-full lg:px-20 mt-12 justify-between">
+          <h1 className="font-semibold text-4xl mb-4">My Profile</h1>
+          <div className="w-80 m-4">
+            <h1 className=" text-2xl my-2">Profile Picture</h1>
             <img
-              width="100%"
-              className="rounded-full mt-6"
+              width="30%"
+              className="rounded-full aspect-square"
               src={auth.currentUser?.photoURL || profilepic}
               alt="profile pic"
             />
           </div>
-          <h1 className="mt-12 font-semibold text-2xl text-zinc-400 flex items-center gap-2">
+          <ProfileItem
+            icon={<IoPersonCircleOutline />}
+            category={"Fullname:"}
+            item={auth.currentUser?.displayName}
+          />
+          <ProfileItem
+            icon={<IoIosMail />}
+            category={"Email:"}
+            item={auth.currentUser?.email}
+          />
+          <ProfileItem
+            icon={<IoCall />}
+            category={"Phone:"}
+            item={
+              auth.currentUser?.phoneNumber === null
+                ? "No Phone Number Added"
+                : auth.currentUser?.phoneNumber
+            }
+          />
+          {/* <h1 className="mt-12 font-semibold text-2xl text-zinc-400 flex items-center gap-2">
             <IoPersonCircleOutline />
             Full name:
           </h1>
@@ -47,11 +68,21 @@ const Profile = () => {
             {auth.currentUser?.phoneNumber === null
               ? "Null"
               : auth.currentUser?.phoneNumber}
-          </h1>
+          </h1> */}
         </div>
       </div>
     </div>
   );
 };
-
+const ProfileItem = function ({ icon, item, category }) {
+  return (
+    <div className="flex justify center items-start my-4 gap-4 rounded-md p-4 pl-0">
+      <span className="text-4xl md:text-5xl text-[#473bf0]">{icon}</span>
+      <div className="flex flex-col justify-center items-start gap-2">
+        <h1 className="font-semibold text-xl md:text-2xl">{category}</h1>
+        <h2 className="text-l md:text-xl">{item}</h2>
+      </div>
+    </div>
+  );
+};
 export default Profile;
