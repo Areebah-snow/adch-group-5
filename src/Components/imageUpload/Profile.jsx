@@ -3,7 +3,8 @@ import PencilIcon from "./PencilIcon";
 import Modal from "./Modal";
 import LeftContent from "../../assets/Left Content.png";
 import RightContent from "../../assets/Right Content.png";
-const Profile = ({ avatarUrl, setPhotoURL }) => {
+const Profile = ({ setPhotoURL }) => {
+  const avatarUrl = useRef("");
   const [modalOpen, setModalOpen] = useState(false);
   const uploadImage = () => {
     const blob = new Blob([avatarUrl.current], { type: "image/jpeg" });

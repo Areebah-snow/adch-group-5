@@ -13,7 +13,7 @@ import Profile from "../../Components/imageUpload/Profile";
 
 const CreateEvent = () => {
   const [eventName, seteventName] = useState("");
-  const avatarUrl = useRef("");
+
   const [eventDescription, seteventDescription] = useState("");
   const [eventStartTime, seteventStartTime] = useState("");
   const [eventStartDate, seteventStartDate] = useState("");
@@ -320,7 +320,7 @@ const CreateEvent = () => {
                     <img src={RightContent} alt="hug" className="inline" />
                   </span>
                 </label> */}
-                <Profile avatarUrl={(avatarUrl, setPhotoURL)} />
+                <Profile setPhotoURL={setPhotoURL} />
               </div>
 
               <button
