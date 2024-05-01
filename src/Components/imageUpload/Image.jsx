@@ -5,12 +5,19 @@ import LeftContent from "../../assets/Left Content.png";
 import RightContent from "../../assets/Right Content.png";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 
-const Image = ({ setPhotoURL, circle, photoURL, editMode }) => {
+const Image = ({
+  setPhotoURL,
+  circle,
+  photoURL,
+  editMode,
+  setPhotoUploading,
+}) => {
   const avatarUrl = useRef("");
   const [modalOpen, setModalOpen] = useState(false);
   avatarUrl.current = photoURL;
 
   const uploadImage = () => {
+    setPhotoUploading(true);
     const blob = new Blob([avatarUrl.current], { type: "image/jpeg" });
     const data = new FormData();
     data.append("file", blob);
@@ -24,7 +31,7 @@ const Image = ({ setPhotoURL, circle, photoURL, editMode }) => {
       .then((data) => {
         setPhotoURL(data.url);
         console.log(data.url);
-
+        setPhotoUploading(false);
         toast.success("Picture uploaded successfully", {
           theme: "colored",
           autoClose: 1500,
@@ -32,6 +39,7 @@ const Image = ({ setPhotoURL, circle, photoURL, editMode }) => {
       })
       .catch((err) => {
         console.log(err);
+        setPhotoUploading(false);
         toast.warning("Error uploading picture" + err.message, {
           theme: "colored",
           autoClose: 1500,
