@@ -56,22 +56,31 @@ const createUser = functions.auth.user().onCreate(async (user) => {
     // FDL custom domain.
     // dynamicLinkDomain: "adch-05.firebaseapp.com",
   };
+  const userDetails = await getAuth().getUserByEmail(user.email);
+
   try {
-    getAuth()
-      .generateEmailVerificationLink(user.email, actionCodeSettings)
-      .then(async (link) => {
-        await axios.post("https://db-lhsk5bihpq-uc.a.run.app/api/email/", {
+    userDetails.emailVerified
+      ? getAuth()
+          .generateEmailVerificationLink(user.email, actionCodeSettings)
+          .then(async (link) => {
+            await axios.post("https://db-lhsk5bihpq-uc.a.run.app/api/email/", {
+              to: user.email,
+              subject: "Account created successfully",
+              text: `Congratulations!!🎊Your WBT account has been successfully created.Explore a world of events and memories with Will Be There.Click the link below to verify your email ${link}`,
+              html: `<p>Congratulations!!🎊Your WBT account has been successfully created.</p><p>Explore a world of events and memories with Will Be There.</p><p>Click the link below to verify your email ${link}</p>`,
+            });
+          })
+          .catch((err) => {
+            // Some error occurred.
+            log(err);
+            error(err);
+          })
+      : await axios.post("https://db-lhsk5bihpq-uc.a.run.app/api/email/", {
           to: user.email,
           subject: "Account created successfully",
-          text: `Congratulations!!🎊Your WBT account has been successfully created.Explore a world of events and memories with Will Be There.Click the link below to verify your email ${link}`,
-          html: `<p>Congratulations!!🎊Your WBT account has been successfully created.</p><p>Explore a world of events and memories with Will Be There.</p><p>Click the link below to verify your email ${link}</p>`,
+          text: `Congratulations!!🎊Your WBT account has been successfully created.Explore a world of events and memories with Will Be There.`,
+          html: `<p>Congratulations!!🎊Your WBT account has been successfully created.</p><p>Explore a world of events and memories with Will Be There.</p><p>Click <a href="https://adch-group-5.vercel.app/dashboard">here</a> to begin.`,
         });
-      })
-      .catch((err) => {
-        // Some error occurred.
-        log(err);
-        error(err);
-      });
   } catch (err) {
     log(err);
     error(err);

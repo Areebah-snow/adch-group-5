@@ -16,9 +16,9 @@ const registerUser = expressAsyncHandler(async (req, res) => {
 });
 
 const updateUser = expressAsyncHandler(async (req, res) => {
-  const { name, uid, photoURL, email } = req.user;
+  const { name, uid, photoURL } = req.user;
   try {
-    User.findOneAndUpdate({ uid: uid }, { name, photoURL, email })
+    User.findOneAndUpdate({ uid: uid }, { name, photoURL })
       .then((user) => {
         res.status(200).json(user);
       })

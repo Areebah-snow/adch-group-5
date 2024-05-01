@@ -10,7 +10,7 @@ import setCanvasPreview from "./setCanvasPreview";
 const ASPECT_RATIO = 1;
 const MIN_DIMENSION = 150;
 
-const ImageCropper = ({ closeModal, updateAvatar }) => {
+const ImageCropper = ({ closeModal, updateAvatar, circle, editMode }) => {
   const imgRef = useRef(null);
   const previewCanvasRef = useRef(null);
   const [imgSrc, setImgSrc] = useState("");
@@ -74,6 +74,7 @@ const ImageCropper = ({ closeModal, updateAvatar }) => {
           <ReactCrop
             crop={crop}
             onChange={(pixelCrop, percentCrop) => setCrop(percentCrop)}
+            circularCrop={circle ? true : false}
             keepSelection
             aspect={ASPECT_RATIO}
             minWidth={MIN_DIMENSION}

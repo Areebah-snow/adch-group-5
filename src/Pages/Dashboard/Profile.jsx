@@ -8,8 +8,24 @@ import { IoCall } from "react-icons/io5";
 import { IoIosMail } from "react-icons/io";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { MdVerified } from "react-icons/md";
-
+import Image from "../../Components/imageUpload/Image";
+import { useState } from "react";
+import { updateProfile } from "firebase/auth";
+import { toast } from "react-toastify";
 const Profile = () => {
+  const [photoURL, setPhotoURL] = useState(
+    auth.currentUser.photoURL || profilepic
+  );
+  const [name, setName] = useState(auth.currentUser.displayName);
+  const handleUpdate = async () => {
+    updateProfile(auth.currentUser, { displayName: name, photoURL: photoURL })
+      .then(() => {
+        toast.success("Profile Updated Successfully");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
   return (
     <div>
       <Sidebar />
@@ -20,11 +36,17 @@ const Profile = () => {
           <h1 className="font-semibold text-4xl mb-4">My Profile</h1>
           <div className="w-80">
             <h1 className=" text-2xl my-2">Profile Picture</h1>
-            <img
+            {/* <img
               width="35%"
               className="rounded-full aspect-square"
               src={auth.currentUser?.photoURL || profilepic}
               alt="profile pic"
+            /> */}
+            <Image
+              circle={true}
+              editMode={false}
+              setPhotoURL={setPhotoURL}
+              photoURL={photoURL}
             />
           </div>
           <ProfileItem

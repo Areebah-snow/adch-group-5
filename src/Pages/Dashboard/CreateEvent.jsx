@@ -7,7 +7,7 @@ import { auth } from "../../../firebaseConfig";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ClockLoader from "react-spinners/ClipLoader";
-import Profile from "../../Components/imageUpload/Profile";
+import Image from "../../Components/imageUpload/Image";
 
 const CreateEvent = () => {
   const [eventName, seteventName] = useState("");
@@ -298,7 +298,7 @@ const CreateEvent = () => {
                 className="my-2 rounded-md px-4 pt-3 pb-20 w-full border border-gray outline-none shadow-md"
               />
               <div className="my-4 flex flex-col">
-                <Profile setPhotoURL={setPhotoURL} />
+                <Image setPhotoURL={setPhotoURL} />
               </div>
 
               <button

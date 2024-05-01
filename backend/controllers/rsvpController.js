@@ -48,6 +48,7 @@ const createRSVP = expressAsyncHandler(async (req, res) => {
             Description:${eventDetails.description}
             Looking forward to seeing you.`,
         html: `<p>Congratulations</p><p>You succesfully RSVP'd for ${eventDetails.name}.</p>
+            <img src="${eventDetails.photoURL}" width={"150px"}/>
             <p>Below are the details of your event:</p>
             <p>Event Name:${eventDetails.name}</p>
             <p>Event Location:${eventDetails.location}</p>
