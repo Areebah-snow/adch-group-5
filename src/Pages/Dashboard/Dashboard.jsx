@@ -15,9 +15,9 @@ import { FaFly } from "react-icons/fa";
 import { Button } from "../../Components/Hero";
 const Dashboard = () => {
   const [loading, isLoading] = useState(false);
-  const [EventsCreated, setEventsCreated] = useState([]);
-  const [upcommingEvent, setupcommingEvent] = useState([]);
-  const [RSVP, SetRSVP] = useState([]);
+  const [EventsCreated, setEventsCreated] = useState();
+  const [upcommingEvent, setupcommingEvent] = useState();
+  const [RSVP, SetRSVP] = useState();
   const [eventTable, setEventTable] = useState([]);
   const instance = axios.create({
     baseURL: "https://db-lhsk5bihpq-uc.a.run.app/",
@@ -32,43 +32,13 @@ const Dashboard = () => {
   useEffect(() => {
     isLoading(true);
     instance
-      .get("/api/event/getEvents/1")
+      .get("/api/event/getDashboard")
       .then((res) => {
         console.log(res.data);
-        setEventsCreated(res.data);
-        isLoading(false);
-      })
-      .catch((error) => {
-        isLoading(false);
-        console.log(error);
-      });
-    instance
-      .get("/api/event/getEvents/2")
-      .then((res) => {
-        console.log(res.data);
-        setupcommingEvent(res.data);
-        isLoading(false);
-      })
-      .catch((error) => {
-        isLoading(false);
-        console.log(error);
-      });
-    instance
-      .get("/api/event/getEvents/0")
-      .then((res) => {
-        console.log(res.data);
-        setEventTable(res.data);
-        isLoading(false);
-      })
-      .catch((error) => {
-        isLoading(false);
-        console.log(error);
-      });
-    instance
-      .get("/api/rsvp")
-      .then((res) => {
-        console.log(res.data);
-        SetRSVP(res.data);
+        setEventTable(res.data.event);
+        setEventsCreated(res.data.totalEvents);
+        setupcommingEvent(res.data.upcommingEvents);
+        SetRSVP(res.data.rsvpCount);
         isLoading(false);
       })
       .catch((error) => {
@@ -125,7 +95,7 @@ const Dashboard = () => {
                           <ClockLoader color="black" size={50} />
                         ) : (
                           <h3 className="font-bold p-5 text-[2rem]">
-                            {EventsCreated.length}
+                            {EventsCreated}
                           </h3>
                         )}
                         <p className="px-5 pb-12 text-base text-[#1D2739] font-semibold whitespace-break-spaces">
@@ -138,9 +108,7 @@ const Dashboard = () => {
                         {loading ? (
                           <ClockLoader color="black" size={50} />
                         ) : (
-                          <h3 className="font-bold p-5 text-[2rem]">
-                            {RSVP.length}
-                          </h3>
+                          <h3 className="font-bold p-5 text-[2rem]">{RSVP}</h3>
                         )}
                         <p className="px-5 pb-12 text-base text-[#1D2739] font-semibold whitespace-break-spaces">
                           Previous RSVP
@@ -153,7 +121,7 @@ const Dashboard = () => {
                           <ClockLoader color="black" size={50} />
                         ) : (
                           <h3 className="font-bold p-5 text-[2rem]">
-                            {upcommingEvent.length}
+                            {upcommingEvent}
                           </h3>
                         )}
                         <p className="px-5 pb-12 text-base text-[#1D2739] font-semibold whitespace-break-spaces">
@@ -168,7 +136,9 @@ const Dashboard = () => {
                     <h1 className="font-bold text-3xl flex justify-center gap-4 items-center my-4">
                       Get started <FaFly />
                     </h1>
-                    <h1 className="my-4">Create events and manage them easily</h1>
+                    <h1 className="my-4">
+                      Create events and manage them easily
+                    </h1>
                     <Button text={"Create an Event"} />
                   </div>
                 ) : (

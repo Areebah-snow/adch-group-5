@@ -18,8 +18,8 @@ const Profile = () => {
   );
   const [editMode, setEditMode] = useState(false);
   const [updateMode, setUpdateMode] = useState(false);
-  const [name, setName] = useState(auth.currentUser.displayName);
-  const [phoneNumber, setPhoneNumber] = useState(auth.currentUser.phoneNumber);
+  const [name, setName] = useState(auth.currentUser?.displayName);
+  const [phoneNumber, setPhoneNumber] = useState(auth.currentUser?.phoneNumber);
   const [photoUploading, setPhotoUploading] = useState(false);
   const handleUpdate = async () => {
     setUpdateMode(true);
@@ -31,12 +31,15 @@ const Profile = () => {
       .then(() => {
         setUpdateMode(false);
         setEditMode(false);
-        toast.success("Profile Updated Successfully");
+        toast.success("Profile Updated Successfully", {
+          theme: "colored",
+          autoClose: 2000,
+        });
       })
       .catch((error) => {
         console.log(error);
         setUpdateMode(false);
-        toast.error(error.message);
+        toast.error(error.message, { theme: "colored", autoClose: 2000 });
       });
   };
   return (
@@ -48,20 +51,6 @@ const Profile = () => {
         <div className="flex flex-col px-6 lg:px-20 mt-12 justify-between items-start">
           <h1 className="font-semibold text-4xl mb-4">My Profile</h1>
           <div className="w-80">
-            {/* {editMode ? (
-              <>
-                <h1 className="font-semibold text-xl md:text-2xl">
-                  Profile Picture
-                </h1>
-                <input
-                  // value={photoURL}
-                  onChange={(e) => setPhotoURL(e.target.value)}
-                  type="file"
-                  autoFocus
-                  required
-                />
-              </>
-            ) : ( */}
             <Image
               circle={true}
               editMode={editMode}
@@ -69,7 +58,6 @@ const Profile = () => {
               photoURL={photoURL}
               setPhotoUploading={setPhotoUploading}
             />
-            {/* )} */}
           </div>
           {editMode ? (
             <>
@@ -107,42 +95,39 @@ const Profile = () => {
                 : "Not Verified"
             }
           />
-          {editMode ? (
-            <>
-              <h1 className="font-semibold text-xl md:text-2xl mt-4">Phone</h1>
-              <input
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                type="tel"
-                pattern="^\+[1-9]\d{1,14}$"
-                autoFocus
-                placeholder="+1234567890"
-                className="rounded-md px-2 py-3 border border-gray"
-              />
-            </>
-          ) : (
-            <ProfileItem
-              icon={<IoCall />}
-              category={"Phone:"}
-              item={
-                auth.currentUser?.phoneNumber === null
-                  ? "No Phone Number Added"
-                  : auth.currentUser?.phoneNumber
-              }
-            />
-          )}
-
+          <ProfileItem
+            icon={<IoCall />}
+            category={"Phone:"}
+            item={
+              auth.currentUser?.phoneNumber === null
+                ? "No Phone Number Added"
+                : auth.currentUser?.phoneNumber
+            }
+          />
           <div>
             {editMode ? (
-              <button
-                className="mt-6 bg-primary text-white px-4 py-2 font-semibold text-xl rounded-lg"
-                onClick={handleUpdate}
-              >
-                {updateMode ? "Loading..." : "Save Profile"}
-              </button>
+              <div className="flex gap-6">
+                <button
+                  disabled={photoUploading}
+                  className="mt-6 bg-primary text-white px-4 py-2 font-semibold text-xl rounded-lg"
+                  onClick={handleUpdate}
+                >
+                  {updateMode
+                    ? "Loading..."
+                    : photoUploading
+                    ? "Loading..."
+                    : "Save Profile"}
+                </button>
+                <button
+                  className="mt-6 bg-white text-primary border px-4 py-2 font-semibold text-xl rounded-lg"
+                  onClick={() => setEditMode(!editMode)}
+                >
+                  Cancel
+                </button>
+              </div>
             ) : (
               <button
-                className="mt-6 bg-white text-primary border px-4 py-2 font-semibold text-xl rounded-lg"
+                className="mt-6 bg-primary text-white px-4 py-2 font-semibold text-xl rounded-lg"
                 onClick={() => setEditMode(!editMode)}
               >
                 Edit Profile
