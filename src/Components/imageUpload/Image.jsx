@@ -47,7 +47,7 @@ const Image = ({ setPhotoURL, circle, photoURL, editMode }) => {
   return (
     <div className="flex flex-col items-start pt-12">
       <div className="relative">
-        {avatarUrl.current ? (
+        {photoURL ? (
           <img
             src={avatarUrl.current}
             alt="Upload Event Image"

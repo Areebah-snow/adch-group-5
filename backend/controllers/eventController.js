@@ -9,6 +9,7 @@ import {
   error,
   write,
 } from "firebase-functions/logger";
+import RSVP from "../models/rsvpModel.js";
 
 const createEvent = expressAsyncHandler(async (req, res) => {
   const creator = req.user;
@@ -199,6 +200,33 @@ const getEventNameById = expressAsyncHandler(async (req, res) => {
 });
 const getDashboard = expressAsyncHandler(async (req, res) => {
   try {
+    const user = await User.findOne({ uid: req.user.uid });
+    const currentDate = new Date();
+    Event.updateMany({ endDate: { $lt: currentDate } }, { stats: "Closed" })
+      .then(async () => {
+        const events = await Event.find({ creator: user._id })
+          .sort({ createdAt: -1 })
+          .limit(5);
+        const eventsCreated = await Event.find({
+          creator: user._id,
+        }).countDocuments();
+        const upcommingEvents = await Event.find({
+          creator: user._id,
+          stats: "Open",
+        }).countDocuments();
+        const rsvpCount = await RSVP.find({
+          email: user.email,
+        }).countDocuments();
+        res.status(200).json({
+          event: events,
+          totalEvents: eventsCreated,
+          upcommingEvents: upcommingEvents,
+          rsvpCount: rsvpCount,
+        });
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -212,4 +240,5 @@ export {
   deleteEvent,
   searchEvent,
   getEventNameById,
+  getDashboard,
 };
