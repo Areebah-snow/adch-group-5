@@ -41,7 +41,7 @@ const Profile = () => {
         <div className="flex flex-col px-6 lg:px-20 mt-12 justify-between items-start">
           <h1 className="font-semibold text-4xl mb-4">My Profile</h1>
           <div className="w-80">
-            {editMode ? (
+            {/* {editMode ? (
               <>
                 <h1 className="font-semibold text-xl md:text-2xl">
                   Profile Picture
@@ -54,14 +54,14 @@ const Profile = () => {
                   required
                 />
               </>
-            ) : (
-              <Image
-                circle={true}
-                editMode={false}
-                setPhotoURL={setPhotoURL}
-                photoURL={photoURL}
-              />
-            )}
+            ) : ( */}
+            <Image
+              circle={true}
+              editMode={editMode}
+              setPhotoURL={setPhotoURL}
+              photoURL={photoURL}
+            />
+            {/* )} */}
           </div>
           {editMode ? (
             <>
