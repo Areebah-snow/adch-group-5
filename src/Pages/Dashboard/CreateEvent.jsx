@@ -21,6 +21,7 @@ const CreateEvent = () => {
   const [eventotherInfo, seteventotherInfo] = useState("");
   const [photoURL, setPhotoURL] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [photoUploading, setPhotoUploading] = useState(false);
   const navigate = useNavigate();
 
   const validateForm = () => {
@@ -298,7 +299,11 @@ const CreateEvent = () => {
                 className="my-2 rounded-md px-4 pt-3 pb-20 w-full border border-gray outline-none shadow-md"
               />
               <div className="my-4 flex flex-col">
-                <Image setPhotoURL={setPhotoURL} photoURL={photoURL} />
+                <Image
+                  setPhotoURL={setPhotoURL}
+                  photoURL={photoURL}
+                  setPhotoUploading={setPhotoUploading}
+                />
               </div>
 
               <button
