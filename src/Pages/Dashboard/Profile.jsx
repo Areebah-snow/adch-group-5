@@ -34,6 +34,7 @@ const Profile = () => {
         toast.success("Profile Updated Successfully");
       })
       .catch((error) => {
+        console.log(error);
         setUpdateMode(false);
         toast.error(error.message);
       });
@@ -81,7 +82,7 @@ const Profile = () => {
                 type="text"
                 autoFocus
                 required
-                placeholder="Name of the event"
+                placeholder="Enter your name"
                 className="rounded-md px-2 py-3 border border-gray"
               />
             </>
@@ -106,15 +107,30 @@ const Profile = () => {
                 : "Not Verified"
             }
           />
-          <ProfileItem
-            icon={<IoCall />}
-            category={"Phone:"}
-            item={
-              auth.currentUser?.phoneNumber === null
-                ? "No Phone Number Added"
-                : auth.currentUser?.phoneNumber
-            }
-          />
+          {editMode ? (
+            <>
+              <h1 className="font-semibold text-xl md:text-2xl mt-4">Phone</h1>
+              <input
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                type="tel"
+                pattern="^\+[1-9]\d{1,14}$"
+                autoFocus
+                placeholder="+1234567890"
+                className="rounded-md px-2 py-3 border border-gray"
+              />
+            </>
+          ) : (
+            <ProfileItem
+              icon={<IoCall />}
+              category={"Phone:"}
+              item={
+                auth.currentUser?.phoneNumber === null
+                  ? "No Phone Number Added"
+                  : auth.currentUser?.phoneNumber
+              }
+            />
+          )}
 
           <div>
             {editMode ? (
