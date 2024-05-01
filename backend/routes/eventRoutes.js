@@ -4,6 +4,7 @@ import {
   deleteEvent,
   getAllEvents,
   getAllEventsByUser,
+  getDashboard,
   getEventByID,
   getEventNameById,
   searchEvent,
@@ -21,4 +22,5 @@ router.route("/").put(protect, updateEvent);
 router.route("/").delete(protect, deleteEvent);
 router.route("/searchEvent/:searchTerm").get(protect, searchEvent);
 router.route("/getEventName/:id").get(getEventNameById);
+router.route("/getDashboard").get(protect, getDashboard);
 export default router;

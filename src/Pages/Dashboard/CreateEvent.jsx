@@ -298,7 +298,7 @@ const CreateEvent = () => {
                 className="my-2 rounded-md px-4 pt-3 pb-20 w-full border border-gray outline-none shadow-md"
               />
               <div className="my-4 flex flex-col">
-                <Image setPhotoURL={setPhotoURL} />
+                <Image setPhotoURL={setPhotoURL} photoURL={photoURL} />
               </div>
 
               <button
