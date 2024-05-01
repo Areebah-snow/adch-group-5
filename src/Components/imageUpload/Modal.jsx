@@ -2,7 +2,7 @@ import CloseIcon from "./CloseIcon";
 import ImageCropper from "./ImageCropper";
 
 // eslint-disable-next-line react/prop-types
-const Modal = ({ updateAvatar, closeModal }) => {
+const Modal = ({ updateAvatar, closeModal, circle, editMode }) => {
   return (
     <div
       className="relative z-10"
@@ -24,6 +24,8 @@ const Modal = ({ updateAvatar, closeModal }) => {
                 <CloseIcon />
               </button>
               <ImageCropper
+                circle={circle}
+                editMode={editMode}
                 updateAvatar={updateAvatar}
                 closeModal={closeModal}
               />

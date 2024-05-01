@@ -5,9 +5,11 @@ import LeftContent from "../../assets/Left Content.png";
 import RightContent from "../../assets/Right Content.png";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 
-const Profile = ({ setPhotoURL }) => {
+const Image = ({ setPhotoURL, circle, photoURL, editMode }) => {
   const avatarUrl = useRef("");
   const [modalOpen, setModalOpen] = useState(false);
+  avatarUrl.current = photoURL;
+
   const uploadImage = () => {
     const blob = new Blob([avatarUrl.current], { type: "image/jpeg" });
     const data = new FormData();
@@ -49,7 +51,9 @@ const Profile = ({ setPhotoURL }) => {
           <img
             src={avatarUrl.current}
             alt="Upload Event Image"
-            className="w-[170px] h-[170px] border-2 border-grey"
+            className={`w-[170px] h-[170px] ${
+              circle ? "rounded-full" : ""
+            } border-2 border-grey`}
           />
         ) : (
           <span className="py-20 rounded-md px-14 mx-auto border-grey border-2 flex items-center justify-center">
@@ -57,17 +61,21 @@ const Profile = ({ setPhotoURL }) => {
             <img src={RightContent} alt="hug" className="inline" />
           </span>
         )}
-        <button
-          className="absolute -bottom-3 left-0 right-0 m-auto w-fit p-[.35rem] rounded-full bg-gray-800 hover:bg-gray border border-gray-600 bg-grey"
-          title="Change photo"
-          onClick={() => setModalOpen(true)}
-        >
-          <PencilIcon />
-        </button>
+        {(editMode == undefined || editMode != false) && (
+          <button
+            className="absolute -bottom-3 left-0 right-0 m-auto w-fit p-[.35rem] rounded-full bg-gray-800 hover:bg-gray border border-gray-600 bg-grey"
+            title="Change photo"
+            onClick={() => setModalOpen(true)}
+          >
+            <PencilIcon />
+          </button>
+        )}
       </div>
 
       {modalOpen && (
         <Modal
+          circle={circle}
+          editMode={editMode}
           updateAvatar={updateAvatar}
           closeModal={() => setModalOpen(false)}
         />
@@ -76,4 +84,4 @@ const Profile = ({ setPhotoURL }) => {
   );
 };
 
-export default Profile;
+export default Image;
