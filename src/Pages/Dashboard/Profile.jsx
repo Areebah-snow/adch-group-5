@@ -14,19 +14,17 @@ import { updateProfile } from "firebase/auth";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 const Profile = () => {
   const [photoURL, setPhotoURL] = useState(
-    auth.currentUser.photoURL || profilepic
+    auth.currentUser?.photoURL || profilepic
   );
   const [editMode, setEditMode] = useState(false);
   const [updateMode, setUpdateMode] = useState(false);
   const [name, setName] = useState(auth.currentUser?.displayName);
-  const [phoneNumber, setPhoneNumber] = useState(auth.currentUser?.phoneNumber);
   const [photoUploading, setPhotoUploading] = useState(false);
   const handleUpdate = async () => {
     setUpdateMode(true);
     updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photoURL,
-      phoneNumber: phoneNumber,
     })
       .then(() => {
         setUpdateMode(false);
