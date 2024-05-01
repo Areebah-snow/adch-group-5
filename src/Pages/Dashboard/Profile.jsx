@@ -19,6 +19,8 @@ const Profile = () => {
   const [editMode, setEditMode] = useState(false);
   const [updateMode, setUpdateMode] = useState(false);
   const [name, setName] = useState(auth.currentUser.displayName);
+  const [phoneNumber, setPhoneNumber] = useState(auth.currentUser.phoneNumber);
+  const [photoUploading, setPhotoUploading] = useState(false);
   const handleUpdate = async () => {
     setUpdateMode(true);
     updateProfile(auth.currentUser, { displayName: name, photoURL: photoURL })
@@ -60,6 +62,7 @@ const Profile = () => {
               editMode={editMode}
               setPhotoURL={setPhotoURL}
               photoURL={photoURL}
+              setPhotoUploading={setPhotoUploading}
             />
             {/* )} */}
           </div>
