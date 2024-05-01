@@ -23,7 +23,11 @@ const Profile = () => {
   const [photoUploading, setPhotoUploading] = useState(false);
   const handleUpdate = async () => {
     setUpdateMode(true);
-    updateProfile(auth.currentUser, { displayName: name, photoURL: photoURL })
+    updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photoURL,
+      phoneNumber: phoneNumber,
+    })
       .then(() => {
         setUpdateMode(false);
         setEditMode(false);
