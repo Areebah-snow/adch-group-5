@@ -12,6 +12,8 @@ import ClockLoader from "react-spinners/ClockLoader";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
+import { FaFly } from "react-icons/fa";
+import { Button } from "../../Components/Hero";
 const AllEvents = () => {
   const [showEvents, setShowEvents] = useState([]);
   const [loading, isLoading] = useState(false);
@@ -65,6 +67,14 @@ const AllEvents = () => {
           <div className="bg-[#F9FAFB] min-h-[90vh] overflow-x-auto p-4">
             {loading ? (
               <ClockLoader color="blue" />
+            ) : showEvents.length === 0 ? (
+              <div className="text-xl font-semibold text-center my-6">
+                <h1 className="font-bold text-3xl flex justify-center gap-4 items-center my-4">
+                  Get started <FaFly />
+                </h1>
+                <h1 className="my-4">Create events and manage them easily</h1>
+                <Button text={"Create an Event"} />
+              </div>
             ) : (
               <table className="text-left w-full whitespace-nowrap">
                 <thead>
@@ -76,7 +86,6 @@ const AllEvents = () => {
                     <th className="p-4">Actions</th>
                   </tr>
                 </thead>
-                {showEvents.length === 0 && "No events created"}
                 <tbody>
                   {showEvents.map((item, index) => (
                     <tr

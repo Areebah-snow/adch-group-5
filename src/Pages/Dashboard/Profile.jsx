@@ -11,18 +11,24 @@ import { MdVerified } from "react-icons/md";
 import Image from "../../Components/imageUpload/Image";
 import { useState } from "react";
 import { updateProfile } from "firebase/auth";
-import { toast } from "react-toastify";
+import { ToastContainer, Zoom, toast } from "react-toastify";
 const Profile = () => {
   const [photoURL, setPhotoURL] = useState(
     auth.currentUser.photoURL || profilepic
   );
+  const [editMode, setEditMode] = useState(false);
+  const [updateMode, setUpdateMode] = useState(false);
   const [name, setName] = useState(auth.currentUser.displayName);
   const handleUpdate = async () => {
+    setUpdateMode(true);
     updateProfile(auth.currentUser, { displayName: name, photoURL: photoURL })
       .then(() => {
+        setUpdateMode(false);
+        setEditMode(false);
         toast.success("Profile Updated Successfully");
       })
       .catch((error) => {
+        setUpdateMode(false);
         toast.error(error.message);
       });
   };
@@ -35,25 +41,50 @@ const Profile = () => {
         <div className="flex flex-col px-6 lg:px-20 mt-12 justify-between items-start">
           <h1 className="font-semibold text-4xl mb-4">My Profile</h1>
           <div className="w-80">
-            <h1 className=" text-2xl my-2">Profile Picture</h1>
-            {/* <img
-              width="35%"
-              className="rounded-full aspect-square"
-              src={auth.currentUser?.photoURL || profilepic}
-              alt="profile pic"
-            /> */}
-            <Image
-              circle={true}
-              editMode={false}
-              setPhotoURL={setPhotoURL}
-              photoURL={photoURL}
-            />
+            {editMode ? (
+              <>
+                <h1 className="font-semibold text-xl md:text-2xl">
+                  Profile Picture
+                </h1>
+                <input
+                  // value={photoURL}
+                  onChange={(e) => setPhotoURL(e.target.value)}
+                  type="file"
+                  autoFocus
+                  required
+                />
+              </>
+            ) : (
+              <Image
+                circle={true}
+                editMode={false}
+                setPhotoURL={setPhotoURL}
+                photoURL={photoURL}
+              />
+            )}
           </div>
-          <ProfileItem
-            icon={<IoPersonCircleOutline />}
-            category={"Fullname:"}
-            item={auth.currentUser?.displayName}
-          />
+          {editMode ? (
+            <>
+              <h1 className="font-semibold text-xl md:text-2xl mt-4">
+                Fullname
+              </h1>
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                type="text"
+                autoFocus
+                required
+                placeholder="Name of the event"
+                className="rounded-md px-2 py-3 border border-gray"
+              />
+            </>
+          ) : (
+            <ProfileItem
+              icon={<IoPersonCircleOutline />}
+              category={"Fullname:"}
+              item={auth.currentUser?.displayName}
+            />
+          )}
           <ProfileItem
             icon={<IoIosMail />}
             category={"Email:"}
@@ -77,6 +108,26 @@ const Profile = () => {
                 : auth.currentUser?.phoneNumber
             }
           />
+
+          <div>
+            {editMode ? (
+              <button
+                className="mt-6 bg-primary text-white px-4 py-2 font-semibold text-xl rounded-lg"
+                onClick={handleUpdate}
+              >
+                {updateMode ? "Loading..." : "Save Profile"}
+              </button>
+            ) : (
+              <button
+                className="mt-6 bg-white text-primary border px-4 py-2 font-semibold text-xl rounded-lg"
+                onClick={() => setEditMode(!editMode)}
+              >
+                Edit Profile
+              </button>
+            )}
+          </div>
+
+          <ToastContainer transition={Zoom} />
         </div>
       </div>
     </div>
